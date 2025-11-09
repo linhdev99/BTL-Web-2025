@@ -1,0 +1,12 @@
+.vscode
+.env
+configs/config.development.php
+configs/config.production.php
+
+server/configs/config.development.php
+server/configs/config.production.php
+
+client/configs/config.development.php
+client/configs/config.production.php
+
+/**/**.test.**
