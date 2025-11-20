@@ -2,21 +2,24 @@
 
 namespace Controllers;
 
-use Models\DashboardModel;
 use Views\DashboardView;
+use Core\CMSAuth;
 
-class DashboardController extends BaseController
+class DashboardController
 {
     public function index()
     {
-        $model = new DashboardModel();
+        CMSAuth::check(); // MUST login
+
         $view = new DashboardView();
-
-        $data = [
-            "page_title" => "Dashboard CMS",
-            "stats" => $model->getStats()
-        ];
-
-        $view->render($data);
+        $view->render([
+            'page_title' => "Dashboard CMS",
+            'stats' => [
+                'total_products' => 120,
+                'total_users' => 53,
+                'total_orders' => 12,
+                'total_revenue' => 10000000,
+            ]
+        ]);
     }
 }
