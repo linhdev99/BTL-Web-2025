@@ -18,3 +18,4 @@ $router->get('cms/introduction', 'CMSIntroductionController@index');
 
 // Home
 $router->get('/home','HomeController@index');
+//test
