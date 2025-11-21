@@ -1,9 +1,9 @@
 USE `bkshop`;
--- Roles
+-- ROLES
 INSERT INTO roles (name, description)
 VALUES ('admin', 'Administrator'),
     ('user', 'Regular customer');
--- Admin user (⚠ replace password hash later)
+-- ADMIN ACCOUNT
 INSERT INTO users (
         role_id,
         email,
@@ -15,12 +15,13 @@ INSERT INTO users (
 VALUES (
         1,
         'admin@bkshop.com',
-        '$2y$10$EXAMPLE_HASH_REPLACE_ME',
+        '$2y$10$6QyQKq8N.8Ek1HhVa7X8Uu68SwuSoQ2r0uDcD1Qn.4quYpVqn3.D.',
+        -- password: admin
         'BKShop Admin',
         '0123456789',
         1
     );
--- Categories
+-- CATEGORIES
 INSERT INTO categories (name, slug, description)
 VALUES (
         'Anime Figures',
@@ -42,33 +43,33 @@ VALUES (
         'vehicles',
         'Cars, bikes, and mechanical model kits'
     );
--- Brands
+-- BRANDS
 INSERT INTO brands (name, slug, description, country)
 VALUES (
         'Bandai',
         'bandai',
-        'Japanese toy and plastic model manufacturer',
+        'Japanese toy and model manufacturer',
         'Japan'
     ),
     (
         'Kotobukiya',
         'kotobukiya',
-        'Japanese model and figure company',
+        'Japanese figure company',
         'Japan'
     ),
     (
         'Good Smile Company',
         'good-smile',
-        'Famous for Nendoroid and Figma series',
+        'Known for Nendoroids',
         'Japan'
     ),
     (
         'Tamiya',
         'tamiya',
-        'Model car and military kits brand',
+        'Model cars & military kits',
         'Japan'
     );
--- Products (3D figures / models)
+-- PRODUCTS
 INSERT INTO products (
         category_id,
         brand_id,
@@ -131,7 +132,7 @@ VALUES (
         'SKU-004',
         'Tamiya Porsche 911 GT3',
         'porsche-911-gt3',
-        'Detailed model car kit',
+        'Detailed Porsche model kit',
         '1/24',
         'Resin',
         65.00,
@@ -139,13 +140,13 @@ VALUES (
         40,
         1
     );
--- Product Images
+-- PRODUCT IMAGES
 INSERT INTO product_images (product_id, file_name, is_main)
 VALUES (1, 'products/miku-main.jpg', 1),
     (1, 'products/miku-side.jpg', 0),
     (3, 'products/gundam-main.jpg', 1),
     (4, 'products/porsche-main.jpg', 1);
--- News / Blog
+-- BLOG / NEWS
 INSERT INTO news (
         user_id,
         title,
@@ -161,7 +162,7 @@ VALUES (
         'BKShop Grand Opening',
         'bkshop-opening',
         'BKShop officially launches!',
-        'We are thrilled to announce the opening of BKShop – your go-to place for anime, robot, and model figures!',
+        'We are thrilled to announce the opening of BKShop...',
         NULL,
         NOW(),
         1
@@ -170,13 +171,13 @@ VALUES (
         NULL,
         'Top 5 New Anime Figures in 2025',
         'top-anime-figures-2025',
-        'Our selection of the most popular figures this year',
+        'A list of the most popular figures this year.',
         'Full article content here...',
         NULL,
         NOW(),
         1
     );
--- Contacts
+-- CONTACT SAMPLE
 INSERT INTO contacts (name, email, phone, subject, message)
 VALUES (
         'John Doe',
@@ -185,9 +186,55 @@ VALUES (
         'Inquiry about Gundam',
         'Do you have MG Zaku II model available?'
     );
--- Settings
+-- SETTINGS
 INSERT INTO settings (`key`, `value`)
 VALUES ('site_name', 'BKShop – 3D Figures & Model Kits'),
     ('site_email', 'support@bkshop.com'),
     ('site_phone', '+84-123-456-789'),
     ('site_address', 'Ho Chi Minh City, Vietnam');
+-- =============================
+-- ORDERS (Demo Data)
+-- =============================
+-- Order 1
+INSERT INTO orders (
+        user_id,
+        order_code,
+        status,
+        total,
+        shipping_address,
+        payment_method
+    )
+VALUES (
+        1,
+        'ORD-0001',
+        'completed',
+        299.89,
+        'HCM City',
+        'COD'
+    );
+INSERT INTO order_items (order_id, product_id, quantity, price)
+VALUES (1, 1, 1, 79.99),
+    (1, 2, 1, 119.00),
+    (1, 3, 1, 59.90),
+    (1, 4, 1, 41.00);
+-- Order 2
+INSERT INTO orders (
+        user_id,
+        order_code,
+        status,
+        total,
+        shipping_address,
+        payment_method
+    )
+VALUES (
+        1,
+        'ORD-0002',
+        'completed',
+        199.99,
+        'Hanoi',
+        'VNPAY'
+    );
+INSERT INTO order_items (order_id, product_id, quantity, price)
+VALUES (2, 3, 1, 49.90),
+    (2, 1, 1, 79.99),
+    (2, 4, 1, 70.10);
