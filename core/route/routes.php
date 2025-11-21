@@ -8,3 +8,6 @@ $router->post('/cms/login', 'CMSAuthController@loginPost');
 $router->get('/cms/register', 'CMSAuthController@registerForm');
 $router->post('/cms/register', 'CMSAuthController@registerPost');
 $router->get('/cms/logout', 'CMSAuthController@logout');
+
+// CMS PRODUCTS
+$router->get('cms/products','CMSProductController@showAll');
