@@ -10,4 +10,11 @@ $router->post('/cms/register', 'CMSAuthController@registerPost');
 $router->get('/cms/logout', 'CMSAuthController@logout');
 
 // CMS PRODUCTS
-$router->get('cms/products','CMSProductController@showAll');
+$router->get('cms/products', 'CMSProductController@showAll');
+
+// CMS Introduction (Trang giới thiệu)
+$router->get('cms/introduction', 'CMSIntroductionController@index');
+
+
+// Home
+$router->get('/home','HomeController@index');
