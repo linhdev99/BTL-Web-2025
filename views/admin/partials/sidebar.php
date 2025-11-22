@@ -8,6 +8,12 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="/cms/faq" class="nav-link text-white">
+                <i class="fa-solid fa-question"></i> FAQ
+            </a>
+        </li>
+
         <li>
             <a href="/cms/product" class="nav-link text-white">
                 <i class="fa-solid fa-box"></i> Sản phẩm

@@ -4,33 +4,25 @@ namespace Views;
 
 class CMSFAQView
 {
-    public function render(array $data = [])
+    public function render(string $module, string $view = "index", array $data = [])
     {
         extract($data);
 
-        // Load Layout
         include PATH_ROOT . "/views/admin/partials/header.php";
         include PATH_ROOT . "/views/admin/partials/sidebar.php";
 
         echo '<div class="admin-content container-fluid">';
 
-        switch ($mode ?? 'index') {
+        if ($module === "home") {
+            include PATH_ROOT . "/views/admin/faq/faq.php";
+        } else {
+            $file = PATH_ROOT . "/views/admin/faq/{$module}/{$view}.php";
 
-            case 'index':
-                include PATH_ROOT . "/views/admin/faq/index.php";
-                break;
-
-            case 'add':
-                include PATH_ROOT . "/views/admin/faq/add.php";
-                break;
-
-            case 'edit':
-                include PATH_ROOT . "/views/admin/faq/edit.php";
-                break;
-
-            default:
-                echo "<p class='text-danger'>FAQ View mode not found!</p>";
-                break;
+            if (!file_exists($file)) {
+                echo "<p class='text-danger'>Không tìm thấy view: $file</p>";
+            } else {
+                include $file;
+            }
         }
 
         echo '</div>';

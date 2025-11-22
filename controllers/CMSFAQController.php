@@ -4,35 +4,161 @@ namespace Controllers;
 
 use Core\CMSAuth;
 use Models\FAQModel;
+use Models\FAQCategoryModel;
+use Models\FAQQuestionModel;
 use Views\CMSFAQView;
 
 class CMSFAQController
 {
+    /**
+     * Trang HOME của FAQ - có 3 nút chuyển module
+     */
     public function index()
     {
         CMSAuth::check();
 
-        $model = new FAQModel();
-        $faqs = $model->getAllFAQ();
-
-        (new CMSFAQView())->render([
-            'mode' => 'index',
-            'page_title' => 'Quản lý FAQ',
-            'faqs' => $faqs
-        ]);
+        (new CMSFAQView())->render(
+            "home",
+            "index",
+            [
+                "page_title" => "Quản lý FAQ"
+            ]
+        );
     }
 
-    public function add()
+    // ============================================================
+    //  MODULE 1 — FAQ CATEGORY (faq-category/)
+    // ============================================================
+
+    public function category()
     {
         CMSAuth::check();
 
-        (new CMSFAQView())->render([
-            'mode' => 'add',
-            'page_title' => 'Thêm câu hỏi mới'
-        ]);
+        $categories = (new FAQCategoryModel())->getAllCategories();
+
+        (new CMSFAQView())->render(
+            "category",
+            "index",
+            [
+                "page_title" => "Quản lý thể loại FAQ",
+                "categories" => $categories
+            ]
+        );
     }
 
-    public function store()
+    public function categoryAdd()
+    {
+        CMSAuth::check();
+
+        (new CMSFAQView())->render(
+            "category",
+            "add",
+            [
+                "page_title" => "Thêm thể loại FAQ"
+            ]
+        );
+    }
+
+    public function categoryStore()
+    {
+        CMSAuth::check();
+
+        $name = $_POST['name'] ?? '';
+        $is_active = isset($_POST['is_active']) ? 1 : 0;
+
+        (new FAQCategoryModel())->create($name, $is_active);
+
+        header("Location: /cms/faq/category");
+        exit;
+    }
+
+    public function categoryEdit($url, $id)
+    {
+        CMSAuth::check();
+
+        $id = (int) $id;
+        $category = (new FAQCategoryModel())->getById($id);
+
+        (new CMSFAQView())->render(
+            "category",
+            "edit",
+            [
+                "page_title" => "Chỉnh sửa thể loại FAQ",
+                "category" => $category
+            ]
+        );
+    }
+
+    public function categoryUpdate($url, $id)
+    {
+        CMSAuth::check();
+
+        $id = (int) $id;
+        $name = $_POST['name'] ?? '';
+        $is_active = isset($_POST['is_active']) ? 1 : 0;
+
+        (new FAQCategoryModel())->updateCategory($id, $name, $is_active);
+
+        header("Location: /cms/faq/category");
+        exit;
+    }
+
+    public function categoryDelete($url, $id)
+    {
+        CMSAuth::check();
+        (new FAQCategoryModel())->deleteCategory((int) $id);
+        header("Location: /cms/faq/category");
+        exit;
+    }
+
+    // ============================================================
+    //  MODULE 2 — FAQ STATIC (faq-static/)
+    // ============================================================
+
+    public function static()
+    {
+        CMSAuth::check();
+
+        $faqModel = new FAQModel();
+        $catModel = new FAQCategoryModel();
+
+        $staticFaq = $faqModel->getAllFAQ();
+        $categories = $catModel->getAllCategories();
+        $categoriesMap = [];
+
+        foreach ($categories as $c) {
+            $categoriesMap[$c['id']] = $c['name'];
+        }
+
+        (new CMSFAQView())->render(
+            "static",
+            "index",
+            [
+                "page_title" => "FAQ tĩnh",
+                "staticFaq" => $staticFaq,
+                "categories" => $categories,
+                "categoriesMap" => $categoriesMap
+            ]
+        );
+    }
+
+    public function staticAdd()
+    {
+        CMSAuth::check();
+
+        $categories = (new FAQCategoryModel())->getAllCategories();
+
+        (new CMSFAQView())->render(
+            "static",
+            "add",
+            [
+                "page_title" => "Thêm FAQ tĩnh",
+                "categories" => $categories
+            ]
+        );
+    }
+
+    public function staticStore()
     {
         CMSAuth::check();
 
@@ -40,55 +166,126 @@ class CMSFAQController
         $answer = $_POST['answer'] ?? '';
         $ordering = (int) ($_POST['ordering'] ?? 0);
         $isActive = isset($_POST['is_active']) ? 1 : 0;
+        $category_id = (int) ($_POST['category_id'] ?? 1);
 
-        (new FAQModel())->create($question, $answer, $ordering, $isActive);
+        (new FAQModel())->create($question, $answer, $ordering, $isActive, $category_id);
 
-        header("Location: /cms/faq");
+        header("Location: /cms/faq/static");
         exit;
     }
 
-    public function edit($url, $id)
+    public function staticEdit($url, $id)
     {
         CMSAuth::check();
 
         $id = (int) $id;
+        $faqModel = new FAQModel();
+        $catModel = new FAQCategoryModel();
 
-        $model = new FAQModel();
-        $faq = $model->getById($id);
+        $faq = $faqModel->getById($id);
+        $categories = $catModel->getAllCategories();
 
-        (new CMSFAQView())->render([
-            'mode' => 'edit',
-            'page_title' => 'Chỉnh sửa FAQ',
-            'faq' => $faq
-        ]);
+        (new CMSFAQView())->render(
+            "static",
+            "edit",
+            [
+                "page_title" => "Chỉnh sửa FAQ tĩnh",
+                "faq" => $faq,
+                "categories" => $categories
+            ]
+        );
     }
 
-    public function update($url, $id)
+    public function staticUpdate($url, $id)
     {
         CMSAuth::check();
 
         $id = (int) $id;
-
         $question = $_POST['question'] ?? '';
         $answer = $_POST['answer'] ?? '';
         $ordering = (int) ($_POST['ordering'] ?? 0);
         $isActive = isset($_POST['is_active']) ? 1 : 0;
+        $category_id = (int) ($_POST['category_id'] ?? 1);
 
-        (new FAQModel())->updateFAQ($id, $question, $answer, $ordering, $isActive);
+        error_log($category_id);
 
-        header("Location: /cms/faq");
+        (new FAQModel())->updateFAQ($id, $question, $answer, $ordering, $isActive, $category_id);
+
+        header("Location: /cms/faq/static");
         exit;
     }
 
-    public function delete($url, $id)
+    public function staticDelete($url, $id)
+    {
+        CMSAuth::check();
+        (new FAQModel())->deleteFAQ((int) $id);
+        header("Location: /cms/faq/static");
+        exit;
+    }
+
+    // ============================================================
+    //  MODULE 3 — FAQ USER INTERACTION (faq-user/)
+    // ============================================================
+
+    public function user()
+    {
+        CMSAuth::check();
+
+        $questionModel = new FAQQuestionModel();
+        $userQuestions = $questionModel->getAllQuestionsWithUser();
+
+        (new CMSFAQView())->render(
+            "user",
+            "index",
+            [
+                "page_title" => "FAQ người dùng",
+                "userQuestions" => $userQuestions
+            ]
+        );
+    }
+
+    public function userDetail($url, $id)
     {
         CMSAuth::check();
 
         $id = (int) $id;
 
-        (new FAQModel())->deleteFAQ($id);
+        $questionModel = new FAQQuestionModel();
+        $question = $questionModel->getById($id);
+        $comments = $questionModel->getComments($id);
 
-        header("Location: /cms/faq");
+        (new CMSFAQView())->render(
+            "user",
+            "detail",
+            [
+                "page_title" => "Chi tiết câu hỏi người dùng",
+                "question" => $question,
+                "comments" => $comments
+            ]
+        );
+    }
+
+    public function userReply($url, $id)
+    {
+        CMSAuth::check();
+
+        $id = (int) $id;
+        $content = $_POST['content'] ?? '';
+        $adminId = $_SESSION['cms_user']['id'];
+
+        (new FAQQuestionModel())->addComment($id, $adminId, $content);
+
+        header("Location: /cms/faq/user/detail/$id");
+        exit;
+    }
+
+    public function userDelete($url, $id)
+    {
+        CMSAuth::check();
+
+        (new FAQQuestionModel())->deleteQuestion((int) $id);
+
+        header("Location: /cms/faq/user");
         exit;
     }
 }
