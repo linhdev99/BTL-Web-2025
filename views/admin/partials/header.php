@@ -20,9 +20,16 @@
     <!-- Summernote JS -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-
     <!-- Custom admin CSS -->
     <link rel="stylesheet" href="<?= ROOT_URL ?>/assets/css/admin.css">
+
+    <script>
+        window.addEventListener("pageshow", function (e) {
+            if (e.persisted) {
+                location.reload();
+            }
+        });
+    </script>
 </head>
 
 <body class="bg-dark text-white">
