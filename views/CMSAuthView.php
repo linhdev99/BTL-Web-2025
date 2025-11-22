@@ -8,7 +8,6 @@ class CMSAuthView
     {
         if (!empty($data))
             extract($data);
-        // require __DIR__ . "/admin/auth/{$view}.php";
         require PATH_ROOT . "/views/admin/auth/{$view}.php";
     }
 }

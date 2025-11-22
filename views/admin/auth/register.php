@@ -1,5 +1,5 @@
-<?php include PATH_ROOT . '/views/admin/header.php'; ?>
-<?php include PATH_ROOT . '/views/admin/sidebar.php'; ?>
+<?php include PATH_ROOT . '/views/admin/partials/header.php'; ?>
+<?php include PATH_ROOT . '/views/admin/partials/sidebar.php'; ?>
 
 <div class="admin-content container-fluid">
 
@@ -48,4 +48,4 @@
 
 </div>
 
-<?php include PATH_ROOT . '/views/admin/footer.php'; ?>
+<?php include PATH_ROOT . '/views/admin/partials/footer.php'; ?>

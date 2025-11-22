@@ -4,14 +4,17 @@ namespace Controllers;
 
 use Models\UserModel;
 use Views\CMSAuthView;
+use Core\CMSAuth;
 
 class CMSAuthController
 {
     public function loginForm()
     {
-        \Core\CMSAuth::redirectIfLoggedIn();
-        $view = new \Views\CMSAuthView();
-        $view->render('login', ['page_title' => 'CMS Login']);
+        CMSAuth::redirectIfLoggedIn();
+        $view = new CMSAuthView();
+        $view->render('login', [
+            'page_title' => 'CMS Login'
+        ]);
     }
 
     public function loginPost()
@@ -38,7 +41,6 @@ class CMSAuthController
             exit;
         }
 
-        // check role: admin = role_id = 1
         if ($user['role_id'] != 1) {
             $_SESSION['cms_error'] = "Bạn không có quyền truy cập CMS!";
             header("Location: /cms/login");
@@ -54,10 +56,11 @@ class CMSAuthController
 
     public function registerForm()
     {
-        \Core\CMSAuth::redirectIfLoggedIn();
-
-        $view = new \Views\CMSAuthView();
-        $view->render('register', ['page_title' => 'Đăng ký CMS']);
+        CMSAuth::redirectIfLoggedIn();
+        $view = new CMSAuthView();
+        $view->render('register', [
+            'page_title' => 'Đăng ký CMS'
+        ]);
     }
 
     public function registerPost()
@@ -68,7 +71,6 @@ class CMSAuthController
 
         $userModel = new UserModel();
 
-        // kiểm tra trùng email
         $exist = $userModel->getOne(
             "SELECT * FROM users WHERE email = :email",
             ['email' => $email]

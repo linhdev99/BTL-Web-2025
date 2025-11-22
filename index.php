@@ -1,7 +1,6 @@
 <?php
 
-// Định nghĩa hằng Path của file index.php
-define('PATH_ROOT', __DIR__);
+require 'define-params.php';
 
 // This hack help files importable on MacOS
 function include_class($class)
