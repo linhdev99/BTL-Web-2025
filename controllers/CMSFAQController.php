@@ -231,27 +231,32 @@ class CMSFAQController
     {
         CMSAuth::check();
 
-        $keyword = $_GET['keyword'] ?? null;
-        $category_id = $_GET['category_id'] ?? null;
-        $sort = $_GET['sort'] ?? null;
+        $keyword = $_GET['keyword'] ?? '';
+        $category_id = $_GET['category_id'] ?? '';
+        $sort = $_GET['sort'] ?? 'newest';
+
+        $page = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
 
         $questionModel = new FAQQuestionModel();
         $catModel = new FAQCategoryModel();
-        $categories = $catModel->getAllCategories();
-        $userQuestions = [];
 
-        if ($keyword === null && $category_id === null && $sort === null) {
-            $userQuestions = $questionModel->getAllQuestionsWithUser();
-            error_log('1');
-        } else {
-            $sort = $sort ?: 'newest';
-            $userQuestions = $questionModel->filterUserQuestions(
-                $keyword ?? '',
-                $category_id ?? '',
-                $sort
-            );
-            error_log('2');
-        }
+        $categories = $catModel->getAllCategories();
+
+        // Đếm tổng bản ghi
+        $total = $questionModel->countFilteredQuestions($keyword, $category_id);
+
+        // Lấy dữ liệu theo trang
+        $userQuestions = $questionModel->paginateFilteredQuestions(
+            $keyword,
+            $category_id,
+            $sort,
+            $limit,
+            $offset
+        );
+
+        $totalPages = ceil($total / $limit);
 
         (new CMSFAQView())->render(
             "user",
@@ -259,7 +264,10 @@ class CMSFAQController
             [
                 "page_title" => "FAQ người dùng",
                 "userQuestions" => $userQuestions,
-                "categories" => $categories
+                "categories" => $categories,
+                "total" => $total,
+                "page" => $page,
+                "totalPages" => $totalPages
             ]
         );
     }
@@ -308,4 +316,31 @@ class CMSFAQController
         header("Location: /cms/faq/user");
         exit;
     }
+
+    public function userUpdateStatus($url, $id)
+    {
+        CMSAuth::check();
+
+        $id = (int) $id;
+        $status = $_POST['status'] ?? 'pending';
+
+        $questionModel = new FAQQuestionModel();
+
+        $questionModel->update(
+            'faq_questions',
+            ['status' => $status],
+            "id = :id",
+            ['id' => $id]
+        );
+
+        $_SESSION['cms_flash'][] = [
+            'msg' => "Cập nhật thành công!",
+            'type' => "success",   // success / danger / warning / info
+            'time' => 3000         // ms
+        ];
+
+        header("Location: /cms/faq/user/detail/$id");
+        exit;
+    }
+
 }

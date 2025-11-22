@@ -27,6 +27,42 @@
 
 <body class="bg-dark text-white">
 
+    <!-- TOAST STACK (top-right) -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 999999;">
+
+        <?php if (!empty($_SESSION['cms_flash'])): ?>
+            <?php foreach ($_SESSION['cms_flash'] as $i => $toast): ?>
+
+                <?php
+                $type = $toast['type'] ?? 'success';
+                $time = $toast['time'] ?? 4000;
+                ?>
+
+                <div id="cmsToast<?= $i ?>" class="toast align-items-center text-white bg-<?= $type ?> border-0 show mb-2"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <?= $toast['msg'] ?>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+
+                <script>
+                    setTimeout(() => {
+                        const el = document.getElementById("cmsToast<?= $i ?>");
+                        if (el) bootstrap.Toast.getOrCreateInstance(el).hide();
+                    }, <?= $time ?>);
+                </script>
+
+            <?php endforeach; ?>
+
+            <?php unset($_SESSION['cms_flash']); ?>
+        <?php endif; ?>
+
+    </div>
+
     <!-- ================= NAVBAR ================= -->
     <?php include 'navbar.php'; ?>
 

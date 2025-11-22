@@ -55,7 +55,7 @@ class FAQQuestionModel extends BaseModel
 
     public function filterUserQuestions(string $keyword = '', $category_id = '', string $sort = 'newest')
     {
-        $sql =  "
+        $sql = "
                     SELECT q.*, u.full_name, c.name AS category_name
                     FROM faq_questions q
                     LEFT JOIN users u ON u.id = q.user_id
@@ -87,4 +87,61 @@ class FAQQuestionModel extends BaseModel
         return $this->getAll($sql, $params);
     }
 
+    public function countFilteredQuestions(string $keyword, $category_id)
+    {
+        $sql = "
+        SELECT COUNT(*) AS total
+        FROM faq_questions q
+        WHERE 1=1
+    ";
+
+        $params = [];
+
+        if ($keyword !== '') {
+            $sql .= " AND q.question LIKE :keyword";
+            $params['keyword'] = "%{$keyword}%";
+        }
+
+        if ($category_id !== '' && $category_id !== null) {
+            $sql .= " AND q.category_id = :cat_id";
+            $params['cat_id'] = $category_id;
+        }
+
+        $row = $this->getOne($sql, $params);
+        return $row ? (int) $row['total'] : 0;
+    }
+
+    public function paginateFilteredQuestions(string $keyword, $category_id, string $sort, int $limit, int $offset)
+    {
+        $sql = "
+        SELECT q.*, u.full_name, c.name AS category_name
+        FROM faq_questions q
+        LEFT JOIN users u ON u.id = q.user_id
+        LEFT JOIN faq_categories c ON c.id = q.category_id
+        WHERE 1=1
+    ";
+
+        $params = [];
+
+        if ($keyword !== '') {
+            $sql .= " AND q.question LIKE :keyword";
+            $params['keyword'] = "%{$keyword}%";
+        }
+
+        if ($category_id !== '' && $category_id !== null) {
+            $sql .= " AND q.category_id = :cat_id";
+            $params['cat_id'] = $category_id;
+        }
+
+        // sort
+        if ($sort === 'oldest')
+            $sql .= " ORDER BY q.created_at ASC";
+        else
+            $sql .= " ORDER BY q.created_at DESC";
+
+        // FIX LIMIT + OFFSET (important)
+        $sql .= " LIMIT {$limit} OFFSET {$offset}";
+
+        return $this->getAll($sql, $params);
+    }
 }
