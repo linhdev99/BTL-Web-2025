@@ -5,14 +5,17 @@
     <!-- Câu hỏi -->
     <div class="mb-3">
         <label class="text-white fw-bold">Câu hỏi</label>
-        <input type="text" name="question" class="form-control" value="<?= htmlspecialchars($faq['question']) ?>"
-            required>
+        <textarea id="question_editor" name="question">
+            <?= htmlspecialchars($faq['question']) ?>
+        </textarea>
     </div>
 
     <!-- Trả lời -->
     <div class="mb-3">
         <label class="text-white fw-bold">Trả lời</label>
-        <textarea id="editor" name="answer"><?= htmlspecialchars($faq['answer']) ?></textarea>
+        <textarea id="answer_editor" name="answer">
+            <?= htmlspecialchars($faq['answer']) ?>
+        </textarea>
     </div>
 
     <!-- Thứ tự -->
@@ -22,13 +25,13 @@
     </div>
 
     <!-- Hiển thị -->
-    <div class="form-check mb-3">
+    <div class="form-check mb-4">
         <input type="checkbox" class="form-check-input" name="is_active" <?= $faq['is_active'] ? 'checked' : '' ?>>
         <label class="form-check-label text-white">Hiển thị</label>
     </div>
 
     <button class="btn btn-primary">
-        <i class="fa-solid fa-floppy-disk"></i> Cập nhật FAQ
+        <i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi
     </button>
 
     <a href="/cms/faq" class="btn btn-secondary">
@@ -38,8 +41,13 @@
 </form>
 
 <script>
-    $('#editor').summernote({
+    $('#question_editor').summernote({
+        height: 150,
+        placeholder: 'Chỉnh sửa nội dung câu hỏi...'
+    });
+
+    $('#answer_editor').summernote({
         height: 200,
-        placeholder: 'Nhập nội dung câu trả lời...'
+        placeholder: 'Chỉnh sửa nội dung câu trả lời...'
     });
 </script>
