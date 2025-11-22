@@ -231,15 +231,35 @@ class CMSFAQController
     {
         CMSAuth::check();
 
+        $keyword = $_GET['keyword'] ?? null;
+        $category_id = $_GET['category_id'] ?? null;
+        $sort = $_GET['sort'] ?? null;
+
         $questionModel = new FAQQuestionModel();
-        $userQuestions = $questionModel->getAllQuestionsWithUser();
+        $catModel = new FAQCategoryModel();
+        $categories = $catModel->getAllCategories();
+        $userQuestions = [];
+
+        if ($keyword === null && $category_id === null && $sort === null) {
+            $userQuestions = $questionModel->getAllQuestionsWithUser();
+            error_log('1');
+        } else {
+            $sort = $sort ?: 'newest';
+            $userQuestions = $questionModel->filterUserQuestions(
+                $keyword ?? '',
+                $category_id ?? '',
+                $sort
+            );
+            error_log('2');
+        }
 
         (new CMSFAQView())->render(
             "user",
             "index",
             [
                 "page_title" => "FAQ người dùng",
-                "userQuestions" => $userQuestions
+                "userQuestions" => $userQuestions,
+                "categories" => $categories
             ]
         );
     }

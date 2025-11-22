@@ -52,4 +52,39 @@ class FAQQuestionModel extends BaseModel
     {
         return $this->delete($this->table, "id = :id", ['id' => $id]);
     }
+
+    public function filterUserQuestions(string $keyword = '', $category_id = '', string $sort = 'newest')
+    {
+        $sql =  "
+                    SELECT q.*, u.full_name, c.name AS category_name
+                    FROM faq_questions q
+                    LEFT JOIN users u ON u.id = q.user_id
+                    LEFT JOIN faq_categories c ON c.id = q.category_id
+                    WHERE 1 = 1
+                ";
+
+        $params = [];
+
+        // Lọc theo từ khóa
+        if ($keyword !== '') {
+            $sql .= " AND q.question LIKE :keyword";
+            $params['keyword'] = "%{$keyword}%";
+        }
+
+        // Lọc theo thể loại
+        if ($category_id !== '' && $category_id !== null) {
+            $sql .= " AND q.category_id = :category_id";
+            $params['category_id'] = (int) $category_id;
+        }
+
+        // Sắp xếp ngày
+        if ($sort === 'oldest') {
+            $sql .= " ORDER BY q.created_at ASC";
+        } else {
+            $sql .= " ORDER BY q.created_at DESC";
+        }
+
+        return $this->getAll($sql, $params);
+    }
+
 }
