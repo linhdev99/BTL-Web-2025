@@ -22,7 +22,7 @@
                 <td><?= $f['id'] ?></td>
 
                 <td>
-                    <span class="badge bg-info text-dark">
+                    <span class="badge faq-category-badge category-<?= htmlspecialchars($f['category_id'] ?? 1) ?>">
                         <?= htmlspecialchars($categoriesMap[$f['category_id'] ?? 1]) ?>
                     </span>
                 </td>

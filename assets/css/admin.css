@@ -16,3 +16,14 @@
     background: #222 !important;
     color: #fff !important;
 }
+
+.faq-category-badge {
+    display: inline-block;
+    background: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}

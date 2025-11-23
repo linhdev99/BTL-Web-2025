@@ -1,0 +1,250 @@
+/* =========================================================
+   GLOBAL BASE
+   ========================================================= */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fafafa;
+    color: #222;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================================
+   HEADER & NAVIGATION
+   ========================================================= */
+header {
+    background: #202020;
+    color: white;
+    padding: 20px 30px;
+    border-bottom: 3px solid #ff4d4d;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+header .slogan {
+    margin-top: 3px;
+    font-size: 14px;
+    font-style: italic;
+    color: #e5e5e5;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: #fff;
+    margin-right: 20px;
+    font-size: 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+    background: #202020;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+footer small {
+    color: #bbbbbb;
+    font-size: 12px;
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+.container {
+    padding: 25px;
+}
+
+/* =========================================================
+   FAQ PAGE
+   ========================================================= */
+.faq-container {
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ===== Title bar ===== */
+.page-title {
+    font-size: 26px;
+    margin-bottom: 25px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-title i {
+    color: #007bff;
+    margin-right: 8px;
+}
+
+.page-title a.btn-view-all {
+    font-size: 15px;
+    padding: 8px 14px;
+    background: #007bff;
+    color: white;
+    border-radius: 6px;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.page-title a.btn-view-all:hover {
+    background: #0056b3;
+}
+
+/* =========================================================
+   FAQ LIST / CARDS
+   ========================================================= */
+.faq-section {
+    margin-bottom: 40px;
+}
+
+.faq-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 10px 0;
+}
+
+.faq-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+/* ===== Category badge ===== */
+.faq-category-badge {
+    display: inline-block;
+    background: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.category-1 {
+    background: #464646;
+}
+.category-2 {
+    background: #904fb7;
+}
+.category-3 {
+    background: #007bff;
+}
+.category-4 {
+    background: #28a745;
+    color: #000;
+}
+.category-5 {
+    background: #ffe431;
+    color: #000;
+}
+.category-6 {
+    background: #ff4d4d;
+}
+
+/* ===== Card content ===== */
+.faq-item h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #111;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.faq-item p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* ===== Button ===== */
+.btn-primary {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: #007bff;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    align-self: flex-start;
+    transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+/* =========================================================
+   QUESTION ITEMS (optional on other pages)
+   ========================================================= */
+.faq-question-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.faq-question-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.faq-question-item a:hover {
+    text-decoration: underline;
+}
+
+.faq-meta {
+    font-size: 13px;
+    color: #777;
+    display: flex;
+    gap: 15px;
+    margin-top: 4px;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+.no-data {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+}

@@ -74,4 +74,24 @@ class FAQModel extends BaseModel
     {
         return $this->delete($this->table, "id = :id", ['id' => $id]);
     }
+
+    public function getFrontendFAQ(string $keyword, $category_id)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE is_active = 1";
+        $params = [];
+
+        if ($keyword !== '') {
+            $sql .= " AND question LIKE :keyword";
+            $params['keyword'] = "%$keyword%";
+        }
+
+        if ($category_id !== '' && $category_id !== null) {
+            $sql .= " AND category_id = :cat_id";
+            $params['cat_id'] = $category_id;
+        }
+
+        $sql .= " ORDER BY ordering ASC";
+
+        return $this->getAll($sql, $params);
+    }
 }

@@ -22,6 +22,7 @@
 
     <!-- Custom admin CSS -->
     <link rel="stylesheet" href="<?= ROOT_URL ?>/assets/css/admin.css">
+    <link rel="stylesheet" href="<?= ROOT_URL ?>/assets/css/styles.css">
 
     <script>
         window.addEventListener("pageshow", function (e) {

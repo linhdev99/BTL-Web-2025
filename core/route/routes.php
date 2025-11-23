@@ -39,4 +39,6 @@ $router->post('/cms/faq/user/status/{id}', 'CMSFAQController@userUpdateStatus');
 
 // Home
 $router->get('/home', 'HomeController@index');
-//test
+
+// FAQ
+$router->get('/faq', 'FAQController@index');
