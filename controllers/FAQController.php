@@ -31,18 +31,14 @@ class FAQController extends BaseController
         $catModel = new FAQCategoryModel();
         $faqQuestionModel = new FAQQuestionModel();
 
-        // ==== Lấy tham số filter từ URL ====
         $search = $_GET['search'] ?? '';
         $sort = $_GET['sort'] ?? 'created_at';
         $filterCategory = isset($_GET['category_id']) && $_GET['category_id'] !== '' ? (int) $_GET['category_id'] : null;
         $page = max(1, (int) ($_GET['page'] ?? 1));
-        $limit = 9; // số câu hỏi mỗi trang
+        $limit = 9;
 
-        // ==== Chuẩn bị dữ liệu danh mục ====
-        // array_column: chuyển về dạng [id => ['name' => ...]]
-        $categories = array_column($catModel->getAllCategories(), null, 'id');
+        $categories = $catModel->getAllCategories();
 
-        // ==== Lấy danh sách câu hỏi đã lọc + tổng số trang ====
         [$faqQuestions, $totalPages] = $faqQuestionModel->getFilteredQuestions(
             $search,
             $sort,

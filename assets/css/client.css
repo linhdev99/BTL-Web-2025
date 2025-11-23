@@ -146,24 +146,29 @@ footer small {
 /* ===== Category badge ===== */
 .faq-category-badge {
     display: inline-block;
-    background: #007bff;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 13px;
     padding: 5px 10px;
     border-radius: 8px;
     margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    max-width: fit-content;
+    font-weight: bold;
 }
 
 /* ===== Status badge ===== */
 .faq-status-badge {
     display: inline-block;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
     font-weight: 600;
     color: #fff;
-    margin-left: 8px;
+    white-space: nowrap;
+    max-width: fit-content;
+    font-weight: bold;
 }
 
 .status-active {
@@ -317,6 +322,14 @@ footer small {
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 4px;
+}
+
+.faq-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;
 }
 
 /* =========================================================

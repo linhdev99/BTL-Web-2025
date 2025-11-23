@@ -3,23 +3,21 @@
  * @var array $faq
  * @var array|null $category
  */
-
-$canEdit = isset($_SESSION['role']) && in_array($_SESSION['role'], ['admin', 'staff']);
 ?>
 
 <div class="faq-container">
     <div class="page-title d-flex justify-content-between align-items-center">
-        <h2 class="mb-0">
-            <i class="fa-solid fa-circle-question"></i> Chi tiết câu hỏi
-        </h2>
+        <div class="d-flex align-items-center gap-2">
+            <i class="fa-solid fa-circle-question"></i>
+            <span>Câu hỏi thường gặp (FAQ)</span>
+        </div>
 
         <div class="d-flex gap-2">
-            <a href="/faq" class="btn btn-primary">
+            <a href="/faq" class="btn-view-all">
                 <i class="fa-solid fa-arrow-left"></i> Quay lại
             </a>
-
-            <?php if ($canEdit): ?>
-                <a href="/cms/faq/edit.php?id=<?= $faq['id'] ?>" class="btn btn-success">
+            <?php if ($isAdmin): ?>
+                <a href="/cms/faq/edit.php?id=<?= $faq['id'] ?>" class="btn-view-all">
                     <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
                 </a>
             <?php endif; ?>

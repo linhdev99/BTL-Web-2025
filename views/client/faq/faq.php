@@ -21,13 +21,19 @@
         <section class="faq-section">
             <div class="faq-list">
                 <?php foreach ($faqs as $faq): ?>
+                    <?php
+                    $getId = !empty($faq['category_id']) ? (int) $faq['category_id'] : 1;
+                    $categoryName = $categories[0]['name'];
+                    foreach ($categories as $cat) {
+                        if ((int) $cat['id'] === $getId) {
+                            $categoryName = $cat['name'];
+                            break;
+                        }
+                    }
+                    ?>
                     <a href="faq/<?= htmlspecialchars($faq['id']) ?>" class="faq-item card faq-clickable">
-                        <div class="faq-category-badge category-<?= htmlspecialchars($faq['category_id']) ?>">
-                            <?php
-                            $getId = $faq['category_id'];
-                            $category = $categories[$getId]['name'] ?? 'Khác';
-                            echo htmlspecialchars($category);
-                            ?>
+                        <div class="faq-category-badge category-<?= htmlspecialchars($getId) ?>">
+                            <?= htmlspecialchars($categoryName) ?>
                         </div>
 
                         <h3><?= htmlspecialchars(strip_tags($faq['question'])) ?></h3>

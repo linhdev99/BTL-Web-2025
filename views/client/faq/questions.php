@@ -44,19 +44,29 @@
             <div class="faq-list">
                 <?php foreach ($faqQuestions as $q): ?>
                     <div class="faq-item card">
-                        <!-- Category -->
-                        <div class="faq-category-badge category-<?= htmlspecialchars($q['category_id']) ?>">
-                            <?= htmlspecialchars($categories[$q['category_id']]['name'] ?? 'Khác') ?>
-                        </div>
+                        <div class="faq-header-row">
+                            <?php
+                            $getId = !empty($q['category_id']) ? (int) $q['category_id'] : 1;
+                            $categoryName = $categories[0]['name'];
+                            foreach ($categories as $cat) {
+                                if ((int) $cat['id'] === $getId) {
+                                    $categoryName = $cat['name'];
+                                    break;
+                                }
+                            }
+                            ?>
+                            <div class="faq-category-badge category-<?= htmlspecialchars($getId) ?>">
+                                <?= htmlspecialchars($categoryName) ?>
+                            </div>
 
-                        <!-- Status -->
-                        <div class="faq-status-badge status-<?= htmlspecialchars($q['status']) ?>">
-                            <?= match ($q['status']) {
-                                'active' => 'Hiển thị',
-                                'pending' => 'Chờ duyệt',
-                                'hidden' => 'Ẩn',
-                                default => ucfirst($q['status'])
-                            } ?>
+                            <div class="faq-status-badge status-<?= htmlspecialchars($q['status']) ?>">
+                                <?= match ($q['status']) {
+                                    'active' => 'Hiển thị',
+                                    'pending' => 'Chờ duyệt',
+                                    'hidden' => 'Ẩn',
+                                    default => ucfirst($q['status'])
+                                } ?>
+                            </div>
                         </div>
 
                         <h4>
