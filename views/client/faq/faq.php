@@ -21,7 +21,7 @@
         <section class="faq-section">
             <div class="faq-list">
                 <?php foreach ($faqs as $faq): ?>
-                    <div class="faq-item card">
+                    <a href="faq/<?= htmlspecialchars($faq['id']) ?>" class="faq-item card faq-clickable">
                         <div class="faq-category-badge category-<?= htmlspecialchars($faq['category_id']) ?>">
                             <?php
                             $getId = $faq['category_id'];
@@ -29,14 +29,15 @@
                             echo htmlspecialchars($category);
                             ?>
                         </div>
+
                         <h3><?= htmlspecialchars(strip_tags($faq['question'])) ?></h3>
-                        <p>
-                            <?= nl2br(htmlspecialchars(strip_tags(mb_substr($faq['answer'], 0, 200)))) ?>...
-                        </p>
-                        <a href="faq-question.php?category_id=<?= htmlspecialchars($faq['id']) ?>" class="btn btn-primary">
+
+                        <p><?= nl2br(htmlspecialchars(strip_tags(mb_substr($faq['answer'], 0, 200)))) ?>...</p>
+
+                        <div class="btn btn-primary">
                             <i class="fa-solid fa-comments"></i> Xem câu hỏi
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 <?php endforeach; ?>
             </div>
         </section>

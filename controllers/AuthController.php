@@ -3,17 +3,17 @@
 namespace Controllers;
 
 use Models\UserModel;
-use Views\CMSAuthView;
-use Core\CMSAuth;
+use Views\AuthView;
+use Core\Auth;
 
-class CMSAuthController
+class AuthController
 {
     public function loginForm()
     {
-        CMSAuth::redirectIfLoggedIn();
-        $view = new CMSAuthView();
+        Auth::redirectIfLoggedIn();
+        $view = new AuthView();
         $view->render('login', [
-            'page_title' => 'CMS Login'
+            'page_title' => 'Login'
         ]);
     }
 
@@ -30,36 +30,30 @@ class CMSAuthController
         );
 
         if (!$user) {
-            $_SESSION['cms_error'] = "Email không tồn tại!";
-            header("Location: /cms/login");
+            $_SESSION['error'] = "Email không tồn tại!";
+            header("Location: /login");
             exit;
         }
 
         if (!password_verify($password, $user['password'])) {
-            $_SESSION['cms_error'] = "Sai mật khẩu!";
-            header("Location: /cms/login");
-            exit;
-        }
-
-        if ($user['role_id'] != 1) {
-            $_SESSION['cms_error'] = "Bạn không có quyền truy cập CMS!";
-            header("Location: /cms/login");
+            $_SESSION['error'] = "Sai mật khẩu!";
+            header("Location: /login");
             exit;
         }
 
         unset($user['password']);
-        $_SESSION['cms_user'] = $user;
+        $_SESSION['user'] = $user;
 
-        header("Location: /cms");
+        header("Location: /");
         exit;
     }
 
     public function registerForm()
     {
-        CMSAuth::redirectIfLoggedIn();
-        $view = new CMSAuthView();
+        Auth::redirectIfLoggedIn();
+        $view = new AuthView();
         $view->render('register', [
-            'page_title' => 'Đăng ký CMS'
+            'page_title' => 'Đăng ký'
         ]);
     }
 
@@ -77,30 +71,29 @@ class CMSAuthController
         );
 
         if ($exist) {
-            $_SESSION['cms_error'] = "Email đã tồn tại!";
-            header("Location: /cms/register");
+            $_SESSION['error'] = "Email đã tồn tại!";
+            header("Location: /register");
             exit;
         }
 
         $hash = password_hash($password, PASSWORD_BCRYPT);
 
-        // tạo admin CMS
         $userModel->insert("users", [
             'email' => $email,
             'password' => $hash,
             'full_name' => $fullName,
-            'role_id' => 1
+            'role_id' => 3
         ]);
 
-        $_SESSION['cms_success'] = "Tạo tài khoản CMS thành công!";
-        header("Location: /cms/login");
+        $_SESSION['success'] = "Tạo tài khoản thành công!";
+        header("Location: /login");
         exit;
     }
 
     public function logout()
     {
-        unset($_SESSION['cms_user']);
-        header("Location: /cms/login");
+        unset($_SESSION['user']);
+        header("Location: /login");
         exit;
     }
 }

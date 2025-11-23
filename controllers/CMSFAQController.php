@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Core\CMSAuth;
+use Core\Auth;
 use Models\FAQModel;
 use Models\FAQCategoryModel;
 use Models\FAQQuestionModel;
@@ -15,7 +15,7 @@ class CMSFAQController
      */
     public function index()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         (new CMSFAQView())->render(
             "home",
@@ -32,7 +32,7 @@ class CMSFAQController
 
     public function category()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $categories = (new FAQCategoryModel())->getAllCategories();
 
@@ -48,7 +48,7 @@ class CMSFAQController
 
     public function categoryAdd()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         (new CMSFAQView())->render(
             "category",
@@ -61,7 +61,7 @@ class CMSFAQController
 
     public function categoryStore()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $name = $_POST['name'] ?? '';
         $is_active = isset($_POST['is_active']) ? 1 : 0;
@@ -74,7 +74,7 @@ class CMSFAQController
 
     public function categoryEdit($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $id = (int) $id;
         $category = (new FAQCategoryModel())->getById($id);
@@ -91,7 +91,7 @@ class CMSFAQController
 
     public function categoryUpdate($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $id = (int) $id;
         $name = $_POST['name'] ?? '';
@@ -105,7 +105,7 @@ class CMSFAQController
 
     public function categoryDelete($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
         (new FAQCategoryModel())->deleteCategory((int) $id);
         header("Location: /cms/faq/category");
         exit;
@@ -117,7 +117,7 @@ class CMSFAQController
 
     public function static()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $faqModel = new FAQModel();
         $catModel = new FAQCategoryModel();
@@ -144,7 +144,7 @@ class CMSFAQController
 
     public function staticAdd()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $categories = (new FAQCategoryModel())->getAllCategories();
 
@@ -160,7 +160,7 @@ class CMSFAQController
 
     public function staticStore()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $question = $_POST['question'] ?? '';
         $answer = $_POST['answer'] ?? '';
@@ -176,7 +176,7 @@ class CMSFAQController
 
     public function staticEdit($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $id = (int) $id;
         $faqModel = new FAQModel();
@@ -198,7 +198,7 @@ class CMSFAQController
 
     public function staticUpdate($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $id = (int) $id;
         $question = $_POST['question'] ?? '';
@@ -217,7 +217,7 @@ class CMSFAQController
 
     public function staticDelete($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
         (new FAQModel())->deleteFAQ((int) $id);
         header("Location: /cms/faq/static");
         exit;
@@ -229,7 +229,7 @@ class CMSFAQController
 
     public function user()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $keyword = $_GET['keyword'] ?? '';
         $category_id = $_GET['category_id'] ?? '';
@@ -274,7 +274,7 @@ class CMSFAQController
 
     public function userDetail($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $id = (int) $id;
 
@@ -295,7 +295,7 @@ class CMSFAQController
 
     public function userReply($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $id = (int) $id;
         $content = $_POST['content'] ?? '';
@@ -309,7 +309,7 @@ class CMSFAQController
 
     public function userDelete($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         (new FAQQuestionModel())->deleteQuestion((int) $id);
 
@@ -319,7 +319,7 @@ class CMSFAQController
 
     public function userUpdateStatus($url, $id)
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $id = (int) $id;
         $status = $_POST['status'] ?? 'pending';
@@ -333,7 +333,7 @@ class CMSFAQController
             ['id' => $id]
         );
 
-        $_SESSION['cms_flash'][] = [
+        $_SESSION['_flash'][] = [
             'msg' => "Cập nhật thành công!",
             'type' => "success",   // success / danger / warning / info
             'time' => 3000         // ms

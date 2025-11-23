@@ -3,14 +3,14 @@
 namespace Controllers;
 
 use Views\DashboardView;
-use Core\CMSAuth;
+use Core\Auth;
 use Models\DashboardModel;
 
 class DashboardController
 {
     public function index()
     {
-        CMSAuth::check();
+        Auth::requireAdminOrStaff();
 
         $model = new DashboardModel();
         $stats = $model->getStats();

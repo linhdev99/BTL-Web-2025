@@ -7,6 +7,7 @@ use Models\FAQModel;
 use Models\FAQCategoryModel;
 use Models\FAQQuestionModel;
 use Controllers\BaseController;
+use Core\Auth;
 
 class FAQController extends BaseController
 {
@@ -30,13 +31,58 @@ class FAQController extends BaseController
         $catModel = new FAQCategoryModel();
         $faqQuestionModel = new FAQQuestionModel();
 
-        $categories = $catModel->getAllCategories();
-        $faqQuestions = $faqQuestionModel->getAllQuestionsWithUser();
+        // ==== Lấy tham số filter từ URL ====
+        $search = $_GET['search'] ?? '';
+        $sort = $_GET['sort'] ?? 'created_at';
+        $filterCategory = isset($_GET['category_id']) && $_GET['category_id'] !== '' ? (int) $_GET['category_id'] : null;
+        $page = max(1, (int) ($_GET['page'] ?? 1));
+        $limit = 9; // số câu hỏi mỗi trang
 
+        // ==== Chuẩn bị dữ liệu danh mục ====
+        // array_column: chuyển về dạng [id => ['name' => ...]]
+        $categories = array_column($catModel->getAllCategories(), null, 'id');
 
+        // ==== Lấy danh sách câu hỏi đã lọc + tổng số trang ====
+        [$faqQuestions, $totalPages] = $faqQuestionModel->getFilteredQuestions(
+            $search,
+            $sort,
+            $filterCategory,
+            $page,
+            $limit
+        );
+
+        // ==== Gửi dữ liệu sang View ====
         return $view->render_questions([
             'categories' => $categories,
             'faqQuestions' => $faqQuestions,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'search' => $search,
+            'sort' => $sort,
+            'filterCategory' => $filterCategory,
         ]);
     }
+
+    public function faqDetail($url, $id)
+    {
+        $view = new FAQView();
+        $faqModel = new FAQModel();
+        $catModel = new FAQCategoryModel();
+
+        $user = Auth::optionalUser();
+
+        $faq = $faqModel->getById($id);
+        if (!$faq) {
+            die("Không tìm thấy câu hỏi FAQ với ID #{$id}");
+        }
+
+        $category = $catModel->getById($faq['category_id']);
+
+        return $view->render_faq_detail([
+            'faq' => $faq,
+            'category' => $category,
+            'user' => $user,
+        ]);
+    }
+
 }

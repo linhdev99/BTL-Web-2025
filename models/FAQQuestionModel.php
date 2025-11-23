@@ -144,4 +144,18 @@ class FAQQuestionModel extends BaseModel
 
         return $this->getAll($sql, $params);
     }
+    
+    public function getFilteredQuestions(string $search, string $sort, $categoryId, int $page, int $limit)
+    {
+        $offset = ($page - 1) * $limit;
+
+        // Tổng số bản ghi
+        $total = $this->countFilteredQuestions($search, $categoryId);
+        $totalPages = max(1, ceil($total / $limit));
+
+        // Lấy dữ liệu trang hiện tại
+        $faqQuestions = $this->paginateFilteredQuestions($search, $categoryId, $sort, $limit, $offset);
+
+        return [$faqQuestions, $totalPages];
+    }
 }

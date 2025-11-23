@@ -21,3 +21,94 @@ body {
 .category-6 {
     background: #ff4d4d;
 }
+
+.main-header {
+    background: #0d0d0d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left h1 {
+    font-size: 20px;
+    margin: 0;
+    color: #fff;
+}
+
+.header-left .slogan {
+    font-size: 13px;
+    color: #aaa;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* ===== Menu ===== */
+.header-nav {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.header-nav a:hover {
+    color: #00c8ff;
+    transform: translateY(-1px);
+}
+
+/* ===== Right section ===== */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ===== Login button ===== */
+.btn-login {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0066ff;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-login:hover {
+    background: #004bcc;
+    transform: translateY(-2px);
+}
+
+.btn-login.logout {
+    background: #dc3545;
+}
+
+.btn-login.logout:hover {
+    background: #b52d38;
+}
+
+/* ===== User info ===== */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}

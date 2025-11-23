@@ -8,24 +8,24 @@
 
     <div class="d-flex align-items-center gap-3">
 
-        <?php if (isset($_SESSION['cms_user'])): ?>
+        <?php if (isset($_SESSION['user'])): ?>
 
             <span class="text-white">
                 <i class="fa-solid fa-user"></i>
-                <?= htmlspecialchars($_SESSION['cms_user']['full_name'] ?? $_SESSION['cms_user']['email']) ?>
+                <?= htmlspecialchars($_SESSION['user']['full_name'] ?? $_SESSION['user']['email']) ?>
             </span>
 
-            <a href="/cms/logout" class="btn btn-outline-light btn-sm">
+            <a href="/logout" class="btn btn-outline-light btn-sm">
                 <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
             </a>
 
         <?php else: ?>
 
-            <a href="/cms/login" class="btn btn-outline-info btn-sm">
+            <a href="/login" class="btn btn-outline-info btn-sm">
                 <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
             </a>
 
-            <a href="/cms/register" class="btn btn-info btn-sm text-dark fw-semibold">
+            <a href="/register" class="btn btn-info btn-sm text-dark fw-semibold">
                 <i class="fa-solid fa-user-plus"></i> Đăng ký
             </a>
 

@@ -3,11 +3,11 @@ $router->get('/', 'HomeController@index');
 $router->get('/cms', 'DashboardController@index');
 
 // CMS AUTH
-$router->get('/cms/login', 'CMSAuthController@loginForm');
-$router->post('/cms/login', 'CMSAuthController@loginPost');
-$router->get('/cms/register', 'CMSAuthController@registerForm');
-$router->post('/cms/register', 'CMSAuthController@registerPost');
-$router->get('/cms/logout', 'CMSAuthController@logout');
+$router->get('/login', 'AuthController@loginForm');
+$router->post('/login', 'AuthController@loginPost');
+$router->get('/register', 'AuthController@registerForm');
+$router->post('/register', 'AuthController@registerPost');
+$router->get('/logout', 'AuthController@logout');
 
 // CMS PRODUCTS
 $router->get('cms/products', 'CMSProductController@showAll');
@@ -42,3 +42,5 @@ $router->get('/home', 'HomeController@index');
 
 // FAQ
 $router->get('/faq', 'FAQController@index');
+$router->get('/faq/questions', 'FAQController@questions');
+$router->get('/faq/{id}', 'FAQController@faqDetail');

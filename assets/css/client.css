@@ -135,6 +135,7 @@ footer small {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
+    position: relative;
 }
 
 .faq-item:hover {
@@ -154,29 +155,31 @@ footer small {
     margin-bottom: 10px;
 }
 
-.category-1 {
-    background: #464646;
-}
-.category-2 {
-    background: #904fb7;
-}
-.category-3 {
-    background: #007bff;
-}
-.category-4 {
-    background: #28a745;
-    color: #000;
-}
-.category-5 {
-    background: #ffe431;
-    color: #000;
-}
-.category-6 {
-    background: #ff4d4d;
+/* ===== Status badge ===== */
+.faq-status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    margin-left: 8px;
 }
 
+.status-active {
+    background: #28a745;
+} /* Hiển thị */
+.status-pending {
+    background: #ffc107;
+    color: #000;
+} /* Chờ duyệt */
+.status-hidden {
+    background: #6c757d;
+} /* Ẩn */
+
 /* ===== Card content ===== */
-.faq-item h3 {
+.faq-item h3,
+.faq-item h4 {
     margin: 0 0 10px;
     font-size: 18px;
     color: #111;
@@ -211,7 +214,83 @@ footer small {
 }
 
 /* =========================================================
-   QUESTION ITEMS (optional on other pages)
+   FILTER BAR (SEARCH + SORT + CATEGORY)
+   ========================================================= */
+.faq-filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.faq-filter-form input,
+.faq-filter-form select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.faq-filter-form input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.faq-filter-form button {
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+/* =========================================================
+   PAGINATION (with Prev / Next)
+   ========================================================= */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #333;
+    background: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.page-link:hover {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.page-link.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+    pointer-events: none;
+}
+
+.page-link.disabled {
+    color: #aaa;
+    background: #f8f9fa;
+    border-color: #ddd;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* =========================================================
+   QUESTION ITEMS
    ========================================================= */
 .faq-question-item {
     padding: 10px 0;
@@ -235,6 +314,7 @@ footer small {
     font-size: 13px;
     color: #777;
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
     margin-top: 4px;
 }
@@ -247,4 +327,66 @@ footer small {
     font-style: italic;
     text-align: center;
     margin-top: 20px;
+}
+
+/* =========================================================
+   PAGE TITLE (FAQ HEADER)
+   ========================================================= */
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.page-title span {
+    font-size: 22px;
+    font-weight: 600;
+    color: #222;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-title span i {
+    color: #007bff;
+    font-size: 22px;
+}
+.btn-view-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #007bff;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-view-all i {
+    font-size: 16px;
+    color: #fff;
+    opacity: 1;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-view-all:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.btn-view-all:hover i {
+    transform: scale(1.1);
+    color: #fff;
 }

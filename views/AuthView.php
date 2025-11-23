@@ -2,12 +2,12 @@
 
 namespace Views;
 
-class CMSAuthView
+class AuthView
 {
     public function render(string $view, array $data = [])
     {
         if (!empty($data))
             extract($data);
-        require PATH_ROOT . "/views/admin/auth/{$view}.php";
+        require PATH_ROOT . "/views/auth/{$view}.php";
     }
 }

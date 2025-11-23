@@ -38,8 +38,8 @@
     <!-- TOAST STACK (top-right) -->
     <div class="position-fixed top-0 end-0 p-3" style="z-index: 999999;">
 
-        <?php if (!empty($_SESSION['cms_flash'])): ?>
-            <?php foreach ($_SESSION['cms_flash'] as $i => $toast): ?>
+        <?php if (!empty($_SESSION['flash'])): ?>
+            <?php foreach ($_SESSION['flash'] as $i => $toast): ?>
 
                 <?php
                 $type = $toast['type'] ?? 'success';
@@ -66,7 +66,7 @@
 
             <?php endforeach; ?>
 
-            <?php unset($_SESSION['cms_flash']); ?>
+            <?php unset($_SESSION['flash']); ?>
         <?php endif; ?>
 
     </div>
