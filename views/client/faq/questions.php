@@ -15,27 +15,52 @@
         <span><i class="fa-regular fa-circle-question"></i> Danh sách câu hỏi</span>
     </div>
 
-    <!-- ======= Bộ lọc ======= -->
-    <form method="get" class="faq-filter-form">
-        <input type="text" name="search" placeholder="Tìm kiếm câu hỏi..."
-            value="<?= htmlspecialchars($search ?? '') ?>">
+    <form method="get" class="faq-filter-form bg-light p-3 rounded shadow-sm">
+        <div class="row g-2 align-items-center">
+            <!-- Tìm kiếm -->
+            <div class="col-md-4">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="search" name="search" placeholder="Tìm kiếm câu hỏi..."
+                        value="<?= htmlspecialchars($search ?? '') ?>">
+                    <label for="search"><i class="fa-solid fa-magnifying-glass me-1"></i> Tìm kiếm</label>
+                </div>
+            </div>
 
-        <select name="category_id">
-            <option value="">-- Tất cả danh mục --</option>
-            <?php foreach ($categories as $id => $cat): ?>
-                <option value="<?= $id ?>" <?= ($filterCategory == $id) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($cat['name']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            <!-- Danh mục -->
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <select class="form-select" id="category_id" name="category_id">
+                        <option value="">-- Tất cả danh mục --</option>
+                        <?php foreach ($categories as $id => $cat): ?>
+                            <option value="<?= $id ?>" <?= ($filterCategory == $id) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($cat['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <label for="category_id"><i class="fa-solid fa-list me-1"></i> Phân loại</label>
+                </div>
+            </div>
 
-        <select name="sort">
-            <option value="created_at" <?= $sort === 'created_at' ? 'selected' : '' ?>>Mới nhất</option>
-            <option value="question" <?= $sort === 'question' ? 'selected' : '' ?>>Theo tên câu hỏi (A-Z)</option>
-            <option value="status" <?= $sort === 'status' ? 'selected' : '' ?>>Theo trạng thái</option>
-        </select>
+            <!-- Sắp xếp -->
+            <div class="col-md-3">
+                <div class="form-floating">
+                    <select class="form-select" id="sort" name="sort">
+                        <option value="newest" <?= (($_GET['sort'] ?? '') === 'newest') ? 'selected' : '' ?>>Mới nhất
+                        </option>
+                        <option value="oldest" <?= (($_GET['sort'] ?? '') === 'oldest') ? 'selected' : '' ?>>Cũ nhất
+                        </option>
+                    </select>
+                    <label for="sort"><i class="fa-solid fa-arrow-down-short-wide me-1"></i> Sắp xếp</label>
+                </div>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Lọc</button>
+            <!-- Nút Lọc -->
+            <div class="col-md-2 d-flex align-items-center">
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold shadow-sm">
+                    <i class="fa-solid fa-filter me-2"></i> Lọc
+                </button>
+            </div>
+        </div>
     </form>
 
     <!-- ======= Danh sách câu hỏi ======= -->

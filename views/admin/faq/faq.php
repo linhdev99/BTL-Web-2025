@@ -7,7 +7,7 @@
         <a href="/cms/faq/category" class="text-decoration-none">
             <div class="card bg-dark border-secondary p-4 text-center shadow-lg faq-card">
                 <h4 class="text-info mb-2">
-                    <i class="fa-solid fa-list"></i> Thể loại FAQ
+                    <i class="fa-solid fa-list"></i> Thể loại
                 </h4>
                 <p class="text-white-50 mb-0">Quản lý các nhóm chủ đề FAQ</p>
             </div>
@@ -19,7 +19,7 @@
         <a href="/cms/faq/static" class="text-decoration-none">
             <div class="card bg-dark border-secondary p-4 text-center shadow-lg faq-card">
                 <h4 class="text-warning mb-2">
-                    <i class="fa-solid fa-file-lines"></i> FAQ tĩnh
+                    <i class="fa-solid fa-file-lines"></i> FAQ
                 </h4>
                 <p class="text-white-50 mb-0">Câu hỏi & trả lời do admin tạo</p>
             </div>
@@ -31,7 +31,7 @@
         <a href="/cms/faq/user" class="text-decoration-none">
             <div class="card bg-dark border-secondary p-4 text-center shadow-lg faq-card">
                 <h4 class="text-success mb-2">
-                    <i class="fa-solid fa-comments"></i> FAQ tương tác
+                    <i class="fa-solid fa-comments"></i> Hỏi/đáp với người dùng
                 </h4>
                 <p class="text-white-50 mb-0">Câu hỏi người dùng + bình luận</p>
             </div>

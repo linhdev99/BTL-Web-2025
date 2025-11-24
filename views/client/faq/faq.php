@@ -1,6 +1,5 @@
 <?php
 /**
- * @var array $categories
  * @var array $faqs
  */
 ?>
@@ -23,17 +22,11 @@
                 <?php foreach ($faqs as $faq): ?>
                     <?php
                     $getId = !empty($faq['category_id']) ? (int) $faq['category_id'] : 1;
-                    $categoryName = $categories[0]['name'];
-                    foreach ($categories as $cat) {
-                        if ((int) $cat['id'] === $getId) {
-                            $categoryName = $cat['name'];
-                            break;
-                        }
-                    }
+                    $categoryName = $faq['category_name'];
                     ?>
-                    <a href="faq/<?= htmlspecialchars($faq['id']) ?>" class="faq-item card faq-clickable">
-                        <div class="faq-category-badge category-<?= htmlspecialchars($getId) ?>">
-                            <?= htmlspecialchars($categoryName) ?>
+                    <a href="faq/<?= $faq['id'] ?>" class="faq-item card faq-clickable">
+                        <div class="faq-category-badge category-<?= $getId ?>">
+                            <?= $categoryName ?>
                         </div>
 
                         <h3><?= htmlspecialchars(strip_tags($faq['question'])) ?></h3>

@@ -21,7 +21,7 @@ class CMSFAQController
             "home",
             "index",
             [
-                "page_title" => "Quản lý FAQ"
+                "page_title" => "Frequently Asked Questions (FAQ)"
             ]
         );
     }
@@ -40,7 +40,7 @@ class CMSFAQController
             "category",
             "index",
             [
-                "page_title" => "Quản lý thể loại FAQ",
+                "page_title" => "Quản lý thể loại",
                 "categories" => $categories
             ]
         );
@@ -54,7 +54,7 @@ class CMSFAQController
             "category",
             "add",
             [
-                "page_title" => "Thêm thể loại FAQ"
+                "page_title" => "Thêm thể loại"
             ]
         );
     }
@@ -83,7 +83,7 @@ class CMSFAQController
             "category",
             "edit",
             [
-                "page_title" => "Chỉnh sửa thể loại FAQ",
+                "page_title" => "Chỉnh sửa thể loại",
                 "category" => $category
             ]
         );
@@ -134,7 +134,7 @@ class CMSFAQController
             "static",
             "index",
             [
-                "page_title" => "FAQ tĩnh",
+                "page_title" => "Quản lí Câu hỏi thường gặp",
                 "staticFaq" => $staticFaq,
                 "categories" => $categories,
                 "categoriesMap" => $categoriesMap
@@ -152,7 +152,7 @@ class CMSFAQController
             "static",
             "add",
             [
-                "page_title" => "Thêm FAQ tĩnh",
+                "page_title" => "Thêm Câu hỏi",
                 "categories" => $categories
             ]
         );
@@ -189,7 +189,7 @@ class CMSFAQController
             "static",
             "edit",
             [
-                "page_title" => "Chỉnh sửa FAQ tĩnh",
+                "page_title" => "Chỉnh sửa câu hỏi",
                 "faq" => $faq,
                 "categories" => $categories
             ]
@@ -231,43 +231,36 @@ class CMSFAQController
     {
         Auth::requireAdminOrStaff();
 
-        $keyword = $_GET['keyword'] ?? '';
-        $category_id = $_GET['category_id'] ?? '';
-        $sort = $_GET['sort'] ?? 'newest';
-
-        $page = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
-        $limit = 20;
-        $offset = ($page - 1) * $limit;
-
-        $questionModel = new FAQQuestionModel();
+        $view = new CMSFAQView();
         $catModel = new FAQCategoryModel();
+        $faqQuestionModel = new FAQQuestionModel();
+
+        $search = $_GET['search'] ?? '';
+        $sort = $_GET['sort'] ?? 'newest';
+        $filterCategory = !empty($_GET['category_id']) ? (int) $_GET['category_id'] : null;
+        $page = max(1, (int) ($_GET['page'] ?? 1));
+        $limit = 9;
+
+        $isUser = Auth::isUser();
 
         $categories = $catModel->getAllCategories();
+        $faqQuestions = $faqQuestionModel->getFilteredQuestions($search, $sort, $filterCategory, $page, $limit, $isUser);
+        $totalRecords = $faqQuestionModel->countFilteredQuestions($search, $filterCategory, $isUser);
+        $totalPages = ceil($totalRecords / $limit);
 
-        // Đếm tổng bản ghi
-        $total = $questionModel->countFilteredQuestions($keyword, $category_id);
-
-        // Lấy dữ liệu theo trang
-        $userQuestions = $questionModel->paginateFilteredQuestions(
-            $keyword,
-            $category_id,
-            $sort,
-            $limit,
-            $offset
-        );
-
-        $totalPages = ceil($total / $limit);
-
-        (new CMSFAQView())->render(
+        $view->render(
             "user",
             "index",
             [
-                "page_title" => "FAQ người dùng",
-                "userQuestions" => $userQuestions,
-                "categories" => $categories,
-                "total" => $total,
-                "page" => $page,
-                "totalPages" => $totalPages
+                'page_title' => "Quản lí Hỏi/Đáp với người dùng",
+                'categories' => $categories,
+                'faqQuestions' => $faqQuestions,
+                'page' => $page,
+                'totalPages' => $totalPages,
+                'search' => $search,
+                'sort' => $sort,
+                'filterCategory' => $filterCategory,
+                'isUser' => $isUser
             ]
         );
     }
@@ -298,8 +291,8 @@ class CMSFAQController
         Auth::requireAdminOrStaff();
 
         $id = (int) $id;
+        $adminId = Auth::isAdminOrStaff();
         $content = $_POST['content'] ?? '';
-        $adminId = $_SESSION['cms_user']['id'];
 
         (new FAQQuestionModel())->addComment($id, $adminId, $content);
 

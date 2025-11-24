@@ -56,10 +56,6 @@ class Auth
         }
     }
 
-    /**
-     * Kiểm tra role theo role_id
-     * 1 = admin, 2 = employee, 3 = user
-     */
     public static function isAdmin(): bool
     {
         return !empty($_SESSION['user']) && $_SESSION['user']['role_id'] == 1;
@@ -75,9 +71,6 @@ class Auth
         return !empty($_SESSION['user']) && $_SESSION['user']['role_id'] == 3;
     }
 
-    /**
-     * Cho phép admin hoặc nhân viên
-     */
     public static function isAdminOrStaff(): bool
     {
         return !empty($_SESSION['user']) && in_array($_SESSION['user']['role_id'], [1, 2]);

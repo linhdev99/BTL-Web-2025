@@ -4,11 +4,11 @@
 // Helper giữ query khi phân trang
 function keepQuery($remove = [])
 {
-    $query = $_GET;
+    $questionuery = $_GET;
     foreach ($remove as $r)
-        unset($query[$r]);
-    $q = http_build_query($query);
-    return $q ? '&' . $q : '';
+        unset($questionuery[$r]);
+    $question = http_build_query($questionuery);
+    return $question ? '&' . $question : '';
 }
 ?>
 
@@ -64,8 +64,7 @@ function keepQuery($remove = [])
     </thead>
 
     <tbody>
-
-        <?php if (empty($userQuestions)): ?>
+        <?php if (empty($faqQuestions)): ?>
             <tr>
                 <td colspan="6" class="text-center text-white-50 py-4">
                     Không tìm thấy kết quả phù hợp.
@@ -73,25 +72,25 @@ function keepQuery($remove = [])
             </tr>
         <?php endif; ?>
 
-        <?php foreach ($userQuestions as $q): ?>
+        <?php foreach ($faqQuestions as $question): ?>
             <tr>
 
-                <td><?= $q['id'] ?></td>
+                <td><?= $question['id'] ?></td>
 
-                <td><?= htmlspecialchars($q['full_name'] ?? 'User #' . $q['user_id']) ?></td>
+                <td><?= htmlspecialchars($question['full_name'] ?? 'User #' . $question['user_id']) ?></td>
 
                 <td>
-                    <span class="badge bg-info text-dark">
-                        <?= htmlspecialchars($q['category_name'] ?? 'Chưa phân loại') ?>
+                    <span class="badge faq-category-badge category-<?= $question['category_id'] ?? 1 ?>">
+                        <?= htmlspecialchars($question['category_name'] ?? 'Chưa phân loại') ?>
                     </span>
                 </td>
 
-                <td><?= htmlspecialchars(strip_tags($q['question'])) ?></td>
+                <td><?= htmlspecialchars(strip_tags($question['question'])) ?></td>
 
                 <td>
-                    <?php if ($q['status'] === 'pending'): ?>
+                    <?php if ($question['status'] === 'pending'): ?>
                         <span class="badge bg-warning text-dark">Chờ duyệt</span>
-                    <?php elseif ($q['status'] === 'active'): ?>
+                    <?php elseif ($question['status'] === 'active'): ?>
                         <span class="badge bg-success">Hiển thị</span>
                     <?php else: ?>
                         <span class="badge bg-secondary">Ẩn</span>
@@ -99,11 +98,11 @@ function keepQuery($remove = [])
                 </td>
 
                 <td>
-                    <a href="/cms/faq/user/detail/<?= $q['id'] ?>" class="btn btn-primary btn-sm">
+                    <a href="/cms/faq/user/detail/<?= $question['id'] ?>" class="btn btn-primary btn-sm">
                         <i class="fa-solid fa-eye"></i> Chi tiết
                     </a>
 
-                    <form method="POST" action="/cms/faq/user/delete/<?= $q['id'] ?>" class="d-inline"
+                    <form method="POST" action="/cms/faq/user/delete/<?= $question['id'] ?>" class="d-inline"
                         onsubmit="return confirm('Xóa câu hỏi này?')">
                         <button class="btn btn-danger btn-sm">
                             <?= ICON_DELETE ?> Xóa

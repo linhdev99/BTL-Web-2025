@@ -1,7 +1,7 @@
 <?php
 /**
- * @var array $faq
- * @var array|null $category
+ * @var $faq
+ * @var $user
  */
 ?>
 
@@ -17,7 +17,7 @@
                 <i class="fa-solid fa-arrow-left"></i> Quay lại
             </a>
             <?php if ($isAdmin): ?>
-                <a href="/cms/faq/edit.php?id=<?= $faq['id'] ?>" class="btn-view-all">
+                <a href="/cms/faq/static/edit/<?= $faq['id'] ?>" class="btn-view-all">
                     <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
                 </a>
             <?php endif; ?>
@@ -26,7 +26,7 @@
 
     <div class="card mt-4 p-4">
         <div class="faq-category-badge category-<?= $faq['category_id'] ?> mb-2">
-            <?= $category['name'] ?? 'Khác' ?>
+            <?= $faq['category_name'] ?? 'Khác' ?>
         </div>
 
         <h4 class="fw-bold mb-3"><?= $faq['question'] ?></h4>

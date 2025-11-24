@@ -1,7 +1,7 @@
 <h1 class="text-white mb-4"><?= $page_title ?></h1>
 
 <a href="/cms/faq/static/add" class="btn btn-success mb-3">
-    <?= ICON_ADD ?> Thêm FAQ tĩnh
+    <?= ICON_ADD ?> Thêm câu hỏi
 </a>
 
 <table class="table table-dark table-bordered align-middle">

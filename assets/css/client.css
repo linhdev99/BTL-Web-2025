@@ -221,29 +221,12 @@ footer small {
 /* =========================================================
    FILTER BAR (SEARCH + SORT + CATEGORY)
    ========================================================= */
-.faq-filter-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 25px;
+.faq-filter-form .btn {
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
 }
-
-.faq-filter-form input,
-.faq-filter-form select {
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-.faq-filter-form input {
-    flex: 1;
-    min-width: 200px;
-}
-
-.faq-filter-form button {
-    padding: 8px 14px;
-    cursor: pointer;
+.faq-filter-form .form-floating label i {
+    color: #6c757d;
 }
 
 /* =========================================================

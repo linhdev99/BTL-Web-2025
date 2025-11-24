@@ -15,16 +15,31 @@ class FAQController extends BaseController
     {
         $view = new FAQView();
         $faqModel = new FAQModel();
-        $catModel = new FAQCategoryModel();
+        $isUser = Auth::isUser();
+        $faqs = [];
 
-        $categories = $catModel->getAllCategories();
-        $faqs = $faqModel->getAllFAQ();
+        if ($isUser) {
+            $faqs = $faqModel->getActiveFAQ();
+        } else {
+            $faqs = $faqModel->getAllFAQ();
+        }
 
-        return $view->render_faq([
-            'categories' => $categories,
-            'faqs' => $faqs,
+        return $view->render_faq(['faqs' => $faqs,]);
+    }
+
+    public function faqDetail($url, $id)
+    {
+        $user = Auth::optionalUser();
+        $view = new FAQView();
+        $faqModel = new FAQModel();
+        $faq = $faqModel->getById($id);
+
+        return $view->render_faq_detail([
+            'user' => $user,
+            'faq' => $faq,
         ]);
     }
+
     public function questions()
     {
         $view = new FAQView();
@@ -32,22 +47,19 @@ class FAQController extends BaseController
         $faqQuestionModel = new FAQQuestionModel();
 
         $search = $_GET['search'] ?? '';
-        $sort = $_GET['sort'] ?? 'created_at';
-        $filterCategory = isset($_GET['category_id']) && $_GET['category_id'] !== '' ? (int) $_GET['category_id'] : null;
+        $sort = $_GET['sort'] ?? 'newest';
+        $filterCategory = !empty($_GET['category_id']) ? (int) $_GET['category_id'] : null;
         $page = max(1, (int) ($_GET['page'] ?? 1));
         $limit = 9;
 
+        $isUser = !Auth::isAdminOrStaff();
+        error_log('isuser: ' . $isUser);
+
         $categories = $catModel->getAllCategories();
+        $faqQuestions = $faqQuestionModel->getFilteredQuestions($search, $sort, $filterCategory, $page, $limit, $isUser);
+        $totalRecords = $faqQuestionModel->countFilteredQuestions($search, $filterCategory, $isUser);
+        $totalPages = ceil($totalRecords / $limit);
 
-        [$faqQuestions, $totalPages] = $faqQuestionModel->getFilteredQuestions(
-            $search,
-            $sort,
-            $filterCategory,
-            $page,
-            $limit
-        );
-
-        // ==== Gửi dữ liệu sang View ====
         return $view->render_questions([
             'categories' => $categories,
             'faqQuestions' => $faqQuestions,
@@ -56,28 +68,7 @@ class FAQController extends BaseController
             'search' => $search,
             'sort' => $sort,
             'filterCategory' => $filterCategory,
-        ]);
-    }
-
-    public function faqDetail($url, $id)
-    {
-        $view = new FAQView();
-        $faqModel = new FAQModel();
-        $catModel = new FAQCategoryModel();
-
-        $user = Auth::optionalUser();
-
-        $faq = $faqModel->getById($id);
-        if (!$faq) {
-            die("Không tìm thấy câu hỏi FAQ với ID #{$id}");
-        }
-
-        $category = $catModel->getById($faq['category_id']);
-
-        return $view->render_faq_detail([
-            'faq' => $faq,
-            'category' => $category,
-            'user' => $user,
+            'isUser' => $isUser
         ]);
     }
 

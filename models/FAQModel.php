@@ -1,20 +1,44 @@
 <?php
 
 namespace Models;
+use PDO;
 
 class FAQModel extends BaseModel
 {
     protected string $table = "faq";
+    protected string $table_category = "faq_categories";
 
-    /**
-     * Lấy toàn bộ FAQ tĩnh
-     */
     public function getAllFAQ()
     {
         return $this->getAll("
-            SELECT * FROM {$this->table}
-            ORDER BY ordering ASC, id DESC
+            SELECT 
+                f.*,
+                c.name AS category_name
+            FROM {$this->table} AS f
+            LEFT JOIN {$this->table_category} AS c ON f.category_id = c.id
+            ORDER BY f.ordering ASC, f.id DESC
         ");
+    }
+
+    public function getActiveFAQ()
+    {
+        $stmt = $this->db->prepare("
+            SELECT 
+                f.id,
+                f.category_id,
+                c.name AS category_name,
+                f.question,
+                f.answer,
+                f.ordering,
+                f.is_active,
+                f.updated_at
+            FROM {$this->table} AS f
+            JOIN {$this->table_category} AS c ON f.category_id = c.id
+            WHERE f.is_active = 1 AND c.is_active = 1
+            ORDER BY f.ordering ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -23,8 +47,12 @@ class FAQModel extends BaseModel
     public function getById(int $id)
     {
         return $this->getOne("
-            SELECT * FROM {$this->table}
-            WHERE id = :id
+            SELECT 
+                f.*,
+                c.name AS category_name
+            FROM {$this->table} AS f
+            LEFT JOIN {$this->table_category} AS c ON f.category_id = c.id
+            WHERE f.id = :id
         ", ['id' => $id]);
     }
 
