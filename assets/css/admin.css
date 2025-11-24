@@ -27,3 +27,27 @@
     border-radius: 8px;
     margin-bottom: 10px;
 }
+
+.faq-status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    max-width: fit-content;
+    font-weight: bold;
+}
+
+.status-active {
+    background: #28a745;
+} /* Hiển thị */
+.status-pending {
+    background: #ffc107;
+    color: #000;
+} /* Chờ duyệt */
+.status-hidden {
+    background: #6c757d;
+} /* Ẩn */

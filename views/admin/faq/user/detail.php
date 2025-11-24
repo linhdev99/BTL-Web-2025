@@ -2,97 +2,136 @@
 
 <!-- QUESTION INFO -->
 <div class="card bg-dark border-secondary p-4 mb-4">
-    <h4 class="text-info">Câu hỏi:</h4>
-    <p class="text-white"><?= nl2br(htmlspecialchars($question['question'])) ?></p>
-
-    <div class="mt-3">
-        <span class="badge bg-primary">
-            Người hỏi: <?= htmlspecialchars($question['full_name'] ?? "User #{$question['user_id']}") ?>
-        </span>
-
-        <span class="badge bg-info text-dark">
-            Thể loại: <?= htmlspecialchars($question['category_name'] ?? "Chưa phân loại") ?>
-        </span>
-
-        <span class="badge bg-secondary">
-            <?= date("d/m/Y H:i", strtotime($question['created_at'])) ?>
-        </span>
+  <div class="mt-2">
+    <div class="faq-category-badge category-<?= (int) ($question['category_id'] ?? 1) ?>">
+      <?= $question['category_name'] ?? 'Chưa phân loại' ?>
     </div>
+    <div class="faq-status-badge status-<?= $question['status'] ?>">
+      <?= match ($question['status']) {
+        'active' => 'Hiển thị',
+        'pending' => 'Chờ duyệt',
+        'hidden' => 'Ẩn',
+        default => ucfirst($question['status'])
+      } ?>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-start mb-3">
+    <img src="<?= !empty($question['avatar']) ? $question['avatar'] : '/assets/img/default-avatar.png' ?>"
+      alt="Avatar người hỏi" class="rounded-circle me-3 border border-secondary" width="56" height="56"
+      style="object-fit: cover;" />
+
+    <div class="flex-grow-1">
+      <div class="text-white mb-1">
+        <i class="fa-regular fa-user me-1"></i>
+        <strong><?= htmlspecialchars($question['full_name'] ?? "User #{$question['user_id']}") ?></strong>
+        <span class="mx-1">|</span>
+        <i class="fa-regular fa-calendar me-1"></i>
+        <span><?= date("d/m/Y H:i", strtotime($question['created_at'])) ?></span>
+      </div>
+
+      <p class="text-white fs-5 mb-0"><?= nl2br(htmlspecialchars($question['question'])) ?></p>
+    </div>
+  </div>
 </div>
 
+<!-- UPDATE QUESTION STATUS + CATEGORY -->
+<div class="card bg-dark border-secondary p-4 mb-4 shadow-sm rounded-3">
+  <h4 class="text-warning mb-4">
+    <i class="fa-solid fa-flag me-2"></i> Cập nhật thông tin câu hỏi
+  </h4>
 
-<!-- UPDATE QUESTION STATUS -->
-<div class="card bg-dark border-secondary p-4 mb-4">
-    <h4 class="text-warning mb-3"><i class="fa-solid fa-flag"></i> Trạng thái câu hỏi</h4>
+  <form method="POST" action="/cms/faq/user/update/<?= $question['id'] ?>" class="row g-4 align-items-center">
 
-    <form method="POST" action="/cms/faq/user/status/<?= $question['id'] ?>" class="row g-3">
-        <div class="col-md-4">
-            <select name="status" class="form-control bg-dark text-white">
-                <option value="pending" <?= $question['status'] === 'pending' ? 'selected' : '' ?>>Chờ duyệt</option>
-                <option value="active" <?= $question['status'] === 'active' ? 'selected' : '' ?>>Hiển thị</option>
-                <option value="hidden" <?= $question['status'] === 'hidden' ? 'selected' : '' ?>>Ẩn</option>
-            </select>
-        </div>
+    <!-- Danh mục -->
+    <div class="col-md-5">
+      <label for="category_id" class="form-label fw-semibold mb-2 text-light">
+        <i class="fa-solid fa-layer-group me-1"></i> Phân loại
+      </label>
+      <select name="category_id" id="category_id" class="form-select bg-dark text-white border-secondary">
+        <?php foreach ($categories as $cat): ?>
+          <option value="<?= $cat['id'] ?>" <?= $question['category_id'] == $cat['id'] ? 'selected' : '' ?>>
+            <?= htmlspecialchars($cat['name']) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
 
-        <div class="col-md-2">
-            <button class="btn btn-warning w-100">
-                <i class="fa-solid fa-pen"></i> Cập nhật
-            </button>
-        </div>
-    </form>
+    <!-- Trạng thái -->
+    <div class="col-md-4">
+      <label for="status" class="form-label fw-semibold mb-2 text-light">
+        <i class="fa-solid fa-toggle-on me-1"></i> Trạng thái
+      </label>
+      <select name="status" id="status" class="form-select bg-dark text-white border-secondary">
+        <option value="pending" <?= $question['status'] === 'pending' ? 'selected' : '' ?>>Chờ duyệt</option>
+        <option value="active" <?= $question['status'] === 'active' ? 'selected' : '' ?>>Hiển thị</option>
+        <option value="hidden" <?= $question['status'] === 'hidden' ? 'selected' : '' ?>>Ẩn</option>
+      </select>
+    </div>
+
+    <!-- Nút cập nhật -->
+    <div class="col-md-3 d-flex align-items-end">
+      <button type="submit" class="btn btn-warning w-100 fw-semibold py-2 shadow-sm">
+        <i class="fa-solid fa-pen me-1"></i> Cập nhật
+      </button>
+    </div>
+  </form>
 </div>
-
 
 <!-- LIST COMMENTS -->
 <div class="card bg-dark border-secondary p-4 mb-4">
-    <h4 class="text-warning mb-3"><?= ICON_COMMENT ?> Bình luận</h4>
+  <h4 class="text-warning mb-3"><?= ICON_COMMENT ?> Bình luận</h4>
 
-    <?php if (empty($comments)): ?>
-        <p class="text-white-50">Chưa có bình luận nào.</p>
-    <?php else: ?>
-        <?php foreach ($comments as $cmt): ?>
-            <div class="mb-3 border-bottom border-secondary pb-2">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <div class="text-info fw-bold">
-                            <?= htmlspecialchars($cmt['full_name'] ?? "User #{$cmt['user_id']}") ?>
-                        </div>
-                        <div class="text-white">
-                            <?= nl2br(htmlspecialchars($cmt['content'])) ?>
-                        </div>
-                        <div class="text-secondary small">
-                            <?= date("d/m/Y H:i", strtotime($cmt['created_at'])) ?>
-                        </div>
-                    </div>
+  <?php if (empty($comments)): ?>
+    <p class="text-white-50">Chưa có bình luận nào.</p>
+  <?php else: ?>
+    <?php foreach ($comments as $cmt): ?>
+      <div class="d-flex align-items-start border-bottom border-secondary pb-3 mb-3">
+        <!-- Avatar -->
+        <img src="<?= !empty($cmt['avatar']) ? $cmt['avatar'] : '/assets/img/default-avatar.png' ?>" alt="Avatar bình luận"
+          class="rounded-circle me-3 border border-secondary" width="48" height="48" style="object-fit: cover;" />
 
-                    <!-- Delete Button -->
-                    <form method="POST" action="/cms/faq/user/detail/<?= $question['id'] ?>/comment/delete/<?= $cmt['id'] ?>"
-                        onsubmit="return confirm('Xóa bình luận này?')" class="ms-3">
-                        <button class="btn btn-sm btn-danger">
-                            <i class="fa-solid fa-trash"></i> Xóa
-                        </button>
-                    </form>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+        <!-- Nội dung bình luận -->
+        <div class="flex-grow-1">
+          <div class="text-white mb-1">
+            <i class="fa-regular fa-user me-1"></i>
+            <strong><?= htmlspecialchars($cmt['full_name'] ?? "User #{$cmt['user_id']}") ?></strong>
+            <span class="mx-1">|</span>
+            <i class="fa-regular fa-calendar me-1"></i>
+            <span><?= date("d/m/Y H:i", strtotime($cmt['created_at'])) ?></span>
+          </div>
+
+          <div class="text-white mb-2">
+            <?= nl2br(htmlspecialchars($cmt['content'])) ?>
+          </div>
+
+          <!-- Delete Button -->
+          <form method="POST" action="/cms/faq/user/detail/<?= $question['id'] ?>/comment/delete/<?= $cmt['id'] ?>"
+            onsubmit="return confirm('Xóa bình luận này?')" class="mt-1">
+            <button class="btn btn-sm btn-outline-danger">
+              <i class="fa-solid fa-trash"></i> Xóa
+            </button>
+          </form>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  <?php endif; ?>
 </div>
-
 
 <!-- ADMIN REPLY FORM -->
 <div class="card bg-dark border-secondary p-4">
-    <h4 class="text-success mb-3"><i class="fa-solid fa-reply"></i> Trả lời người dùng</h4>
+  <h4 class="text-success mb-3"><i class="fa-solid fa-reply"></i> Trả lời người dùng</h4>
 
-    <form method="POST" action="/cms/faq/user/detail/<?= $question['id'] ?>">
-        <textarea name="content" class="form-control bg-dark text-white mb-3" placeholder="Nhập nội dung trả lời..."
-            rows="3" required></textarea>
+  <form method="POST" action="/cms/faq/user/detail/<?= $question['id'] ?>">
+    <textarea name="content" class="form-control bg-dark text-white mb-3" placeholder="Nhập nội dung trả lời..."
+      rows="3" required></textarea>
 
-        <button class="btn btn-success">
-            <i class="fa-solid fa-paper-plane"></i> Gửi trả lời
-        </button>
+    <button class="btn btn-success">
+      <i class="fa-solid fa-paper-plane"></i> Gửi trả lời
+    </button>
 
-        <a href="/cms/faq/user" class="btn btn-secondary">
-            <?= ICON_BACK ?> Quay lại
-        </a>
-    </form>
+    <a href="/cms/faq/user" class="btn btn-secondary">
+      <?= ICON_BACK ?> Quay lại
+    </a>
+  </form>
 </div>

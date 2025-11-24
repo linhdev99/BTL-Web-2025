@@ -272,6 +272,9 @@ class CMSFAQController
         $id = (int) $id;
 
         $questionModel = new FAQQuestionModel();
+        $catModel = new FAQCategoryModel();
+
+        $categories = $catModel->getAllCategories();
         $question = $questionModel->getById($id);
         $comments = $questionModel->getComments($id);
 
@@ -281,7 +284,8 @@ class CMSFAQController
             [
                 "page_title" => "Chi tiết câu hỏi người dùng",
                 "question" => $question,
-                "comments" => $comments
+                "comments" => $comments,
+                "categories" => $categories,
             ]
         );
     }
@@ -321,11 +325,15 @@ class CMSFAQController
 
         $id = (int) $id;
         $status = $_POST['status'] ?? 'pending';
+        $category_id = $_POST['category_id'] ?? '1';
 
         $questionModel = new FAQQuestionModel();
         $questionModel->update(
             'faq_questions',
-            ['status' => $status],
+            [
+                'status' => $status,
+                'category_id' => $category_id
+            ],
             "id = :id",
             ['id' => $id]
         );

@@ -1,26 +1,6 @@
 body {
     font-family: sans-serif;
 }
-.category-1 {
-    background: #464646;
-}
-.category-2 {
-    background: #904fb7;
-}
-.category-3 {
-    background: #007bff;
-}
-.category-4 {
-    background: #51ff7a;
-    color: #000;
-}
-.category-5 {
-    background: #ffea65;
-    color: #000;
-}
-.category-6 {
-    background: #ff4d4d;
-}
 
 .main-header {
     background: #0d0d0d;
@@ -112,3 +92,63 @@ body {
     gap: 10px;
     font-weight: 500;
 }
+
+/* == FAQ == */
+
+.faq-category-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    max-width: fit-content;
+    font-weight: bold;
+}
+
+.category-1 {
+    background: #464646;
+}
+.category-2 {
+    background: #904fb7;
+}
+.category-3 {
+    background: #007bff;
+}
+.category-4 {
+    background: #51ff7a;
+    color: #000;
+}
+.category-5 {
+    background: #ffea65;
+    color: #000;
+}
+.category-6 {
+    background: #ff4d4d;
+}
+
+.faq-status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    max-width: fit-content;
+    font-weight: bold;
+}
+
+.status-active {
+    background: #28a745;
+} /* Hiển thị */
+.status-pending {
+    background: #ffc107;
+    color: #000;
+} /* Chờ duyệt */
+.status-hidden {
+    background: #6c757d;
+} /* Ẩn */
