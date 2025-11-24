@@ -290,11 +290,16 @@ class CMSFAQController
     {
         Auth::requireAdminOrStaff();
 
-        $id = (int) $id;
-        $adminId = Auth::isAdminOrStaff();
+        $questId = (int) $id;
         $content = $_POST['content'] ?? '';
+        $userId = $_SESSION['user']['id'];
 
-        (new FAQQuestionModel())->addComment($id, $adminId, $content);
+        if ($userId == null || $userId == '') {
+            header("Location: /login");
+            return;
+        }
+
+        (new FAQQuestionModel())->addComment($questId, $userId, $content);
 
         header("Location: /cms/faq/user/detail/$id");
         exit;

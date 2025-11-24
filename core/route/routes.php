@@ -46,3 +46,4 @@ $router->get('/faq', 'FAQController@getAllFAQ');
 $router->get('/faq/detail/{id}', 'FAQController@getFAQDetail');
 $router->get('/faq/questions', 'FAQController@getAllQuestions');
 $router->get('/faq/questions/detail/{id}', 'FAQController@getQuestionDetail');
+$router->post('/faq/questions/detail/{id}/comment', 'FAQController@addCmtToQuest');

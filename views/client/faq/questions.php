@@ -31,9 +31,9 @@
         <div class="form-floating">
           <select class="form-select" id="category_id" name="category_id">
             <option value="">-- Tất cả danh mục --</option>
-            <?php foreach ($categories as $id => $cat): ?>
-              <option value="<?= $id ?>" <?= ($filterCategory == $id) ? 'selected' : '' ?>>
-                <?= $cat['name'] ?>
+            <?php foreach ($categories as $category): ?>
+              <option value="<?= $category['id'] ?>" <?= ($filterCategory == $category['id']) ? 'selected' : '' ?>>
+                <?= $category['name'] ?>
               </option>
             <?php endforeach; ?>
           </select>

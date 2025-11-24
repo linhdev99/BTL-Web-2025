@@ -83,7 +83,8 @@
       <i class="fa-regular fa-comment-dots me-2"></i> Viết bình luận của bạn
     </div>
     <div class="card-body">
-      <form method="POST" action="/faq/comment/add/<?= $question['id'] ?>" class="d-flex align-items-start gap-3">
+      <form method="POST" action="/faq/questions/detail/<?= $question['id'] ?>/comment"
+        class="d-flex align-items-start gap-3">
         <img src="<?= $_SESSION['user']['avatar'] ?? '/assets/img/default-avatar.png' ?>" alt="Avatar"
           class="rounded-circle" width="45" height="45" style="object-fit: cover;" />
         <div class="flex-grow-1">

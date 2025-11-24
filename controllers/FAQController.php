@@ -88,4 +88,21 @@ class FAQController extends BaseController
             ]
         );
     }
+
+    public function addCmtToQuest($url, $id)
+    {
+        Auth::requireLogin();
+        $questId = (int) $id;
+        $content = $_POST['content'] ?? '';
+        $userId = $_SESSION['user']['id'];
+
+        if ($userId == null || $userId == '') {
+            header("Location: /login");
+            return;
+        }
+
+        (new FAQQuestionModel())->addComment($questId, $userId, $content);
+        header("Location: /faq/questions/detail/$id");
+        exit;
+    }
 }
