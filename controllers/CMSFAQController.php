@@ -318,7 +318,6 @@ class CMSFAQController
         $status = $_POST['status'] ?? 'pending';
 
         $questionModel = new FAQQuestionModel();
-
         $questionModel->update(
             'faq_questions',
             ['status' => $status],

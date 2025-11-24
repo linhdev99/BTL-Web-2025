@@ -10,3 +10,6 @@ client/configs/config.development.php
 client/configs/config.production.php
 
 /**/**.test.**
+
+node_modules
+node_modules/

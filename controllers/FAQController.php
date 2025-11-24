@@ -11,7 +11,7 @@ use Core\Auth;
 
 class FAQController extends BaseController
 {
-    public function index()
+    public function getAllFAQ()
     {
         $view = new FAQView();
         $faqModel = new FAQModel();
@@ -27,7 +27,7 @@ class FAQController extends BaseController
         return $view->render_faq(['faqs' => $faqs,]);
     }
 
-    public function faqDetail($url, $id)
+    public function getFAQDetail($url, $id)
     {
         $user = Auth::optionalUser();
         $view = new FAQView();
@@ -40,7 +40,7 @@ class FAQController extends BaseController
         ]);
     }
 
-    public function questions()
+    public function getAllQuestions()
     {
         $view = new FAQView();
         $catModel = new FAQCategoryModel();
@@ -72,4 +72,20 @@ class FAQController extends BaseController
         ]);
     }
 
+    public function getQuestionDetail($url, $id)
+    {
+        Auth::requireLogin();
+        $id = (int) $id;
+
+        $questionModel = new FAQQuestionModel();
+        $question = $questionModel->getById($id);
+        $comments = $questionModel->getComments($id);
+
+        (new FAQView())->render_quest_detail(
+            [
+                "question" => $question,
+                "comments" => $comments
+            ]
+        );
+    }
 }

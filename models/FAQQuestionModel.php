@@ -23,20 +23,35 @@ class FAQQuestionModel extends BaseModel
     public function getById($id)
     {
         return $this->getOne("
-            SELECT q.*, u.full_name, c.name AS category_name
-            FROM faq_questions q
-            LEFT JOIN users u ON u.id = q.user_id
-            LEFT JOIN faq_categories c ON c.id = q.category_id
-            WHERE q.id = :id
+            SELECT 
+                f.*,
+                c.name AS category_name,
+                u.full_name,
+                u.email,
+                u.phone,
+                u.avatar,
+                r.name AS role_name
+            FROM {$this->table} AS f
+            JOIN faq_categories AS c ON f.category_id = c.id
+            JOIN users AS u ON f.user_id = u.id
+            JOIN roles AS r ON u.role_id = r.id
+            WHERE f.id = :id
         ", ['id' => $id]);
     }
 
     public function getComments(int $questionId)
     {
         return $this->getAll("
-            SELECT c.*, u.full_name
-            FROM faq_comments c
-            LEFT JOIN users u ON u.id = c.user_id
+            SELECT
+                c.*, 
+                u.full_name,
+                u.avatar,
+                u.email,
+                u.phone,
+                r.name AS role_name
+            FROM {$this->table_comments} c
+            JOIN users u ON u.id = c.user_id
+            JOIN roles AS r ON u.role_id = r.id
             WHERE c.question_id = :qid
             ORDER BY c.created_at ASC
         ", ['qid' => $questionId]);

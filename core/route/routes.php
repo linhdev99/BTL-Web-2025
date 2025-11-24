@@ -42,6 +42,7 @@ $router->post('/cms/faq/user/status/{id}', 'CMSFAQController@userUpdateStatus');
 $router->get('/home', 'HomeController@index');
 
 // FAQ
-$router->get('/faq', 'FAQController@index');
-$router->get('/faq/questions', 'FAQController@questions');
-$router->get('/faq/{id}', 'FAQController@faqDetail');
+$router->get('/faq', 'FAQController@getAllFAQ');
+$router->get('/faq/detail/{id}', 'FAQController@getFAQDetail');
+$router->get('/faq/questions', 'FAQController@getAllQuestions');
+$router->get('/faq/questions/detail/{id}', 'FAQController@getQuestionDetail');
