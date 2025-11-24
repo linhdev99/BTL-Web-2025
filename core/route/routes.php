@@ -34,6 +34,7 @@ $router->post('/cms/faq/category/delete/{id}', 'CMSFAQController@categoryDelete'
 $router->get('/cms/faq/user', 'CMSFAQController@user');
 $router->get('/cms/faq/user/detail/{id}', 'CMSFAQController@userDetail');
 $router->post('/cms/faq/user/detail/{id}', 'CMSFAQController@userReply');
+$router->post('/cms/faq/user/detail/{id}/comment/delete/{id}', 'CMSFAQController@deleteComment');
 $router->post('/cms/faq/user/delete/{id}', 'CMSFAQController@userDelete');
 $router->post('/cms/faq/user/status/{id}', 'CMSFAQController@userUpdateStatus');
 

@@ -7,6 +7,7 @@ use PDO;
 class FAQQuestionModel extends BaseModel
 {
     protected string $table = "faq_questions";
+    protected string $table_comments = "faq_comments";
 
     public function getAllQuestionsWithUser()
     {
@@ -164,5 +165,13 @@ class FAQQuestionModel extends BaseModel
 
         $stmt->execute();
         return (int) $stmt->fetchColumn();
+    }
+
+    public function deleteComment(int $id)
+    {
+        $sql = "DELETE FROM {$this->table_comments} WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }

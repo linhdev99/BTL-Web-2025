@@ -26,7 +26,6 @@
     <h4 class="text-warning mb-3"><i class="fa-solid fa-flag"></i> Trạng thái câu hỏi</h4>
 
     <form method="POST" action="/cms/faq/user/status/<?= $question['id'] ?>" class="row g-3">
-
         <div class="col-md-4">
             <select name="status" class="form-control bg-dark text-white">
                 <option value="pending" <?= $question['status'] === 'pending' ? 'selected' : '' ?>>Chờ duyệt</option>
@@ -51,21 +50,29 @@
     <?php if (empty($comments)): ?>
         <p class="text-white-50">Chưa có bình luận nào.</p>
     <?php else: ?>
-        <?php foreach ($comments as $c): ?>
+        <?php foreach ($comments as $cmt): ?>
             <div class="mb-3 border-bottom border-secondary pb-2">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <div class="text-info fw-bold">
+                            <?= htmlspecialchars($cmt['full_name'] ?? "User #{$cmt['user_id']}") ?>
+                        </div>
+                        <div class="text-white">
+                            <?= nl2br(htmlspecialchars($cmt['content'])) ?>
+                        </div>
+                        <div class="text-secondary small">
+                            <?= date("d/m/Y H:i", strtotime($cmt['created_at'])) ?>
+                        </div>
+                    </div>
 
-                <div class="text-info fw-bold">
-                    <?= htmlspecialchars($c['full_name'] ?? "User #{$c['user_id']}") ?>
+                    <!-- Delete Button -->
+                    <form method="POST" action="/cms/faq/user/detail/<?= $question['id'] ?>/comment/delete/<?= $cmt['id'] ?>"
+                        onsubmit="return confirm('Xóa bình luận này?')" class="ms-3">
+                        <button class="btn btn-sm btn-danger">
+                            <i class="fa-solid fa-trash"></i> Xóa
+                        </button>
+                    </form>
                 </div>
-
-                <div class="text-white">
-                    <?= nl2br(htmlspecialchars($c['content'])) ?>
-                </div>
-
-                <div class="text-secondary small">
-                    <?= date("d/m/Y H:i", strtotime($c['created_at'])) ?>
-                </div>
-
             </div>
         <?php endforeach; ?>
     <?php endif; ?>

@@ -336,4 +336,20 @@ class CMSFAQController
         exit;
     }
 
+    public function deleteComment($url, $idQuest, $idCmt)
+    {
+        Auth::requireAdminOrStaff();
+        $idCmt = (int) $idCmt;
+        $model = new FAQQuestionModel();
+        $model->deleteComment(id: $idCmt);
+
+        $_SESSION['_flash'][] = [
+            'msg' => "Xoá thành công!",
+            'type' => "success",
+            'time' => 3000
+        ];
+
+        header("Location: /cms/faq/user/detail/$idQuest");
+        exit;
+    }
 }
