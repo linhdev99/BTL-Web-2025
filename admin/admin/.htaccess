@@ -1,0 +1,2 @@
+RewriteEngine On
+# Allow direct access to PHP files in /admin  

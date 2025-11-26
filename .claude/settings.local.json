@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(public/uploads/.gitkeep)",
+      "Bash(tree:*)",
+      "Bash(cat:*)",
+      "Bash(chmod:*)",
+      "Bash(rsync:*)",
+      "Bash(curl:*)",
+      "Bash(git clone:*)",
+      "Bash(php -l:*)",
+      "Bash(php -r:*)",
+      "Bash(php test_routes.php:*)",
+      "Bash(php -S:*)",
+      "Bash(php test_routing.php:*)",
+      "Bash(kill:*)",
+      "Bash(mysql:*)",
+      "Bash(php database/migrations/run_news_migration.php:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9)",
+      "Bash(php run_migration.php:*)",
+      "Bash(php create_carts_table.php:*)",
+      "Bash(ls:*)",
+      "Bash(du:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

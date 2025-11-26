@@ -1,0 +1,104 @@
+# Toy Model Shop - Git Ignore
+
+# Configuration files (comment out if you want to include config in git)
+# config/database.php
+# config/config.php
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Uploads directory (user uploaded files)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Logs
+*.log
+logs/
+error_log
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+nbproject/
+
+# Composer (if using)
+/vendor/
+composer.phar
+composer.lock
+
+# Node modules (if using npm)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build files
+/dist/
+/build/
+
+# Cache
+cache/
+*.cache
+temp/
+tmp/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Database dumps (optional)
+# *.sql
+# database_backup/
+
+# Session files
+sessions/
+
+# Test files
+phpunit.xml
+.phpunit.result.cache
+tests/_output/*
+
+# Security
+.htpasswd
+
+# Mac
+.AppleDouble
+.LSOverride
+
+# Windows
+*.lnk
+
+# Linux
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Package files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip

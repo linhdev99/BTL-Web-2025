@@ -1,0 +1,13 @@
+# Allow direct access to admin folder (bypass main .htaccess routing)
+# This allows the old admin system to work alongside new MVC system
+
+<IfModule mod_rewrite.c>
+    RewriteEngine Off
+</IfModule>
+
+# Allow access to all files in admin directory
+Order allow,deny
+Allow from all
+
+# Security: Require authentication
+# (handled by PHP session checks in layout files)
