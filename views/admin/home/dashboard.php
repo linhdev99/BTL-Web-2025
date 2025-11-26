@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-baseline">
-                    <div class="h1 mb-0 me-2"><?php echo number_format($orderStats['total_orders']); ?></div>
+                    <div class="h1 mb-0 me-2"><?php echo number_format($orderStats['total_orders'] ?? 0); ?></div>
                     <div class="me-auto">
                         <span class="text-yellow d-inline-flex align-items-center lh-1">
                             <i class="ti ti-shopping-cart"></i>
@@ -268,37 +268,37 @@
                 <div class="mb-3">
                     <div class="d-flex justify-content-between mb-1">
                         <span>Chờ xử lý</span>
-                        <strong><?php echo number_format($orderStats['pending']); ?></strong>
+                        <strong><?php echo number_format($orderStats['pending'] ?? 0); ?></strong>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar bg-warning" style="width: <?php echo $orderStats['total_orders'] > 0 ? ($orderStats['pending'] / $orderStats['total_orders'] * 100) : 0; ?>%"></div>
+                        <div class="progress-bar bg-warning" style="width: <?php echo ($orderStats['total_orders'] ?? 0) > 0 ? (($orderStats['pending'] ?? 0) / $orderStats['total_orders'] * 100) : 0; ?>%"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="d-flex justify-content-between mb-1">
                         <span>Đang xử lý</span>
-                        <strong><?php echo number_format($orderStats['processing']); ?></strong>
+                        <strong><?php echo number_format($orderStats['processing'] ?? 0); ?></strong>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar bg-info" style="width: <?php echo $orderStats['total_orders'] > 0 ? ($orderStats['processing'] / $orderStats['total_orders'] * 100) : 0; ?>%"></div>
+                        <div class="progress-bar bg-info" style="width: <?php echo ($orderStats['total_orders'] ?? 0) > 0 ? (($orderStats['processing'] ?? 0) / $orderStats['total_orders'] * 100) : 0; ?>%"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="d-flex justify-content-between mb-1">
                         <span>Hoàn thành</span>
-                        <strong><?php echo number_format($orderStats['completed']); ?></strong>
+                        <strong><?php echo number_format($orderStats['completed'] ?? 0); ?></strong>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar bg-success" style="width: <?php echo $orderStats['total_orders'] > 0 ? ($orderStats['completed'] / $orderStats['total_orders'] * 100) : 0; ?>%"></div>
+                        <div class="progress-bar bg-success" style="width: <?php echo ($orderStats['total_orders'] ?? 0) > 0 ? (($orderStats['completed'] ?? 0) / $orderStats['total_orders'] * 100) : 0; ?>%"></div>
                     </div>
                 </div>
                 <div>
                     <div class="d-flex justify-content-between mb-1">
                         <span>Đã hủy</span>
-                        <strong><?php echo number_format($orderStats['cancelled']); ?></strong>
+                        <strong><?php echo number_format($orderStats['cancelled'] ?? 0); ?></strong>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar bg-danger" style="width: <?php echo $orderStats['total_orders'] > 0 ? ($orderStats['cancelled'] / $orderStats['total_orders'] * 100) : 0; ?>%"></div>
+                        <div class="progress-bar bg-danger" style="width: <?php echo ($orderStats['total_orders'] ?? 0) > 0 ? (($orderStats['cancelled'] ?? 0) / $orderStats['total_orders'] * 100) : 0; ?>%"></div>
                     </div>
                 </div>
             </div>
