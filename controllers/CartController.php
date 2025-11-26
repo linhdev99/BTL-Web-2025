@@ -291,9 +291,9 @@ class CartController extends BaseController
                 $orderItems[] = [
                     'product_id' => $productId,
                     'product_name' => $product['name'],
-                    'product_price' => $price,
+                    'price' => $price,
                     'quantity' => $quantity,
-                    'subtotal' => $subtotal
+                    'total' => $subtotal
                 ];
 
                 $totalAmount += $subtotal;
@@ -310,8 +310,7 @@ class CartController extends BaseController
             'total_amount' => $totalAmount,
             'status' => 'pending',
             'payment_method' => $paymentMethod,
-            'shipping_method' => $shippingMethod,
-            'notes' => $notes
+            'note' => $notes
         ];
 
         try {

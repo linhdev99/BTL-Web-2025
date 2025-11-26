@@ -11,7 +11,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($pageTitle) ? escape($pageTitle) . ' - ' : ''; ?>Admin | Toy Model Shop</title>
+    <title><?php echo isset($pageTitle) ? escape($pageTitle) . ' - ' : ''; ?>Admin | <?= getSiteName() ?></title>
 
     <!-- Tabler CSS -->
     <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                     <a href="<?php echo BASE_URL; ?>/cms">
                         <i class="ti ti-shopping-cart me-2"></i>
-                        ToyShop Admin
+                        <?= getSiteName() ?> Admin
                     </a>
                 </h1>
 

@@ -61,7 +61,7 @@
                         </tr>
                         <?php else: ?>
                             <?php foreach ($contacts as $contact): ?>
-                            <tr class="<?php echo ($contact['status'] ?? 'unread') == 'unread' ? 'table-active' : ''; ?>">
+                            <tr class="<?php echo empty($contact['is_read']) ? 'table-active' : ''; ?>">
                                 <td><?php echo $contact['id']; ?></td>
                                 <td>
                                     <a href="<?php echo BASE_URL; ?>/cms/contacts/<?php echo $contact['id']; ?>" class="text-reset">
@@ -77,21 +77,23 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $status = $contact['status'] ?? 'unread';
-                                    $statusClass = $status == 'read' ? 'success' : 'warning';
-                                    $statusText = $status == 'read' ? 'Đã đọc' : 'Chưa đọc';
+                                    $isRead = !empty($contact['is_read']);
+                                    $statusClass = $isRead ? 'success' : 'warning';
+                                    $statusText = $isRead ? 'Đã đọc' : 'Chưa đọc';
                                     ?>
                                     <span class="badge bg-<?php echo $statusClass; ?>"><?php echo $statusText; ?></span>
                                 </td>
                                 <td><?php echo date('d/m/Y H:i', strtotime($contact['created_at'])); ?></td>
                                 <td>
                                     <div class="btn-list flex-nowrap">
-                                        <a href="<?php echo BASE_URL; ?>/cms/contacts/<?php echo $contact['id']; ?>" class="btn btn-sm btn-primary">
+                                        <a href="<?php echo BASE_URL; ?>/cms/contacts/<?php echo $contact['id']; ?>" class="btn btn-sm btn-primary d-inline-flex align-items-center gap-1">
                                             <i class="ti ti-eye"></i>
+                                            <span>Xem</span>
                                         </a>
                                         <form method="POST" action="<?php echo BASE_URL; ?>/cms/contacts/<?php echo $contact['id']; ?>/delete" style="display: inline;">
-                                            <button type="submit" class="btn btn-sm btn-danger delete-confirm">
+                                            <button type="submit" class="btn btn-sm btn-danger delete-confirm d-inline-flex align-items-center gap-1">
                                                 <i class="ti ti-trash"></i>
+                                                <span>Xóa</span>
                                             </button>
                                         </form>
                                     </div>

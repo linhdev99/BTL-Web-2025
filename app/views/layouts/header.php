@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo isset($metaDescription) ? escape($metaDescription) : 'Cửa hàng mô hình đồ chơi chất lượng cao'; ?>">
+    <meta name="description" content="<?php echo isset($metaDescription) ? escape($metaDescription) : escape(getSiteTagline()); ?>">
     <meta name="keywords" content="<?php echo isset($metaKeywords) ? escape($metaKeywords) : 'mô hình, đồ chơi, gundam, figure'; ?>">
-    <meta name="author" content="Toy Model Shop">
-    <title><?php echo isset($pageTitle) ? escape($pageTitle) . ' - ' : ''; ?>Toy Model Shop</title>
+    <meta name="author" content="<?= getSiteName() ?>">
+    <title><?php echo isset($pageTitle) ? escape($pageTitle) . ' - ' : ''; ?><?= getSiteName() ?></title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/style.css">
@@ -26,8 +26,8 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <small>
-                        <i class="bi bi-telephone"></i> Hotline: 0123-456-789 |
-                        <i class="bi bi-envelope"></i> Email: contact@toyshop.com
+                        <i class="bi bi-telephone"></i> <?= getContactPhone() ?> |
+                        <i class="bi bi-envelope"></i> <?= getContactEmail() ?>
                     </small>
                 </div>
                 <div class="col-md-6 text-end">
@@ -58,7 +58,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="<?php echo BASE_URL; ?>">
-                        <i class="bi bi-shop"></i> ToyShop
+                        <i class="bi bi-shop"></i> <?= getSiteName() ?>
                     </a>
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

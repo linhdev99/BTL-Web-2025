@@ -9,7 +9,7 @@ $isAdmin = $user && ($user['role_id'] == 1 || $user['role_id'] == 2);
 
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ?? "BK Figure Lab" ?></title>
+    <title><?= $title ?? getSiteName() ?></title>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -28,8 +28,16 @@ $isAdmin = $user && ($user['role_id'] == 1 || $user['role_id'] == 2);
     <header class="main-header">
         <div class="header-left">
             <div>
-                <h1>BK Figure Lab</h1>
-                <div class="slogan">For True Figure Lovers</div>
+                <h1><?= getSiteName() ?></h1>
+                <div class="slogan"><?= getSiteTagline() ?></div>
+                <div class="header-contact-info">
+                    <?php if (getContactPhone()): ?>
+                        <span><i class="fa-solid fa-phone"></i> <?= getContactPhone() ?></span>
+                    <?php endif; ?>
+                    <?php if (getContactEmail()): ?>
+                        <span><i class="fa-solid fa-envelope"></i> <?= getContactEmail() ?></span>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
 

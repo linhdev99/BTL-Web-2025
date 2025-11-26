@@ -23,6 +23,9 @@ require 'utils/validate.php';
 // Load helper functions
 require 'includes/functions.php';
 
+// Load settings helper
+require 'utils/settings_helper.php';
+
 // Initialize router
 $router = new Core\Http\Route();
 

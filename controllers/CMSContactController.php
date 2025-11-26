@@ -49,8 +49,9 @@ class CMSContactController extends BaseController
         }
 
         // Mark as read if unread
-        if ($contact['status'] == 'unread') {
+        if (!$contact['is_read']) {
             $this->contactModel->markAsRead($id);
+            $contact['is_read'] = 1; // Update local variable
         }
 
         $this->view('admin/contacts/view', [

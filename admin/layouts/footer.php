@@ -7,9 +7,10 @@
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
-                                    Copyright &copy; <?php echo date('Y'); ?>
-                                    <a href="<?php echo BASE_URL; ?>" class="link-secondary">Toy Model Shop</a>.
-                                    All rights reserved.
+                                    <?= getFooterCopyright() ?>
+                                    <a href="<?php echo BASE_URL; ?>" class="link-secondary" target="_blank">
+                                        <i class="ti ti-external-link ms-1"></i> Xem website
+                                    </a>
                                 </li>
                             </ul>
                         </div>

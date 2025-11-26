@@ -5,7 +5,12 @@
         <div class="col">
             <h2 class="page-title"><?php echo $pageTitle; ?></h2>
         </div>
-        <div class="col-auto ms-auto">
+
+        <!-- Nút điều hướng -->
+        <div class="col-auto ms-auto d-flex gap-2">
+            <a href="<?php echo BASE_URL; ?>/cms/categories" class="btn btn-secondary">
+                <i class="ti ti-category"></i> Danh mục
+            </a>
             <a href="<?php echo BASE_URL; ?>/cms/products/add" class="btn btn-primary">
                 <i class="ti ti-plus"></i> Thêm sản phẩm
             </a>

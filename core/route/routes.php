@@ -98,7 +98,7 @@ $router->post('/cms/contacts/{id}/delete', 'CMSContactController@delete');
 
 // Settings
 $router->get('/cms/settings', 'CMSSettingController@index');
-$router->post('/cms/settings', 'CMSSettingController@update');
+$router->post('/cms/settings/update', 'CMSSettingController@update');
 
 // FAQ Management - BTL FAQ system
 $router->get('/cms/faq', 'CMSFAQController@index');
@@ -125,3 +125,11 @@ $router->get('/cms/faq/user/detail/{id}', 'CMSFAQController@userDetail');
 $router->post('/cms/faq/user/detail/{id}', 'CMSFAQController@userReply');
 $router->post('/cms/faq/user/delete/{id}', 'CMSFAQController@userDelete');
 $router->post('/cms/faq/user/status/{id}', 'CMSFAQController@userUpdateStatus');
+
+// Categories Management
+$router->get('/cms/categories', 'CMSCategoryController@index');
+$router->get('/cms/categories/add', 'CMSCategoryController@add');
+$router->post('/cms/categories/store', 'CMSCategoryController@store');
+$router->get('/cms/categories/edit/{id}', 'CMSCategoryController@edit');
+$router->post('/cms/categories/update/{id}', 'CMSCategoryController@update');
+$router->post('/cms/categories/delete/{id}', 'CMSCategoryController@delete');

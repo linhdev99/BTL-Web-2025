@@ -5,12 +5,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h3>Toy Model Shop</h3>
-                    <p>Cửa hàng mô hình đồ chơi chất lượng cao, chính hãng với giá tốt nhất thị trường.</p>
+                    <h3><?= getSiteName() ?></h3>
+                    <p><?= getSiteTagline() ?></p>
                     <div class="social-links mt-3">
-                        <a href="#" class="text-white me-3"><i class="bi bi-facebook" style="font-size: 24px;"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-instagram" style="font-size: 24px;"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-youtube" style="font-size: 24px;"></i></a>
+                        <?php $socialLinks = getSocialLinks(); ?>
+                        <?php if (!empty($socialLinks['facebook'])): ?>
+                            <a href="<?= escape($socialLinks['facebook']) ?>" class="text-white me-3" target="_blank"><i class="bi bi-facebook" style="font-size: 24px;"></i></a>
+                        <?php endif; ?>
+                        <?php if (!empty($socialLinks['instagram'])): ?>
+                            <a href="<?= escape($socialLinks['instagram']) ?>" class="text-white me-3" target="_blank"><i class="bi bi-instagram" style="font-size: 24px;"></i></a>
+                        <?php endif; ?>
+                        <?php if (!empty($socialLinks['youtube'])): ?>
+                            <a href="<?= escape($socialLinks['youtube']) ?>" class="text-white me-3" target="_blank"><i class="bi bi-youtube" style="font-size: 24px;"></i></a>
+                        <?php endif; ?>
+                        <?php if (!empty($socialLinks['tiktok'])): ?>
+                            <a href="<?= escape($socialLinks['tiktok']) ?>" class="text-white me-3" target="_blank"><i class="bi bi-tiktok" style="font-size: 24px;"></i></a>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -29,18 +39,26 @@
                 <div class="col-md-4">
                     <h3>Thông tin liên hệ</h3>
                     <ul class="list-unstyled">
+                        <?php if (getContactAddress()): ?>
                         <li class="mb-2">
-                            <i class="bi bi-geo-alt"></i> 123 Đường ABC, Quận XYZ, TP.HCM
+                            <i class="bi bi-geo-alt"></i> <?= getContactAddress() ?>
                         </li>
+                        <?php endif; ?>
+                        <?php if (getContactPhone()): ?>
                         <li class="mb-2">
-                            <i class="bi bi-telephone"></i> 0123-456-789
+                            <i class="bi bi-telephone"></i> <?= getContactPhone() ?>
                         </li>
+                        <?php endif; ?>
+                        <?php if (getContactEmail()): ?>
                         <li class="mb-2">
-                            <i class="bi bi-envelope"></i> contact@toyshop.com
+                            <i class="bi bi-envelope"></i> <?= getContactEmail() ?>
                         </li>
+                        <?php endif; ?>
+                        <?php if (getWorkingHours()): ?>
                         <li class="mb-2">
-                            <i class="bi bi-clock"></i> Thứ 2 - Chủ Nhật: 8:00 - 22:00
+                            <i class="bi bi-clock"></i> <?= nl2br(escape(getWorkingHours())) ?>
                         </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -50,7 +68,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <p class="text-white-50 mb-0">
-                        &copy; <?php echo date('Y'); ?> Toy Model Shop. All rights reserved.
+                        <?= getFooterCopyright() ?>
                     </p>
                 </div>
             </div>

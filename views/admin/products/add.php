@@ -17,7 +17,15 @@ $formData = $_SESSION['form_data'] ?? [
     'is_new' => 0
 ];
 $errors = $_SESSION['errors'] ?? [];
-unset($_SESSION['form_data'], $_SESSION['errors']);
+$successMessage = $_SESSION['success'] ?? null;
+$newCategoryId = $_SESSION['new_category_id'] ?? null;
+
+// Auto-select newly created category
+if ($newCategoryId && empty($formData['category_id'])) {
+    $formData['category_id'] = $newCategoryId;
+}
+
+unset($_SESSION['form_data'], $_SESSION['errors'], $_SESSION['success'], $_SESSION['new_category_id']);
 ?>
 
 <div class="page-header d-print-none">
@@ -42,6 +50,13 @@ unset($_SESSION['form_data'], $_SESSION['errors']);
                     <h3 class="card-title">Thông tin cơ bản</h3>
                 </div>
                 <div class="card-body">
+                    <?php if ($successMessage): ?>
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <?php echo escape($successMessage); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <?php if (!empty($errors)): ?>
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -74,14 +89,19 @@ unset($_SESSION['form_data'], $_SESSION['errors']);
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label required">Danh mục</label>
-                                <select class="form-select" name="category_id" required>
-                                    <option value="">Chọn danh mục</option>
-                                    <?php foreach ($categories as $cat): ?>
-                                        <option value="<?php echo $cat['id']; ?>" <?php echo $formData['category_id'] == $cat['id'] ? 'selected' : ''; ?>>
-                                            <?php echo escape($cat['name']); ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <div class="input-group">
+                                    <select class="form-select" name="category_id" id="category_select" required>
+                                        <option value="">Chọn danh mục</option>
+                                        <?php foreach ($categories as $cat): ?>
+                                            <option value="<?php echo $cat['id']; ?>" <?php echo $formData['category_id'] == $cat['id'] ? 'selected' : ''; ?>>
+                                                <?php echo escape($cat['name']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <a href="<?php echo BASE_URL; ?>/cms/categories/add?return_to=products/add" class="btn btn-primary">
+                                        <i class="ti ti-plus"></i> Thêm mới
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

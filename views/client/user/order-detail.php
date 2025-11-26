@@ -121,9 +121,9 @@
                         <p><strong>Địa chỉ:</strong><br>
                         <?php echo nl2br(escape($order['customer_address'])); ?></p>
                         <?php endif; ?>
-                        <?php if ($order['notes']): ?>
+                        <?php if (!empty($order['note'])): ?>
                         <p><strong>Ghi chú:</strong><br>
-                        <?php echo nl2br(escape($order['notes'])); ?></p>
+                        <?php echo nl2br(escape($order['note'])); ?></p>
                         <?php endif; ?>
                     </div>
                 </div>

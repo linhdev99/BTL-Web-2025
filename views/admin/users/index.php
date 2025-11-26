@@ -89,9 +89,12 @@
                                 </td>
                                 <td><?php echo isset($user['created_at']) ? date('d/m/Y', strtotime($user['created_at'])) : 'N/A'; ?></td>
                                 <td>
-                                    <a href="<?php echo BASE_URL; ?>/admin/users.php?edit=<?php echo $user['id']; ?>" class="btn btn-sm btn-primary">
-                                        <i class="ti ti-edit"></i>
-                                    </a>
+                                    <div class="btn-list flex-nowrap">
+                                        <a href="<?php echo BASE_URL; ?>/admin/users.php?edit=<?php echo $user['id']; ?>" class="btn btn-sm btn-primary d-inline-flex align-items-center gap-1">
+                                            <i class="ti ti-edit"></i>
+                                            <span>Sửa</span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

@@ -2,8 +2,17 @@
 
 namespace Controllers;
 
+use Models\ContactModel;
+
 class PageController extends BaseController
 {
+    private $contactModel;
+
+    public function __construct()
+    {
+        $this->contactModel = new ContactModel();
+    }
+
     /**
      * About page
      */
@@ -56,10 +65,27 @@ class PageController extends BaseController
         }
 
         if (empty($errors)) {
-            // TODO: Save to database or send email
-            // For now, just show success message
-            $this->redirectWithMessage(BASE_URL . '/contact', 'Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất!', 'success');
-        } else {
+            // Save to database
+            try {
+                $contactId = $this->contactModel->createContact([
+                    'name' => $name,
+                    'email' => $email,
+                    'phone' => $phone,
+                    'subject' => $subject,
+                    'message' => $message
+                ]);
+
+                if ($contactId) {
+                    $this->redirectWithMessage(BASE_URL . '/contact', 'Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất!', 'success');
+                } else {
+                    $errors[] = 'Có lỗi xảy ra khi gửi liên hệ. Vui lòng thử lại sau.';
+                }
+            } catch (\Exception $e) {
+                $errors[] = 'Có lỗi xảy ra: ' . $e->getMessage();
+            }
+        }
+
+        if (!empty($errors)) {
             $this->view('client/pages/contact', [
                 'pageTitle' => 'Liên hệ',
                 'errors' => $errors,

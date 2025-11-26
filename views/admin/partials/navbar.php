@@ -2,8 +2,8 @@
 
     <button class="navbar-brand d-flex flex-column text-start border-0 bg-transparent p-0"
         onclick="window.location.href='/cms'" style="cursor: pointer;">
-        <span class="fw-bold text-info fs-5">BK Figure Lab</span>
-        <small class="text-secondary">For True Figure Lovers</small>
+        <span class="fw-bold text-info fs-5"><?= getSiteName() ?></span>
+        <small class="text-secondary"><?= getSiteTagline() ?></small>
     </button>
 
     <div class="d-flex align-items-center gap-3">

@@ -105,12 +105,12 @@
                         </div>
                     </div>
                 </div>
-                <?php if ($order['notes']): ?>
+                <?php if (!empty($order['note'])): ?>
                 <div class="row">
                     <div class="col-12">
                         <div class="alert alert-info">
                             <strong>Ghi chú:</strong><br>
-                            <?php echo nl2br(htmlspecialchars($order['notes'], ENT_QUOTES, 'UTF-8')); ?>
+                            <?php echo nl2br(htmlspecialchars($order['note'], ENT_QUOTES, 'UTF-8')); ?>
                         </div>
                     </div>
                 </div>

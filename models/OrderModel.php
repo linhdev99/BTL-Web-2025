@@ -168,10 +168,10 @@ class OrderModel extends BaseModel
             // Insert order
             $sql = "INSERT INTO {$this->table}
                     (user_id, order_code, customer_name, customer_email, customer_phone, customer_address,
-                     total_amount, status, payment_method, payment_status, shipping_method, notes, created_at, updated_at)
+                     total_amount, status, payment_method, payment_status, note, created_at, updated_at)
                     VALUES
                     (:user_id, :order_code, :customer_name, :customer_email, :customer_phone, :customer_address,
-                     :total_amount, :status, :payment_method, :payment_status, :shipping_method, :notes, NOW(), NOW())";
+                     :total_amount, :status, :payment_method, :payment_status, :note, NOW(), NOW())";
 
             $this->execute($sql, [
                 'user_id' => $orderData['user_id'] ?? null,
@@ -184,17 +184,16 @@ class OrderModel extends BaseModel
                 'status' => $orderData['status'] ?? 'pending',
                 'payment_method' => $orderData['payment_method'] ?? 'cod',
                 'payment_status' => $orderData['payment_status'] ?? 'pending',
-                'shipping_method' => $orderData['shipping_method'] ?? 'standard',
-                'notes' => $orderData['notes'] ?? null
+                'note' => $orderData['note'] ?? null
             ]);
 
             $orderId = $this->db->lastInsertId();
 
             // Insert order items and update stock
             $itemSql = "INSERT INTO order_items
-                        (order_id, product_id, product_name, product_price, quantity, subtotal)
+                        (order_id, product_id, product_name, price, quantity, total)
                         VALUES
-                        (:order_id, :product_id, :product_name, :product_price, :quantity, :subtotal)";
+                        (:order_id, :product_id, :product_name, :price, :quantity, :total)";
 
             foreach ($orderItems as $item) {
                 // Lock product row and check stock
@@ -214,9 +213,9 @@ class OrderModel extends BaseModel
                     'order_id' => $orderId,
                     'product_id' => $item['product_id'],
                     'product_name' => $item['product_name'],
-                    'product_price' => $item['product_price'],
+                    'price' => $item['price'],
                     'quantity' => $item['quantity'],
-                    'subtotal' => $item['subtotal']
+                    'total' => $item['total']
                 ]);
 
                 // Decrease stock

@@ -39,9 +39,15 @@
             </div>
             <div class="col-md-6">
                 <h4>Thông tin liên hệ</h4>
-                <p><i class="bi bi-geo-alt"></i> Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM</p>
-                <p><i class="bi bi-telephone"></i> Điện thoại: 0123 456 789</p>
-                <p><i class="bi bi-envelope"></i> Email: contact@toyshop.vn</p>
+                <p><i class="bi bi-geo-alt"></i> Địa chỉ: <?= getContactAddress() ?></p>
+                <p><i class="bi bi-telephone"></i> Điện thoại: <?= getContactPhone() ?></p>
+                <?php if (getContactHotline()): ?>
+                <p><i class="bi bi-headset"></i> Hotline: <?= getContactHotline() ?></p>
+                <?php endif; ?>
+                <p><i class="bi bi-envelope"></i> Email: <?= getContactEmail() ?></p>
+                <?php if (getWorkingHours()): ?>
+                <p><i class="bi bi-clock"></i> Giờ làm việc:<br><?= nl2br(escape(getWorkingHours())) ?></p>
+                <?php endif; ?>
             </div>
         </div>
     </div>

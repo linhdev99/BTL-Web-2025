@@ -139,9 +139,12 @@
                                 </td>
                                 <td><?php echo date('d/m/Y H:i', strtotime($order['created_at'])); ?></td>
                                 <td>
-                                    <a href="<?php echo BASE_URL; ?>/cms/orders/<?php echo $order['id']; ?>" class="btn btn-sm btn-primary">
-                                        <i class="ti ti-eye"></i> Xem
-                                    </a>
+                                    <div class="btn-list flex-nowrap">
+                                        <a href="<?php echo BASE_URL; ?>/cms/orders/<?php echo $order['id']; ?>" class="btn btn-sm btn-primary d-inline-flex align-items-center gap-1">
+                                            <i class="ti ti-eye"></i>
+                                            <span>Xem</span>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
