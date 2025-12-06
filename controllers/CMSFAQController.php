@@ -225,35 +225,31 @@ class CMSFAQController extends BaseController
         $keyword = $_GET['keyword'] ?? '';
         $category_id = $_GET['category_id'] ?? '';
         $sort = $_GET['sort'] ?? 'newest';
+        $statusParam = $_GET['status'] ?? null;
+        $statuses = [];
+
+        if (!empty($statusParam)) {
+            $statuses[] = $statusParam;
+        }
 
         $page = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
-        $limit = 20;
+        $limit = 5;
         $offset = ($page - 1) * $limit;
 
-        $questionModel = new FAQQuestionModel();
-        $catModel = new FAQCategoryModel();
+        $model = new FAQQuestionModel();
+        $view = new CMSFAQView();
 
-        $categories = $catModel->getAllCategories();
-
-        // Đếm tổng bản ghi
-        $total = $questionModel->countFilteredQuestions($keyword, $category_id);
-
-        // Lấy dữ liệu theo trang
-        $userQuestions = $questionModel->paginateFilteredQuestions(
-            $keyword,
-            $category_id,
-            $sort,
-            $limit,
-            $offset
-        );
-
+        $questions = $model->getAllQuestions($keyword, $category_id, $statuses, $sort, $limit, $offset);
+        $total = $model->countAll($keyword, $category_id, $statuses);
         $totalPages = ceil($total / $limit);
 
-        $this->view('admin/faq/user/index', [
-            'pageTitle' => 'FAQ người dùng',
-            'userQuestions' => $userQuestions,
-            'categories' => $categories,
-            'total' => $total,
+        $view->renderUser([
+            'pageTitle' => 'Câu hỏi người dùng',
+            'questions' => $questions,
+            'keyword' => $keyword,
+            'category_id' => $category_id,
+            'status' => $statuses,
+            'sort' => $sort,
             'page' => $page,
             'totalPages' => $totalPages
         ]);

@@ -6,6 +6,137 @@ class FAQQuestionModel extends BaseModel
 {
     protected string $table = "faq_questions";
 
+    /**
+     * Lấy danh sách câu hỏi người dùng
+     * 
+     * @param string $keyword     Từ khóa tìm kiếm
+     * @param string $category_id Lọc theo thể loại
+     * @param array  $statusList  Danh sách trạng thái (['pending', 'answered', 'closed'])
+     * @param string $sort        Kiểu sắp xếp (newest, oldest, views, pending)
+     * @param int    $limit       Số dòng mỗi trang
+     * @param int    $offset      Bỏ qua bao nhiêu dòng (phân trang)
+     */
+    public function getAllQuestions(string $keyword = '', string $category_id = '', array $statusList = [], string $sort = 'newest', int $limit = 20, int $offset = 0)
+    {
+        $sql = "
+            SELECT 
+                q.id,
+                q.user_id,
+                q.category_id,
+                q.question,
+                q.status,
+                q.views,
+                q.created_at,
+                q.updated_at,
+                u.username AS user_name,
+                u.email AS user_email,
+                c.name AS category_name,
+                c.color AS category_color
+            FROM {$this->table} AS q
+            LEFT JOIN users AS u ON q.user_id = u.id
+            LEFT JOIN faq_categories AS c ON q.category_id = c.id
+            WHERE 1
+        ";
+
+        $params = [];
+
+        // --- Tìm kiếm theo từ khóa
+        if (!empty($keyword)) {
+            $sql .= " AND (q.question LIKE :keyword OR u.username LIKE :keyword)";
+            $params['keyword'] = '%' . $keyword . '%';
+        }
+
+        // --- Lọc theo thể loại
+        if (!empty($category_id)) {
+            $sql .= " AND q.category_id = :category_id";
+            $params['category_id'] = (int) $category_id;
+        }
+
+        // --- Lọc theo danh sách trạng thái
+        if (!empty($statusList)) {
+            // Chuẩn bị danh sách placeholder động (:status_0, :status_1, ...)
+            $placeholders = [];
+            foreach ($statusList as $index => $status) {
+                $key = "status_$index";
+                $placeholders[] = ":$key";
+                $params[$key] = $status;
+            }
+            $sql .= " AND q.status IN (" . implode(', ', $placeholders) . ")";
+        }
+
+        // --- Sắp xếp
+        switch ($sort) {
+            case 'views':
+                $sql .= " ORDER BY q.views DESC";
+                break;
+            case 'oldest':
+                $sql .= " ORDER BY q.created_at ASC";
+                break;
+            case 'pending':
+                $sql .= " ORDER BY (q.status = 'pending') DESC, q.created_at DESC";
+                break;
+            default:
+                $sql .= " ORDER BY q.created_at DESC"; // newest
+                break;
+        }
+
+        // --- Phân trang
+        $sql .= " LIMIT :limit OFFSET :offset";
+        $params['limit'] = (int) $limit;
+        $params['offset'] = (int) $offset;
+
+        // --- Thực thi
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($params as $key => $val) {
+            if (in_array($key, ['limit', 'offset', 'category_id'])) {
+                $stmt->bindValue(':' . $key, $val, \PDO::PARAM_INT);
+            } else {
+                $stmt->bindValue(':' . $key, $val, \PDO::PARAM_STR);
+            }
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Đếm tổng số câu hỏi (phục vụ phân trang)
+     */
+    public function countAll(string $keyword = '', string $category_id = '', array $statusList = [])
+    {
+        $sql = "
+            SELECT COUNT(*) AS total
+            FROM {$this->table} AS q
+            LEFT JOIN users AS u ON q.user_id = u.id
+            WHERE 1
+        ";
+
+        $params = [];
+
+        if (!empty($keyword)) {
+            $sql .= " AND (q.question LIKE :keyword OR u.username LIKE :keyword)";
+            $params['keyword'] = '%' . $keyword . '%';
+        }
+
+        if (!empty($category_id)) {
+            $sql .= " AND q.category_id = :category_id";
+            $params['category_id'] = (int) $category_id;
+        }
+
+        if (!empty($statusList)) {
+            $placeholders = [];
+            foreach ($statusList as $index => $status) {
+                $key = "status_$index";
+                $placeholders[] = ":$key";
+                $params[$key] = $status;
+            }
+            $sql .= " AND q.status IN (" . implode(', ', $placeholders) . ")";
+        }
+
+        return $this->getOne($sql, $params)['total'] ?? 0;
+    }
+
     public function getAllQuestionsWithUser()
     {
         return $this->getAll("
@@ -139,7 +270,7 @@ class FAQQuestionModel extends BaseModel
 
         return $this->getAll($sql, $params);
     }
-    
+
     public function getFilteredQuestions(string $search, string $sort, $categoryId, int $page, int $limit)
     {
         $offset = ($page - 1) * $limit;

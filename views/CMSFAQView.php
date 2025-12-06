@@ -47,4 +47,14 @@ class CMSFAQView
     {
         $this->render('static/edit', $data);
     }
+
+    public function renderUser(array $data): void
+    {
+        $this->render('user/index', $data);
+    }
+
+    public function renderUserDetail(array $data): void
+    {
+        $this->render('user/detail', $data);
+    }
 }
