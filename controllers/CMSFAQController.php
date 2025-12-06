@@ -6,6 +6,7 @@ use Core\Auth;
 use Models\FAQModel;
 use Models\FAQCategoryModel;
 use Models\FAQQuestionModel;
+use Views\CMSFAQView;
 
 class CMSFAQController extends BaseController
 {
@@ -30,8 +31,9 @@ class CMSFAQController extends BaseController
         Auth::requireAdminOrStaff();
 
         $categories = (new FAQCategoryModel())->getAllCategories();
+        $view = new CMSFAQView();
 
-        $this->view('admin/faq/category/index', [
+        $view->renderCategory([
             'pageTitle' => 'Quản lý thể loại FAQ',
             'categories' => $categories
         ]);
