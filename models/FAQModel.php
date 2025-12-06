@@ -13,14 +13,7 @@ class FAQModel extends BaseModel
     {
         $sql = "
                     SELECT 
-                        f.id,
-                        f.category_id,
-                        f.question,
-                        f.answer,
-                        f.ordering,
-                        f.is_active,
-                        f.created_at,
-                        f.updated_at,
+                        f.*,
                         c.name  AS category_name,
                         c.slug  AS category_slug,
                         c.color AS category_color,
@@ -38,14 +31,23 @@ class FAQModel extends BaseModel
     }
 
     /**
-     * Lấy 1 FAQ theo ID
+     * Lấy chi tiết 1 FAQ theo ID (kèm thông tin category)
      */
     public function getById(int $id)
     {
-        return $this->getOne("
-            SELECT * FROM {$this->table}
-            WHERE id = :id
-        ", ['id' => $id]);
+        $sql = "
+        SELECT 
+            f.*,
+            c.name  AS category_name,
+            c.slug  AS category_slug,
+            c.color AS category_color,
+            c.is_active AS category_active
+        FROM faq AS f
+        LEFT JOIN faq_categories AS c ON f.category_id = c.id
+        WHERE f.id = :id
+        LIMIT 1
+    ";
+        return $this->getOne($sql, ['id' => $id]);
     }
 
     /**
@@ -95,23 +97,21 @@ class FAQModel extends BaseModel
         return $this->delete($this->table, "id = :id", ['id' => $id]);
     }
 
-    public function getFrontendFAQ(string $keyword, $category_id)
+    public function getAllActiveFAQ()
     {
-        $sql = "SELECT * FROM {$this->table} WHERE is_active = 1";
-        $params = [];
+        $sql = "
+                    SELECT 
+                        f.*,
+                        c.name  AS category_name,
+                        c.slug  AS category_slug,
+                        c.color AS category_color,
+                        c.is_active AS category_active
+                    FROM {$this->table} AS f
+                    LEFT JOIN faq_categories AS c ON f.category_id = c.id
+                    WHERE f.is_active = 1
+                    ORDER BY f.ordering ASC, f.id DESC
+                ";
 
-        if ($keyword !== '') {
-            $sql .= " AND question LIKE :keyword";
-            $params['keyword'] = "%$keyword%";
-        }
-
-        if ($category_id !== '' && $category_id !== null) {
-            $sql .= " AND category_id = :cat_id";
-            $params['cat_id'] = $category_id;
-        }
-
-        $sql .= " ORDER BY ordering ASC";
-
-        return $this->getAll($sql, $params);
+        return $this->getAll($sql);
     }
 }

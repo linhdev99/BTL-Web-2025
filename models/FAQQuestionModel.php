@@ -18,12 +18,18 @@ class FAQQuestionModel extends BaseModel
      * @param int    $limit       Số dòng mỗi trang
      * @param int    $offset      Bỏ qua bao nhiêu dòng (phân trang)
      */
-    public function getAllQuestions(string $keyword = '', string $category_id = '', array $statusList = [], string $sort = 'newest', int $limit = 20, int $offset = 0)
-    {
+    public function getAllQuestions(
+        string $keyword = '',
+        string $category_id = '',
+        array $statusList = [],
+        string $sort = 'newest',
+        int $limit = 20,
+        int $offset = 0
+    ) {
         $sql = "
                     SELECT 
                         q.*,
-                        u.username AS user_name,
+                        u.full_name AS full_name,
                         u.email AS user_email,
                         c.name AS category_name,
                         c.color AS category_color,
@@ -42,23 +48,22 @@ class FAQQuestionModel extends BaseModel
 
         // --- Tìm kiếm theo từ khóa
         if (!empty($keyword)) {
-            $sql .= " AND (q.question LIKE :keyword OR u.username LIKE :keyword)";
-            $params['keyword'] = '%' . $keyword . '%';
+            $sql .= " AND q.question LIKE :keyword";
+            $params[':keyword'] = '%' . $keyword . '%';
         }
 
         // --- Lọc theo thể loại
         if (!empty($category_id)) {
             $sql .= " AND q.category_id = :category_id";
-            $params['category_id'] = (int) $category_id;
+            $params[':category_id'] = (int) $category_id;
         }
 
         // --- Lọc theo danh sách trạng thái
         if (!empty($statusList)) {
-            // Chuẩn bị danh sách placeholder động (:status_0, :status_1, ...)
             $placeholders = [];
             foreach ($statusList as $index => $status) {
-                $key = "status_$index";
-                $placeholders[] = ":$key";
+                $key = ":status_$index";
+                $placeholders[] = $key;
                 $params[$key] = $status;
             }
             $sql .= " AND q.status IN (" . implode(', ', $placeholders) . ")";
@@ -82,18 +87,15 @@ class FAQQuestionModel extends BaseModel
 
         // --- Phân trang
         $sql .= " LIMIT :limit OFFSET :offset";
-        $params['limit'] = (int) $limit;
-        $params['offset'] = (int) $offset;
+        $params[':limit'] = (int) $limit;
+        $params[':offset'] = (int) $offset;
 
         // --- Thực thi
         $stmt = $this->db->prepare($sql);
 
         foreach ($params as $key => $val) {
-            if (in_array($key, ['limit', 'offset', 'category_id'])) {
-                $stmt->bindValue(':' . $key, $val, \PDO::PARAM_INT);
-            } else {
-                $stmt->bindValue(':' . $key, $val, \PDO::PARAM_STR);
-            }
+            $type = is_int($val) ? \PDO::PARAM_INT : \PDO::PARAM_STR;
+            $stmt->bindValue($key, $val, $type);
         }
 
         $stmt->execute();
@@ -106,35 +108,45 @@ class FAQQuestionModel extends BaseModel
     public function countAll(string $keyword = '', string $category_id = '', array $statusList = [])
     {
         $sql = "
-            SELECT COUNT(*) AS total
-            FROM {$this->table} AS q
-            LEFT JOIN users AS u ON q.user_id = u.id
-            WHERE 1
-        ";
+        SELECT COUNT(*) AS total
+        FROM {$this->table} AS q
+        LEFT JOIN users AS u ON q.user_id = u.id
+        WHERE 1
+    ";
 
         $params = [];
 
         if (!empty($keyword)) {
-            $sql .= " AND (q.question LIKE :keyword OR u.username LIKE :keyword)";
-            $params['keyword'] = '%' . $keyword . '%';
+            $sql .= " AND q.question LIKE :keyword";
+            $params[':keyword'] = '%' . $keyword . '%';
         }
 
         if (!empty($category_id)) {
             $sql .= " AND q.category_id = :category_id";
-            $params['category_id'] = (int) $category_id;
+            $params[':category_id'] = (int) $category_id;
         }
 
         if (!empty($statusList)) {
             $placeholders = [];
             foreach ($statusList as $index => $status) {
-                $key = "status_$index";
-                $placeholders[] = ":$key";
+                $key = ":status_$index";
+                $placeholders[] = $key;
                 $params[$key] = $status;
             }
             $sql .= " AND q.status IN (" . implode(', ', $placeholders) . ")";
         }
 
-        return $this->getOne($sql, $params)['total'] ?? 0;
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($params as $key => $val) {
+            $type = is_int($val) ? \PDO::PARAM_INT : \PDO::PARAM_STR;
+            $stmt->bindValue($key, $val, $type);
+        }
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $row['total'] ?? 0;
     }
 
     public function getAllQuestionsWithUser()
@@ -318,5 +330,13 @@ class FAQQuestionModel extends BaseModel
         $faqQuestions = $this->paginateFilteredQuestions($search, $categoryId, $sort, $limit, $offset);
 
         return [$faqQuestions, $totalPages];
+    }
+
+    public function incrementViews(int $id)
+    {
+        $sql = "UPDATE {$this->table} SET views = views + 1 WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }

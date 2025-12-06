@@ -51,8 +51,11 @@ $router->post('/contact', 'PageController@submitContact');
 
 // FAQ - BTL FAQ system (tables created: faq_categories, faq, faq_questions, faq_comments)
 $router->get('/faq', 'FAQController@index');
-$router->get('/faq/questions', 'FAQController@questions');
 $router->get('/faq/{id}', 'FAQController@faqDetail');
+$router->get('/questions', 'FAQController@questions');
+$router->get('/questions/{id}', 'FAQController@questionDetail');
+$router->post('/questions/{id}/comment', 'FAQController@questCmt');
+$router->post('/questions/{id}/delete/comment', 'FAQController@questCmt');
 
 // ========================================
 // ADMIN ROUTES (CMS)
