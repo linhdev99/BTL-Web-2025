@@ -112,22 +112,24 @@ class CMSFAQController extends BaseController
     {
         Auth::requireAdminOrStaff();
 
-        $faqModel = new FAQModel();
-        $catModel = new FAQCategoryModel();
+        $model = new FAQModel();
+        $view = new CMSFAQView();
 
-        $staticFaq = $faqModel->getAllFAQ();
-        $categories = $catModel->getAllCategories();
-        $categoriesMap = [];
+        $limit = 5;
+        $page = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
+        $offset = ($page - 1) * $limit;
 
-        foreach ($categories as $c) {
-            $categoriesMap[$c['id']] = $c['name'];
-        }
+        $data = $model->getAllFAQ($limit, $offset);
 
-        $this->view('admin/faq/static/index', [
+        $countSql = "SELECT COUNT(*) AS total FROM faq";
+        $totalRow = $model->getOne($countSql)['total'] ?? 0;
+        $totalPages = max(1, ceil($totalRow / $limit));
+
+        $view->renderStatic([
             'pageTitle' => 'FAQ tĩnh',
-            'staticFaq' => $staticFaq,
-            'categories' => $categories,
-            'categoriesMap' => $categoriesMap
+            'data' => $data,
+            'page' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 
@@ -135,10 +137,41 @@ class CMSFAQController extends BaseController
     {
         Auth::requireAdminOrStaff();
 
-        $categories = (new FAQCategoryModel())->getAllCategories();
+        $catModel = new FAQCategoryModel();
+        $categories = $catModel->getAllCategories();
 
-        $this->view('admin/faq/static/add', [
+        if (empty($categories)) {
+            $_SESSION['error'] = 'Chưa có thể loại FAQ nào. Vui lòng tạo thể loại trước.';
+            $this->redirect(BASE_URL . '/cms/faq/category/add');
+            return;
+        }
+
+        (new CMSFAQView())->renderStaticAdd([
             'pageTitle' => 'Thêm FAQ tĩnh',
+            'categories' => $categories
+        ]);
+    }
+
+    public function staticEdit($id)
+    {
+        Auth::requireAdminOrStaff();
+
+        $id = (int) $id;
+        $faqModel = new FAQModel();
+        $catModel = new FAQCategoryModel();
+
+        $faq = $faqModel->getById($id);
+        if (!$faq) {
+            $_SESSION['error'] = 'FAQ không tồn tại hoặc đã bị xóa.';
+            $this->redirect(BASE_URL . '/cms/faq/static');
+            return;
+        }
+
+        $categories = $catModel->getAllCategories();
+
+        (new CMSFAQView())->renderStaticEdit([
+            'pageTitle' => 'Chỉnh sửa FAQ tĩnh',
+            'faq' => $faq,
             'categories' => $categories
         ]);
     }
@@ -156,24 +189,6 @@ class CMSFAQController extends BaseController
         (new FAQModel())->create($question, $answer, $ordering, $isActive, $category_id);
 
         $this->redirectWithMessage(BASE_URL . '/cms/faq/static', 'Đã thêm FAQ', 'success');
-    }
-
-    public function staticEdit($id)
-    {
-        Auth::requireAdminOrStaff();
-
-        $id = (int) $id;
-        $faqModel = new FAQModel();
-        $catModel = new FAQCategoryModel();
-
-        $faq = $faqModel->getById($id);
-        $categories = $catModel->getAllCategories();
-
-        $this->view('admin/faq/static/edit', [
-            'pageTitle' => 'Chỉnh sửa FAQ tĩnh',
-            'faq' => $faq,
-            'categories' => $categories
-        ]);
     }
 
     public function staticUpdate($id)
@@ -210,35 +225,31 @@ class CMSFAQController extends BaseController
         $keyword = $_GET['keyword'] ?? '';
         $category_id = $_GET['category_id'] ?? '';
         $sort = $_GET['sort'] ?? 'newest';
+        $statusParam = $_GET['status'] ?? null;
+        $statuses = [];
+
+        if (!empty($statusParam)) {
+            $statuses[] = $statusParam;
+        }
 
         $page = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
-        $limit = 20;
+        $limit = 5;
         $offset = ($page - 1) * $limit;
 
-        $questionModel = new FAQQuestionModel();
-        $catModel = new FAQCategoryModel();
+        $model = new FAQQuestionModel();
+        $view = new CMSFAQView();
 
-        $categories = $catModel->getAllCategories();
-
-        // Đếm tổng bản ghi
-        $total = $questionModel->countFilteredQuestions($keyword, $category_id);
-
-        // Lấy dữ liệu theo trang
-        $userQuestions = $questionModel->paginateFilteredQuestions(
-            $keyword,
-            $category_id,
-            $sort,
-            $limit,
-            $offset
-        );
-
+        $questions = $model->getAllQuestions($keyword, $category_id, $statuses, $sort, $limit, $offset);
+        $total = $model->countAll($keyword, $category_id, $statuses);
         $totalPages = ceil($total / $limit);
 
-        $this->view('admin/faq/user/index', [
-            'pageTitle' => 'FAQ người dùng',
-            'userQuestions' => $userQuestions,
-            'categories' => $categories,
-            'total' => $total,
+        $view->renderUser([
+            'pageTitle' => 'Câu hỏi người dùng',
+            'questions' => $questions,
+            'keyword' => $keyword,
+            'category_id' => $category_id,
+            'status' => $statuses,
+            'sort' => $sort,
             'page' => $page,
             'totalPages' => $totalPages
         ]);
@@ -249,12 +260,19 @@ class CMSFAQController extends BaseController
         Auth::requireAdminOrStaff();
 
         $id = (int) $id;
-
         $questionModel = new FAQQuestionModel();
         $question = $questionModel->getById($id);
+
+        if (!$question) {
+            $_SESSION['error'] = 'Câu hỏi không tồn tại hoặc đã bị xóa.';
+            header('Location: ' . BASE_URL . '/cms/faq/user');
+            exit;
+        }
+
         $comments = $questionModel->getComments($id);
 
-        $this->view('admin/faq/user/detail', [
+        $view = new CMSFAQView();
+        $view->renderUserDetail([
             'pageTitle' => 'Chi tiết câu hỏi người dùng',
             'question' => $question,
             'comments' => $comments
