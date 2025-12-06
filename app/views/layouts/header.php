@@ -7,9 +7,9 @@
   <meta name="description"
     content="<?php echo isset($metaDescription) ? escape($metaDescription) : escape(getSiteTagline()); ?>">
   <meta name="keywords"
-    content="<?php echo isset($metaKeywords) ? escape($metaKeywords) : 'mô hình, đồ chơi, gundam, figure'; ?>">
+    content="<?php echo isset($metaKeywords) ? escape($metaKeywords) : 'mô hình, figure, đồ chơi, gundam, xe mô hình'; ?>">
   <meta name="author" content="<?= getSiteName() ?>">
-  <title><?php echo isset($pageTitle) ? escape($pageTitle) . ' - ' : ''; ?><?= getSiteName() ?></title>
+  <title><?php echo isset($pageTitle) ? escape($pageTitle) . ' - ' : ''; ?>BK Figure Lab</title>
 
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -23,97 +23,88 @@
   <?php endif; ?>
 </head>
 
-<body>
+<body class="bg-light text-dark">
+
   <!-- Top Bar -->
-  <div class="top-bar">
+  <div class="top-bar bg-primary text-white py-2 small">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6">
-          <small>
-            <i class="bi bi-telephone"></i> <?= getContactPhone() ?> |
-            <i class="bi bi-envelope"></i> <?= getContactEmail() ?>
-          </small>
+          <i class="bi bi-telephone"></i> <?= getContactPhone() ?> |
+          <i class="bi bi-envelope"></i> <?= getContactEmail() ?>
         </div>
         <div class="col-md-6 text-end">
           <?php if (isLoggedIn()): ?>
             <?php $user = getCurrentUser(); ?>
-            <small>
-              Xin chào, <strong><?php echo escape($user['full_name']); ?></strong> |
-              <?php if (isAdmin()): ?>
-                <a href="<?php echo ADMIN_URL; ?>" style="color: #ffd43b;">Quản trị</a> |
-              <?php endif; ?>
-              <a href="<?php echo BASE_URL; ?>/profile" style="color: #fff;">Tài khoản</a> |
-              <a href="<?php echo BASE_URL; ?>/logout" style="color: #fff;">Đăng xuất</a>
-            </small>
+            Xin chào, <strong><?php echo escape($user['full_name']); ?></strong> |
+            <?php if (isAdmin()): ?>
+              <a href="<?php echo ADMIN_URL; ?>" class="text-warning text-decoration-none">Quản trị</a> |
+            <?php endif; ?>
+            <a href="<?php echo BASE_URL; ?>/profile" class="text-white text-decoration-none">Tài khoản</a> |
+            <a href="<?php echo BASE_URL; ?>/logout" class="text-white text-decoration-none">Đăng xuất</a>
           <?php else: ?>
-            <small>
-              <a href="<?php echo BASE_URL; ?>/login" style="color: #fff;">Đăng nhập</a> |
-              <a href="<?php echo BASE_URL; ?>/register" style="color: #fff;">Đăng ký</a>
-            </small>
+            <a href="<?php echo BASE_URL; ?>/login" class="text-white text-decoration-none">Đăng nhập</a> |
+            <a href="<?php echo BASE_URL; ?>/register" class="text-white text-decoration-none">Đăng ký</a>
           <?php endif; ?>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Header -->
-  <header class="header">
+  <!-- Header / Navbar -->
+  <header class="header shadow-sm bg-white sticky-top">
     <div class="container">
-      <nav class="navbar navbar-expand-lg">
+      <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="<?php echo BASE_URL; ?>">
-            <i class="bi bi-shop"></i> <?= getSiteName() ?>
+
+          <!-- Logo -->
+          <a class="navbar-brand fw-bold text-primary" href="<?php echo BASE_URL; ?>">
+            <i class="bi bi-cube me-2"></i> BK Figure Lab
           </a>
 
+          <!-- Toggler -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
           </button>
 
+          <!-- Nav Links -->
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>">Trang chủ</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/about">Giới thiệu</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/products">Sản phẩm</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/news">Tin tức</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/faq">Hỏi đáp</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/contact">Liên hệ</a>
-              </li>
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-semibold">
+              <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>"><i class="bi bi-house"></i> Trang
+                  chủ</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>/about"><i
+                    class="bi bi-info-circle"></i> Giới thiệu</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>/products"><i
+                    class="bi bi-box-seam"></i> Sản phẩm</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>/news"><i
+                    class="bi bi-newspaper"></i> Tin tức</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>/faq"><i
+                    class="bi bi-question-circle"></i> Hỏi đáp</a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>/contact"><i
+                    class="bi bi-envelope"></i> Liên hệ</a></li>
             </ul>
 
+            <!-- Right icons -->
             <div class="d-flex align-items-center gap-3">
-              <!-- Search Form -->
+              <!-- Search -->
               <form action="<?php echo BASE_URL; ?>/products" method="GET" class="d-flex">
                 <input class="form-control form-control-sm" type="search" name="keyword" placeholder="Tìm kiếm..."
                   style="width: 200px;">
-                <button class="btn btn-sm btn-primary ms-1" type="submit">
-                  <i class="bi bi-search"></i>
-                </button>
+                <button class="btn btn-sm btn-primary ms-1" type="submit"><i class="bi bi-search"></i></button>
               </form>
 
+              <!-- Cart & Orders -->
               <?php if (isLoggedIn()): ?>
                 <?php
                 $cartModel = new \Models\Cart();
                 $cartCount = $cartModel->getCartCount(getCurrentUserId());
                 ?>
-                <!-- My Orders Icon -->
-                <a href="<?php echo BASE_URL; ?>/my-orders" class="text-decoration-none" title="Đơn hàng của tôi">
-                  <i class="bi bi-bag-check" style="font-size: 24px;"></i>
+                <a href="<?php echo BASE_URL; ?>/my-orders" class="text-decoration-none position-relative"
+                  title="Đơn hàng của tôi">
+                  <i class="bi bi-bag-check fs-5"></i>
                 </a>
-
-                <!-- Cart Icon -->
-                <a href="<?php echo BASE_URL; ?>/cart" class="cart-badge position-relative" title="Giỏ hàng">
-                  <i class="bi bi-cart3" style="font-size: 24px;"></i>
+                <a href="<?php echo BASE_URL; ?>/cart" class="text-decoration-none position-relative" title="Giỏ hàng">
+                  <i class="bi bi-cart3 fs-5"></i>
                   <?php if ($cartCount > 0): ?>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       <?php echo $cartCount; ?>
