@@ -101,20 +101,32 @@
       <p class="text-muted mb-0">Chưa có bình luận nào.</p>
     <?php else: ?>
       <?php foreach ($comments as $c): ?>
-        <div class="mb-3 border-bottom pb-2">
-          <div class="fw-bold <?= $c['is_admin'] ? 'text-success' : 'text-info' ?>">
-            <i class="<?= $c['is_admin'] ? 'ti ti-shield' : 'ti ti-user' ?>"></i>
-            <?= htmlspecialchars($c['full_name'] ?? "User #{$c['user_id']}") ?>
+        <div class="mb-3 border-bottom pb-2 d-flex justify-content-between align-items-start">
+
+          <div>
+            <div class="fw-bold <?= $c['is_admin'] ? 'text-success' : 'text-info' ?>">
+              <i class="<?= $c['is_admin'] ? 'ti ti-shield' : 'ti ti-user' ?>"></i>
+              <?= htmlspecialchars($c['full_name'] ?? "User #{$c['user_id']}") ?>
+            </div>
+
+            <div class="mt-1 mb-1 text-dark">
+              <?= nl2br(htmlspecialchars($c['content'])) ?>
+            </div>
+
+            <div class="text-muted small">
+              <i class="ti ti-clock"></i>
+              <?= date("d/m/Y H:i", strtotime($c['created_at'])) ?>
+            </div>
           </div>
 
-          <div class="mt-1 mb-1 text-dark">
-            <?= nl2br(htmlspecialchars($c['content'])) ?>
-          </div>
-
-          <div class="text-muted small">
-            <i class="ti ti-clock"></i>
-            <?= date("d/m/Y H:i", strtotime($c['created_at'])) ?>
-          </div>
+          <form method="POST" action="<?= BASE_URL ?>/cms/faq/user/comment/delete"
+            onsubmit="return confirm('Bạn có chắc muốn xóa bình luận này không?');">
+            <input type="hidden" name="question_id" value="<?= $question['id'] ?>">
+            <input type="hidden" name="comment_id" value="<?= $c['id'] ?>">
+            <button type="submit" class="btn btn-sm btn-outline-danger ms-3">
+              <i class="ti ti-trash"></i>
+            </button>
+          </form>
         </div>
       <?php endforeach; ?>
     <?php endif; ?>

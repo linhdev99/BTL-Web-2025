@@ -320,4 +320,32 @@ class CMSFAQController extends BaseController
         $this->redirectWithMessage(BASE_URL . '/cms/faq/user/detail/' . $id, 'Đã cập nhật trạng thái', 'success');
     }
 
+    public function userDeleteComment()
+    {
+        Auth::requireAdminOrStaff();
+
+        $questionId = (int) ($_POST['question_id'] ?? 0);
+        $commentId = (int) ($_POST['comment_id'] ?? 0);
+
+        if ($questionId <= 0 || $commentId <= 0) {
+            $_SESSION['error'] = 'Dữ liệu không hợp lệ.';
+            header('Location: ' . BASE_URL . '/cms/faq/user');
+            exit;
+        }
+
+        $model = new FAQQuestionModel();
+
+        $comment = $model->getCommentById($commentId);
+        if (!$comment) {
+            $_SESSION['error'] = 'Bình luận không tồn tại hoặc đã bị xóa.';
+            header('Location: ' . BASE_URL . '/cms/faq/user/detail/' . $questionId);
+            exit;
+        }
+
+        $model->deleteComment($questionId, $commentId);
+
+        $_SESSION['success'] = 'Đã xóa bình luận thành công.';
+        header('Location: ' . BASE_URL . '/cms/faq/user/detail/' . $questionId);
+        exit;
+    }
 }

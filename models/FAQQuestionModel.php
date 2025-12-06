@@ -5,6 +5,8 @@ namespace Models;
 class FAQQuestionModel extends BaseModel
 {
     protected string $table = "faq_questions";
+    protected string $table_categories = "faq_categories";
+    protected string $table_comments = "faq_comments";
 
     /**
      * Lấy danh sách câu hỏi người dùng
@@ -19,24 +21,22 @@ class FAQQuestionModel extends BaseModel
     public function getAllQuestions(string $keyword = '', string $category_id = '', array $statusList = [], string $sort = 'newest', int $limit = 20, int $offset = 0)
     {
         $sql = "
-            SELECT 
-                q.id,
-                q.user_id,
-                q.category_id,
-                q.question,
-                q.status,
-                q.views,
-                q.created_at,
-                q.updated_at,
-                u.username AS user_name,
-                u.email AS user_email,
-                c.name AS category_name,
-                c.color AS category_color
-            FROM {$this->table} AS q
-            LEFT JOIN users AS u ON q.user_id = u.id
-            LEFT JOIN faq_categories AS c ON q.category_id = c.id
-            WHERE 1
-        ";
+                    SELECT 
+                        q.*,
+                        u.username AS user_name,
+                        u.email AS user_email,
+                        c.name AS category_name,
+                        c.color AS category_color,
+                        (
+                            SELECT COUNT(*) 
+                            FROM {$this->table_comments} AS fc 
+                            WHERE fc.question_id = q.id
+                        ) AS total_comments
+                    FROM {$this->table} AS q
+                    LEFT JOIN users AS u ON q.user_id = u.id
+                    LEFT JOIN {$this->table_categories} AS c ON q.category_id = c.id
+                    WHERE 1
+                ";
 
         $params = [];
 
@@ -163,6 +163,23 @@ class FAQQuestionModel extends BaseModel
     ", ['id' => $id]);
     }
 
+    public function getCommentById(int $commentId)
+    {
+        return $this->getOne("
+        SELECT 
+            c.*, 
+            u.full_name,
+            u.email,
+            q.question AS question_content,
+            q.id AS question_id
+        FROM faq_comments c
+        LEFT JOIN users u ON u.id = c.user_id
+        LEFT JOIN faq_questions q ON q.id = c.question_id
+        WHERE c.id = :id
+        LIMIT 1
+    ", ['id' => $commentId]);
+    }
+
     public function getComments(int $questionId)
     {
         return $this->getAll("
@@ -182,6 +199,18 @@ class FAQQuestionModel extends BaseModel
             "question_id" => $questionId,
             "user_id" => $userId,
             "content" => $content
+        ]);
+    }
+
+    public function deleteComment($questionId, $commentId)
+    {
+        return $this->execute("
+            DELETE FROM faq_comments 
+            WHERE id = :commentId 
+            AND question_id = :questionId
+        ", [
+            'commentId' => $commentId,
+            'questionId' => $questionId
         ]);
     }
 

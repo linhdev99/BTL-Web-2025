@@ -120,6 +120,7 @@ $router->get('/cms/faq/user/detail/{id}', 'CMSFAQController@userDetail');
 $router->post('/cms/faq/user/detail/{id}', 'CMSFAQController@userReply');
 $router->post('/cms/faq/user/delete/{id}', 'CMSFAQController@userDelete');
 $router->post('/cms/faq/user/status/{id}', 'CMSFAQController@userUpdateStatus');
+$router->post('/cms/faq/user/comment/delete', 'CMSFAQController@userDeleteComment');
 
 // Categories Management
 $router->get('/cms/categories', 'CMSCategoryController@index');
