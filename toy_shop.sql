@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 06, 2025 lúc 09:48 AM
+-- Thời gian đã tạo: Th12 06, 2025 lúc 09:55 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -141,6 +141,7 @@ CREATE TABLE `faq_categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
+  `color` varchar(20) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -150,13 +151,13 @@ CREATE TABLE `faq_categories` (
 -- Đang đổ dữ liệu cho bảng `faq_categories`
 --
 
-INSERT INTO `faq_categories` (`id`, `name`, `slug`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Khác', 'khac', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
-(2, 'Vận chuyển - Giao hàng', 'van-chuyen-giao-hang', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
-(3, 'Thanh toán', 'thanh-toan', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
-(4, 'Đổi trả - Bảo hành', 'doi-tra-bao-hanh', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
-(5, 'Thông tin cửa hàng', 'thong-tin-cua-hang', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
-(6, 'Về sản phẩm', 've-san-pham', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01');
+INSERT INTO `faq_categories` (`id`, `name`, `slug`, `color`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Khác', 'khac', '#9b59b6', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
+(2, 'Vận chuyển - Giao hàng', 'van-chuyen-giao-hang', '#3498db', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
+(3, 'Thanh toán', 'thanh-toan', '#e67e22', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
+(4, 'Đổi trả - Bảo hành', 'doi-tra-bao-hanh', '#2ecc71', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
+(5, 'Thông tin cửa hàng', 'thong-tin-cua-hang', '#f1c40f', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
+(6, 'Về sản phẩm', 've-san-pham', '#e74c3c', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34');
 
 -- --------------------------------------------------------
 
