@@ -7,7 +7,7 @@ class CMSFAQView
     public function renderCategory($data)
     {
         extract($data);
-        $file = PATH_ROOT . '/views/admin/faq/category/index1.php';
+        $file = PATH_ROOT . '/views/admin/faq/category/index.php';
         if (!file_exists($file)) {
             (new ErrorView)->render();
             return;
