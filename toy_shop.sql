@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost
--- Thời gian đã tạo: Th12 06, 2025 lúc 09:03 AM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.0.28
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th12 06, 2025 lúc 09:48 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -120,12 +120,16 @@ CREATE TABLE `faq` (
 --
 
 INSERT INTO `faq` (`id`, `category_id`, `question`, `answer`, `ordering`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Sản phẩm có bảo hành không?', 'Tất cả sản phẩm được bảo hành từ 6-12 tháng', 1, 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(2, 2, 'Làm thế nào để đặt hàng?', 'Bạn có thể đặt hàng qua website hoặc gọi hotline', 1, 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(3, 3, 'Hỗ trợ thanh toán nào?', 'Hỗ trợ COD, chuyển khoản, MoMo, ZaloPay', 1, 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(4, 4, 'Thời gian giao hàng?', 'Giao hàng từ 2-5 ngày tùy theo khu vực', 1, 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(5, 5, 'Chính sách đổi trả?', 'Đổi trả trong 7 ngày nếu sản phẩm còn nguyên vẹn', 1, 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(6, 6, 'as', 'as', 0, 1, '2025-11-25 13:18:41', '2025-11-25 13:18:41');
+(1, 2, '<b><u>Shop có hỗ trợ ship COD toàn quốc không?</u></b>', '<font color=\"#b5d6a5\"><b><u>Có</u></b></font>. Shop hỗ trợ ship COD toàn quốc và khách được kiểm tra hàng trước khi thanh toán.', 1, 1, '2025-12-06 08:45:08', '2025-11-22 09:59:49'),
+(2, 2, 'Thời gian giao hàng mất bao lâu?', 'TP.HCM: 1-2 ngày. Miền Nam: 2-4 ngày. Miền Trung và Miền Bắc: 3-6 ngày.', 2, 1, '2025-12-06 08:45:08', '2025-11-22 08:53:39'),
+(3, 6, 'Figure tại shop có phải hàng chính hãng không?', 'Shop chỉ bán hàng chính hãng 100%, đầy đủ tem mác và kiểm định chất lượng.', 3, 1, '2025-12-06 08:45:08', '2025-11-22 08:53:50'),
+(4, 4, 'Sản phẩm lỗi có được đổi trả không?', 'Bạn có thể đổi sản phẩm trong 24 giờ nếu lỗi do nhà sản xuất.', 4, 1, '2025-12-06 08:45:08', '2025-11-22 09:57:29'),
+(5, 2, 'Shop có cho kiểm tra hàng trước khi nhận không?', 'Tất cả đơn hàng đều được phép xem hàng trước khi thanh toán với shipper.', 5, 1, '2025-12-06 08:45:08', '2025-11-22 09:57:38'),
+(6, 6, 'Giá sản phẩm có thay đổi theo thị trường không?', 'Shop cam kết giữ giá ổn định, không tự ý tăng giá kể cả khi thị trường biến động.', 6, 1, '2025-12-06 08:45:08', '2025-11-22 09:57:53'),
+(7, 3, 'Shop có chương trình giảm giá không?', 'Có. Các chương trình giảm giá sẽ được cập nhật thường xuyên dành cho khách thân thiết.', 7, 1, '2025-12-06 08:45:08', '2025-11-22 09:57:58'),
+(8, 6, 'Những loại figure nào shop đang bán?', 'Shop bán Anime figure, Game figure, Nendoroid, Scale figure, Resin figure và model kit.', 8, 1, '2025-12-06 08:45:08', '2025-11-22 09:58:08'),
+(9, 6, 'Shop có nhận order sản phẩm không có sẵn không?', '<font color=\"#6ba54a\">Có. Shop nhận order theo yêu cầu, chỉ cần gửi hình hoặc link sản phẩm.</font>', 9, 1, '2025-12-06 08:45:08', '2025-11-22 09:58:32'),
+(10, 5, '<font color=\"#b5d6a5\">Địa chỉ cửa hàng là ở đâu?</font>', '<font color=\"#c67ba5\" style=\"\">Lý Thường Kiệt, Phường 14, Quận 10, TP.HCM.</font>', 10, 0, '2025-12-06 08:45:08', '2025-11-23 22:45:13');
 
 -- --------------------------------------------------------
 
@@ -147,11 +151,12 @@ CREATE TABLE `faq_categories` (
 --
 
 INSERT INTO `faq_categories` (`id`, `name`, `slug`, `is_active`, `created_at`, `updated_at`) VALUES
-(2, 'Đặt hàng', 'dat-hang', 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(3, 'Thanh toán', 'thanh-toan', 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(4, 'Vận chuyển', 'van-chuyen', 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(5, 'Chính sách', 'chinh-sach', 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(6, 'as', 'as', 1, '2025-11-25 13:18:29', '2025-11-25 13:18:29');
+(1, 'Khác', 'khac', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
+(2, 'Vận chuyển - Giao hàng', 'van-chuyen-giao-hang', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
+(3, 'Thanh toán', 'thanh-toan', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
+(4, 'Đổi trả - Bảo hành', 'doi-tra-bao-hanh', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
+(5, 'Thông tin cửa hàng', 'thong-tin-cua-hang', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01'),
+(6, 'Về sản phẩm', 've-san-pham', 1, '2025-12-06 08:45:01', '2025-12-06 08:45:01');
 
 -- --------------------------------------------------------
 
@@ -167,6 +172,22 @@ CREATE TABLE `faq_comments` (
   `is_admin` tinyint(1) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `faq_comments`
+--
+
+INSERT INTO `faq_comments` (`id`, `question_id`, `user_id`, `content`, `is_admin`, `created_at`) VALUES
+(1, 1, 1, 'Dạ shop có giao toàn quốc nha bạn ❤️', 0, '2025-11-22 03:05:00'),
+(2, 1, 3, 'Mình ở Đà Nẵng nhận hàng trong 3 ngày thôi, khá nhanh 👍', 0, '2025-11-22 03:06:10'),
+(3, 1, 2, 'Ship COD được kiểm tra hàng trước ạ?', 0, '2025-11-22 03:07:42'),
+(4, 2, 1, 'Dạ thời gian giao hàng tùy khu vực, TP.HCM tầm 1–2 ngày ạ 🚚', 0, '2025-11-22 04:01:02'),
+(5, 2, 8, 'Mình nhận hàng ở Huế sau 4 ngày, hàng nguyên vẹn 💯', 0, '2025-11-22 04:02:40'),
+(6, 3, 6, 'Shop có bán figure chính hãng Bandai không?', 0, '2025-11-22 05:00:00'),
+(7, 3, 1, 'Tất cả đều chính hãng 100%, có tem kiểm định rõ ràng ạ ✅', 0, '2025-11-22 05:00:50'),
+(8, 4, 8, 'Nếu sản phẩm lỗi thì đổi như thế nào ạ?', 0, '2025-11-22 06:00:00'),
+(9, 5, 1, 'Dạ có ạ, bạn được mở hộp kiểm tra trước khi thanh toán nha ✨', 0, '2025-11-22 07:00:40'),
+(10, 6, 1, 'Dạ shop giữ giá ổn định, không tăng dù khan hàng nha 🔒', 0, '2025-11-22 08:00:40');
 
 -- --------------------------------------------------------
 
@@ -184,6 +205,22 @@ CREATE TABLE `faq_questions` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `faq_questions`
+--
+
+INSERT INTO `faq_questions` (`id`, `user_id`, `category_id`, `question`, `status`, `views`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 'Shop có hỗ trợ ship COD toàn quốc không ạ?', 'answered', 45, '2025-11-22 03:00:00', '2025-12-06 08:45:19'),
+(2, 3, 2, 'Nếu mình ở Hà Nội thì bao lâu nhận được hàng?', 'answered', 33, '2025-11-22 03:01:00', '2025-12-06 08:45:19'),
+(3, 5, 2, 'Có thể chọn đơn vị vận chuyển không vậy shop?', 'pending', 0, '2025-11-22 03:02:00', '2025-12-06 08:45:19'),
+(4, 2, 2, 'Phí ship được tính như thế nào ạ?', 'answered', 27, '2025-11-22 03:03:00', '2025-12-06 08:45:19'),
+(5, 6, 2, 'Shop có giao hàng vào Chủ Nhật không?', 'answered', 19, '2025-11-22 03:04:00', '2025-12-06 08:45:19'),
+(6, 7, 3, 'Shop chấp nhận thanh toán qua những hình thức nào?', 'answered', 54, '2025-11-22 04:00:00', '2025-12-06 08:45:19'),
+(7, 4, 3, 'Có thể thanh toán khi nhận hàng (COD) không?', 'answered', 42, '2025-11-22 04:01:00', '2025-12-06 08:45:19'),
+(8, 3, 3, 'Shop có hỗ trợ chuyển khoản ngân hàng không ạ?', 'answered', 35, '2025-11-22 04:02:00', '2025-12-06 08:45:19'),
+(9, 5, 3, 'Có thể dùng ví MOMO để thanh toán không?', 'answered', 38, '2025-11-22 04:03:00', '2025-12-06 08:45:19'),
+(10, 2, 3, 'Khi thanh toán online mà lỗi thì xử lý thế nào?', 'pending', 3, '2025-11-22 04:04:00', '2025-12-06 08:45:19');
 
 -- --------------------------------------------------------
 
@@ -411,7 +448,8 @@ INSERT INTO `users` (`id`, `email`, `password`, `full_name`, `phone`, `address`,
 (1, 'admin@toyshop.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
 (2, 'staff@toyshop.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Staff User', NULL, NULL, 2, 'staff', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
 (3, 'customer@toyshop.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Customer User', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(4, '123@gmail.com', '$2y$12$TI1yMA.fC6h02jLhBxBSe.5EXX/cO6zqQF1rm8OE0l7XHw4d/V9cK', 'Quách Nguyễn Hoàng', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-26 09:55:48', '2025-11-26 09:55:48');
+(4, '123@gmail.com', '$2y$12$TI1yMA.fC6h02jLhBxBSe.5EXX/cO6zqQF1rm8OE0l7XHw4d/V9cK', 'Quách Nguyễn Hoàng', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-26 09:55:48', '2025-11-26 09:55:48'),
+(5, 'admin@gmail.com', '$2y$10$ZxTOmh11/UA1vqtW6GGm4uu7h5pRAd0NhNeJ6P.S1sdgAsa3w9RG.', 'Huynh Pham Phuoc Linh', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-12-06 08:03:58', '2025-12-06 08:04:25');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -578,7 +616,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT cho bảng `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `faq_categories`
@@ -590,13 +628,13 @@ ALTER TABLE `faq_categories`
 -- AUTO_INCREMENT cho bảng `faq_comments`
 --
 ALTER TABLE `faq_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `faq_questions`
 --
 ALTER TABLE `faq_questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `news`
@@ -638,7 +676,7 @@ ALTER TABLE `site_settings`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -662,26 +700,6 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `contacts`
   ADD CONSTRAINT `fk_contacts_replied_by` FOREIGN KEY (`replied_by`) REFERENCES `users` (`id`) ON DELETE SET NULL;
-
---
--- Các ràng buộc cho bảng `faq`
---
-ALTER TABLE `faq`
-  ADD CONSTRAINT `fk_faq_category` FOREIGN KEY (`category_id`) REFERENCES `faq_categories` (`id`) ON DELETE SET NULL;
-
---
--- Các ràng buộc cho bảng `faq_comments`
---
-ALTER TABLE `faq_comments`
-  ADD CONSTRAINT `fk_faq_comments_question` FOREIGN KEY (`question_id`) REFERENCES `faq_questions` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_faq_comments_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
-
---
--- Các ràng buộc cho bảng `faq_questions`
---
-ALTER TABLE `faq_questions`
-  ADD CONSTRAINT `fk_faq_questions_category` FOREIGN KEY (`category_id`) REFERENCES `faq_categories` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_faq_questions_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
 -- Các ràng buộc cho bảng `news`
