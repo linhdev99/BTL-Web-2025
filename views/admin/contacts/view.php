@@ -22,7 +22,21 @@
 
 <div class="row">
     <div class="col-md-8">
-        <div class="card">
+        <!-- Flash Messages -->
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <?php echo escape($_SESSION['success']); unset($_SESSION['success']); ?>
+            </div>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <?php echo escape($_SESSION['error']); unset($_SESSION['error']); ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="card mb-3">
             <div class="card-header">
                 <h3 class="card-title">Nội dung liên hệ</h3>
             </div>
@@ -40,6 +54,40 @@
                 </div>
             </div>
         </div>
+
+        <!-- Admin Reply Section -->
+        <?php if (!empty($contact['admin_reply'])): ?>
+        <div class="card mb-3">
+            <div class="card-header bg-success-lt">
+                <h3 class="card-title">Phản hồi của bạn</h3>
+            </div>
+            <div class="card-body">
+                <div class="p-3 bg-light rounded">
+                    <?php echo nl2br(escape($contact['admin_reply'])); ?>
+                </div>
+                <?php if (!empty($contact['replied_at'])): ?>
+                <small class="text-muted">Phản hồi lúc: <?php echo date('d/m/Y H:i:s', strtotime($contact['replied_at'])); ?></small>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php else: ?>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Thêm phản hồi</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="<?php echo BASE_URL; ?>/cms/contacts/<?php echo $contact['id']; ?>/add-reply">
+                    <div class="mb-3">
+                        <label class="form-label required">Nội dung phản hồi</label>
+                        <textarea class="form-control" name="admin_reply" rows="5" required placeholder="Nhập nội dung phản hồi cho khách hàng..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <i class="ti ti-send"></i> Gửi phản hồi
+                    </button>
+                </form>
+            </div>
+        </div>
+        <?php endif; ?>
     </div>
 
     <div class="col-md-4">
@@ -74,12 +122,20 @@
                 <h3 class="card-title">Thông tin khác</h3>
             </div>
             <div class="card-body">
-                <div class="mb-2">
+                <div class="mb-3">
                     <strong>Trạng thái:</strong><br>
                     <?php
                     $status = $contact['status'] ?? 'unread';
-                    $statusClass = $status == 'read' ? 'success' : 'warning';
-                    $statusText = $status == 'read' ? 'Đã đọc' : 'Chưa đọc';
+                    if ($status === 'replied') {
+                        $statusClass = 'success';
+                        $statusText = 'Đã phản hồi';
+                    } elseif ($status === 'read') {
+                        $statusClass = 'info';
+                        $statusText = 'Đã đọc';
+                    } else {
+                        $statusClass = 'warning';
+                        $statusText = 'Chưa đọc';
+                    }
                     ?>
                     <span class="badge bg-<?php echo $statusClass; ?>"><?php echo $statusText; ?></span>
                 </div>

@@ -70,35 +70,6 @@
         </div>
     </div>
 
-    <!-- Users -->
-    <div class="col-sm-6 col-lg-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div class="subheader">Người dùng</div>
-                    <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown">
-                                <i class="ti ti-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="<?php echo BASE_URL; ?>/cms/users">Xem tất cả</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-baseline">
-                    <div class="h1 mb-0 me-2"><?php echo number_format($totalUsers); ?></div>
-                    <div class="me-auto">
-                        <span class="text-blue d-inline-flex align-items-center lh-1">
-                            <i class="ti ti-users"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Revenue -->
     <div class="col-sm-6 col-lg-3">
         <div class="card">

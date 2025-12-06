@@ -18,8 +18,11 @@
             <a href="<?php echo BASE_URL; ?>/cms/contacts?status=unread" class="btn <?php echo $currentStatus == 'unread' ? 'btn-warning' : 'btn-outline-warning'; ?>">
                 Chưa đọc
             </a>
-            <a href="<?php echo BASE_URL; ?>/cms/contacts?status=read" class="btn <?php echo $currentStatus == 'read' ? 'btn-success' : 'btn-outline-success'; ?>">
+            <a href="<?php echo BASE_URL; ?>/cms/contacts?status=read" class="btn <?php echo $currentStatus == 'read' ? 'btn-info' : 'btn-outline-info'; ?>">
                 Đã đọc
+            </a>
+            <a href="<?php echo BASE_URL; ?>/cms/contacts?status=replied" class="btn <?php echo $currentStatus == 'replied' ? 'btn-success' : 'btn-outline-success'; ?>">
+                Đã phản hồi
             </a>
         </div>
     </div>
@@ -77,9 +80,17 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $isRead = !empty($contact['is_read']);
-                                    $statusClass = $isRead ? 'success' : 'warning';
-                                    $statusText = $isRead ? 'Đã đọc' : 'Chưa đọc';
+                                    $status = $contact['status'] ?? 'unread';
+                                    if ($status === 'replied') {
+                                        $statusClass = 'success';
+                                        $statusText = 'Đã phản hồi';
+                                    } elseif ($status === 'read') {
+                                        $statusClass = 'info';
+                                        $statusText = 'Đã đọc';
+                                    } else {
+                                        $statusClass = 'warning';
+                                        $statusText = 'Chưa đọc';
+                                    }
                                     ?>
                                     <span class="badge bg-<?php echo $statusClass; ?>"><?php echo $statusText; ?></span>
                                 </td>
@@ -90,10 +101,14 @@
                                             <i class="ti ti-eye"></i>
                                             <span>Xem</span>
                                         </a>
+                                        <form method="POST" action="<?php echo BASE_URL; ?>/cms/contacts/<?php echo $contact['id']; ?>/toggle-read" style="display: inline;">
+                                            <button type="submit" class="btn btn-sm btn-<?php echo $contact['is_read'] ? 'warning' : 'info'; ?> d-inline-flex align-items-center gap-1" title="<?php echo $contact['is_read'] ? 'Đánh dấu chưa đọc' : 'Đánh dấu đã đọc'; ?>">
+                                                <i class="ti ti-<?php echo $contact['is_read'] ? 'mail' : 'mail-opened'; ?>"></i>
+                                            </button>
+                                        </form>
                                         <form method="POST" action="<?php echo BASE_URL; ?>/cms/contacts/<?php echo $contact['id']; ?>/delete" style="display: inline;">
                                             <button type="submit" class="btn btn-sm btn-danger delete-confirm d-inline-flex align-items-center gap-1">
                                                 <i class="ti ti-trash"></i>
-                                                <span>Xóa</span>
                                             </button>
                                         </form>
                                     </div>

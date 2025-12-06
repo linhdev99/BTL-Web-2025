@@ -47,7 +47,11 @@
       "Bash(models/BrandModel.php)",
       "Bash(git commit:*)",
       "Bash(php database/run_settings_migration.php:*)",
-      "Bash(php:*)"
+      "Bash(php:*)",
+      "Bash(git push:*)",
+      "Bash(test:*)",
+      "Bash(git pull:*)",
+      "Bash(git reset:*)"
     ],
     "deny": [],
     "ask": []

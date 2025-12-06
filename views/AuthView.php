@@ -8,6 +8,12 @@ class AuthView
     {
         if (!empty($data))
             extract($data);
-        require PATH_ROOT . "/views/auth/{$view}.php";
+
+        $file = PATH_ROOT . "/views/auth/{$view}.php";
+        if (!file_exists($file)) {
+            (new ErrorView)->render();
+            return;
+        }
+        require $file;
     }
 }
