@@ -75,8 +75,11 @@ class OrderModel extends BaseModel
 
     /**
      * Update order status
+     * @param int $id Order ID
+     * @param string $status New status
+     * @param bool $skipValidation Skip status transition validation (for admin override)
      */
-    public function updateStatus($id, $status)
+    public function updateStatus($id, $status, $skipValidation = false)
     {
         try {
             // Get current order status
@@ -87,8 +90,10 @@ class OrderModel extends BaseModel
 
             $oldStatus = $order['status'];
 
-            // Validate status transition
-            $this->validateStatusTransition($oldStatus, $status);
+            // Validate status transition (unless skipped by admin)
+            if (!$skipValidation) {
+                $this->validateStatusTransition($oldStatus, $status);
+            }
 
             // Begin transaction
             $this->db->beginTransaction();
@@ -308,11 +313,13 @@ class OrderModel extends BaseModel
 
     /**
      * Get sales statistics
+     * Revenue is only counted for completed and paid orders
      */
     public function getSalesStats($startDate = null, $endDate = null)
     {
         $params = [];
-        $whereClause = "WHERE status != 'cancelled'";
+        // Only count revenue from completed and paid orders
+        $whereClause = "WHERE status = 'completed' AND payment_status = 'paid'";
 
         if ($startDate) {
             $whereClause .= " AND DATE(created_at) >= :start_date";
@@ -336,6 +343,7 @@ class OrderModel extends BaseModel
 
     /**
      * Get revenue by date range
+     * Only count completed and paid orders
      */
     public function getRevenueByDateRange($days = 7)
     {
@@ -345,7 +353,8 @@ class OrderModel extends BaseModel
                     SUM(total_amount) as revenue
                 FROM {$this->table}
                 WHERE DATE(created_at) >= DATE_SUB(CURDATE(), INTERVAL :days DAY)
-                    AND status != 'cancelled'
+                    AND status = 'completed'
+                    AND payment_status = 'paid'
                 GROUP BY DATE(created_at)
                 ORDER BY date ASC";
 

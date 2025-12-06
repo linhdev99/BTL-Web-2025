@@ -40,13 +40,15 @@
                                                 <td><?php echo formatPrice($item['product']['sale_price'] ?: $item['product']['price']); ?></td>
                                                 <td>
                                                     <input type="number"
-                                                           class="form-control form-control-sm"
+                                                           class="form-control form-control-sm quantity-input"
                                                            style="width: 80px;"
                                                            value="<?php echo $item['quantity']; ?>"
                                                            min="1"
-                                                           data-product-id="<?php echo $item['product']['id']; ?>">
+                                                           max="50"
+                                                           data-product-id="<?php echo $item['product']['id']; ?>"
+                                                           data-price="<?php echo $item['product']['sale_price'] ?: $item['product']['price']; ?>">
                                                 </td>
-                                                <td class="fw-bold"><?php echo formatPrice($item['subtotal']); ?></td>
+                                                <td class="fw-bold subtotal-<?php echo $item['product']['id']; ?>"><?php echo formatPrice($item['subtotal']); ?></td>
                                                 <td>
                                                     <button class="btn btn-sm btn-danger" onclick="removeFromCart(<?php echo $item['product']['id']; ?>)">
                                                         <i class="bi bi-trash"></i>
@@ -68,7 +70,7 @@
                             <hr>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Tạm tính:</span>
-                                <span><?php echo formatPrice($total); ?></span>
+                                <span id="cart-subtotal"><?php echo formatPrice($total); ?></span>
                             </div>
                             <div class="d-flex justify-content-between mb-3">
                                 <span>Phí vận chuyển:</span>
@@ -77,7 +79,7 @@
                             <hr>
                             <div class="d-flex justify-content-between mb-4">
                                 <strong>Tổng cộng:</strong>
-                                <strong class="text-danger"><?php echo formatPrice($total); ?></strong>
+                                <strong class="text-danger" id="cart-total"><?php echo formatPrice($total); ?></strong>
                             </div>
                             <a href="<?php echo BASE_URL; ?>/checkout" class="btn btn-primary w-100 mb-2">
                                 Tiến hành thanh toán
@@ -103,6 +105,102 @@
 </section>
 
 <script>
+// Format price function
+function formatPrice(price) {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+}
+
+// Update cart totals
+function updateCartTotals() {
+    let total = 0;
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        const productId = input.dataset.productId;
+        const price = parseFloat(input.dataset.price);
+        const quantity = parseInt(input.value);
+        const subtotal = price * quantity;
+
+        // Update subtotal display
+        const subtotalElement = document.querySelector(`.subtotal-${productId}`);
+        if (subtotalElement) {
+            subtotalElement.textContent = formatPrice(subtotal);
+        }
+
+        total += subtotal;
+    });
+
+    // Update total displays
+    document.getElementById('cart-subtotal').textContent = formatPrice(total);
+    document.getElementById('cart-total').textContent = formatPrice(total);
+}
+
+// Handle quantity change
+document.addEventListener('DOMContentLoaded', function() {
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+
+    quantityInputs.forEach(input => {
+        let timeoutId;
+
+        input.addEventListener('change', function() {
+            const productId = this.dataset.productId;
+            const quantity = parseInt(this.value);
+
+            if (quantity < 1) {
+                this.value = 1;
+                return;
+            }
+
+            if (quantity > 50) {
+                alert('Số lượng tối đa cho sản phẩm này là 50');
+                this.value = 50;
+                return;
+            }
+
+            // Update UI immediately
+            updateCartTotals();
+
+            // Clear previous timeout
+            clearTimeout(timeoutId);
+
+            // Update cart on server after 500ms delay
+            timeoutId = setTimeout(() => {
+                updateCartQuantity(productId, quantity);
+            }, 500);
+        });
+
+        // Also handle input event for real-time calculation
+        input.addEventListener('input', function() {
+            const quantity = parseInt(this.value);
+            if (quantity >= 1 && quantity <= 50) {
+                updateCartTotals();
+            }
+        });
+    });
+});
+
+// Update cart quantity on server
+function updateCartQuantity(productId, quantity) {
+    const formData = new FormData();
+    formData.append('product_id', productId);
+    formData.append('quantity', quantity);
+
+    fetch('<?php echo BASE_URL; ?>/cart/update', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            alert(data.message);
+            location.reload();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Có lỗi xảy ra khi cập nhật giỏ hàng');
+    });
+}
+
+// Remove from cart
 function removeFromCart(productId) {
     if (confirm('Bạn có chắc muốn xóa sản phẩm này?')) {
         const formData = new FormData();

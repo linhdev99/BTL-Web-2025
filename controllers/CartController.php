@@ -228,7 +228,8 @@ class CartController extends BaseController
         $this->view('client/cart/checkout', [
             'pageTitle' => 'Thanh toán',
             'cartItems' => $cartItems,
-            'total' => $total
+            'total' => $total,
+            'currentUser' => getCurrentUser()
         ]);
     }
 
@@ -239,9 +240,14 @@ class CartController extends BaseController
     {
         Auth::requireLogin();
 
+        // Debug: Log that we reached this method
+        error_log('ProcessCheckout called - Method: ' . $_SERVER['REQUEST_METHOD']);
+
         $cart = $_SESSION['cart'] ?? [];
+        error_log('Cart contents: ' . print_r($cart, true));
 
         if (empty($cart)) {
+            error_log('Cart is empty - redirecting');
             $this->redirectWithMessage(BASE_URL . '/cart', 'Giỏ hàng trống', 'warning');
             return;
         }
@@ -314,8 +320,12 @@ class CartController extends BaseController
         ];
 
         try {
+            error_log('Attempting to create order with data: ' . print_r($orderData, true));
+
             // Create order
             $orderId = $this->orderModel->createOrder($orderData, $orderItems);
+
+            error_log('Order created successfully with ID: ' . $orderId);
 
             // Clear cart
             $_SESSION['cart'] = [];
@@ -327,8 +337,13 @@ class CartController extends BaseController
                 'success'
             );
         } catch (\Exception $e) {
-            $_SESSION['error'] = 'Có lỗi xảy ra khi đặt hàng: ' . $e->getMessage();
+            error_log('Error creating order: ' . $e->getMessage());
+            error_log('Stack trace: ' . $e->getTraceAsString());
+
+            // More detailed error message for debugging
+            $_SESSION['error'] = 'Có lỗi xảy ra khi đặt hàng: ' . $e->getMessage() . '<br>File: ' . $e->getFile() . '<br>Line: ' . $e->getLine();
             $this->redirect(BASE_URL . '/checkout');
+            return;
         }
     }
 

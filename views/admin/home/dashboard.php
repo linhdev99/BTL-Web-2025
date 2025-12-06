@@ -12,7 +12,7 @@
 <!-- Statistics Cards -->
 <div class="row row-deck row-cards mb-3">
     <!-- Products -->
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center">
@@ -42,7 +42,7 @@
     </div>
 
     <!-- Orders -->
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center">
@@ -71,7 +71,7 @@
     </div>
 
     <!-- Revenue -->
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex align-items-center">

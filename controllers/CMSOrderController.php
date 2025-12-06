@@ -84,7 +84,8 @@ class CMSOrderController extends BaseController
         }
 
         try {
-            $this->orderModel->updateStatus($id, $status);
+            // Admin can override status transition validation
+            $this->orderModel->updateStatus($id, $status, true);
             $this->redirectWithMessage(BASE_URL . '/cms/orders/' . $id, 'Đã cập nhật trạng thái đơn hàng', 'success');
         } catch (\Exception $e) {
             $this->redirectWithMessage(BASE_URL . '/cms/orders/' . $id, $e->getMessage(), 'error');
