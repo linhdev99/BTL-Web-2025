@@ -8,7 +8,7 @@ class CMSFAQView
     {
         extract($data);
 
-        $file = PATH_ROOT . '/views/admin/faq/' . $path;
+        $file = PATH_ROOT . '/views/admin/faq/' . $path . ".php";
 
         if (!file_exists($file)) {
             (new ErrorView)->render();
@@ -20,16 +20,31 @@ class CMSFAQView
 
     public function renderCategory(array $data): void
     {
-        $this->render('category/index.php', $data);
+        $this->render('category/index', $data);
     }
 
     public function renderCategoryEdit(array $data): void
     {
-        $this->render('category/edit.php', $data);
+        $this->render('category/edit', $data);
     }
 
     public function renderCategoryAdd(array $data): void
     {
-        $this->render('category/add.php', $data);
+        $this->render('category/add', $data);
+    }
+
+    public function renderStatic(array $data): void
+    {
+        $this->render('static/index', $data);
+    }
+
+    public function renderStaticAdd(array $data): void
+    {
+        $this->render('static/add', $data);
+    }
+
+    public function renderStaticEdit(array $data): void
+    {
+        $this->render('static/edit', $data);
     }
 }

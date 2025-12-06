@@ -9,12 +9,32 @@ class FAQModel extends BaseModel
     /**
      * Lấy toàn bộ FAQ tĩnh
      */
-    public function getAllFAQ()
+    public function getAllFAQ(int $limit = 10, int $offset = 0)
     {
-        return $this->getAll("
-            SELECT * FROM {$this->table}
-            ORDER BY ordering ASC, id DESC
-        ");
+        $sql = "
+                    SELECT 
+                        f.id,
+                        f.category_id,
+                        f.question,
+                        f.answer,
+                        f.ordering,
+                        f.is_active,
+                        f.created_at,
+                        f.updated_at,
+                        c.name  AS category_name,
+                        c.slug  AS category_slug,
+                        c.color AS category_color,
+                        c.is_active AS category_active
+                    FROM faq AS f
+                    LEFT JOIN faq_categories AS c ON f.category_id = c.id
+                    ORDER BY f.ordering ASC, f.id DESC
+                    LIMIT :limit OFFSET :offset
+                ";
+
+        return $this->getAll($sql, [
+            'limit' => $limit,
+            'offset' => $offset
+        ]);
     }
 
     /**
