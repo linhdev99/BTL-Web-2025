@@ -34,7 +34,7 @@ class CMSFAQController extends BaseController
         $view = new CMSFAQView();
 
         $view->renderCategory([
-            'pageTitle' => 'Quản lý thể loại FAQ',
+            'pageTitle' => 'FAQ - Quản lý thể loại',
             'categories' => $categories
         ]);
     }
@@ -42,22 +42,10 @@ class CMSFAQController extends BaseController
     public function categoryAdd()
     {
         Auth::requireAdminOrStaff();
-
-        $this->view('admin/faq/category/add', [
-            'pageTitle' => 'Thêm thể loại FAQ'
+        $view = new CMSFAQView();
+        $view->renderCategoryAdd([
+            'pageTitle' => 'FAQ - Thêm thể loại'
         ]);
-    }
-
-    public function categoryStore()
-    {
-        Auth::requireAdminOrStaff();
-
-        $name = $_POST['name'] ?? '';
-        $is_active = isset($_POST['is_active']) ? 1 : 0;
-
-        (new FAQCategoryModel())->create($name, $is_active);
-
-        $this->redirectWithMessage(BASE_URL . '/cms/faq/category', 'Đã thêm thể loại FAQ', 'success');
     }
 
     public function categoryEdit($id)
@@ -66,11 +54,28 @@ class CMSFAQController extends BaseController
 
         $id = (int) $id;
         $category = (new FAQCategoryModel())->getById($id);
-
-        $this->view('admin/faq/category/edit', [
-            'pageTitle' => 'Chỉnh sửa thể loại FAQ',
+        $view = new CMSFAQView();
+        $view->renderCategoryEdit([
+            'pageTitle' => 'FAQ - Chỉnh sửa thể loại',
             'category' => $category
         ]);
+    }
+
+    public function categoryStore()
+    {
+        Auth::requireAdminOrStaff();
+
+        $name = trim($_POST['name'] ?? '');
+        $color = trim($_POST['color'] ?? '#3498db');
+        $is_active = isset($_POST['is_active']) ? 1 : 0;
+
+        (new FAQCategoryModel())->create($name, $color, $is_active);
+
+        $this->redirectWithMessage(
+            BASE_URL . '/cms/faq/category',
+            'Đã thêm thể loại FAQ',
+            'success'
+        );
     }
 
     public function categoryUpdate($id)
@@ -78,12 +83,18 @@ class CMSFAQController extends BaseController
         Auth::requireAdminOrStaff();
 
         $id = (int) $id;
-        $name = $_POST['name'] ?? '';
+        $name = trim($_POST['name'] ?? '');
+        $slug = trim($_POST['slug'] ?? '');
+        $color = trim($_POST['color'] ?? '#3498db');
         $is_active = isset($_POST['is_active']) ? 1 : 0;
 
-        (new FAQCategoryModel())->updateCategory($id, $name, $is_active);
+        (new FAQCategoryModel())->updateCategory($id, $name, $slug, $color, $is_active);
 
-        $this->redirectWithMessage(BASE_URL . '/cms/faq/category', 'Đã cập nhật thể loại FAQ', 'success');
+        $this->redirectWithMessage(
+            BASE_URL . '/cms/faq/category',
+            'Đã cập nhật thể loại FAQ',
+            'success'
+        );
     }
 
     public function categoryDelete($id)

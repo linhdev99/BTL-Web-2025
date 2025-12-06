@@ -26,12 +26,10 @@ class FAQCategoryModel extends BaseModel
     }
 
     // Tạo category mới
-    public function create(string $name, int $is_active = 1)
+    public function create(string $name, string $color, int $is_active = 1)
     {
-        // Generate slug from name
         $slug = $this->generateSlug($name);
 
-        // Check if slug exists, append number if needed
         $originalSlug = $slug;
         $counter = 1;
         while ($this->slugExists($slug)) {
@@ -42,9 +40,13 @@ class FAQCategoryModel extends BaseModel
         return $this->insert($this->table, [
             "name" => $name,
             "slug" => $slug,
-            "is_active" => $is_active
+            "color" => $color,
+            "is_active" => $is_active,
+            "created_at" => date('Y-m-d H:i:s'),
+            "updated_at" => date('Y-m-d H:i:s')
         ]);
     }
+
 
     // Generate slug from Vietnamese string
     private function generateSlug($string)
@@ -54,19 +56,73 @@ class FAQCategoryModel extends BaseModel
 
         // Convert Vietnamese characters to ASCII
         $vietnameseMap = [
-            'á' => 'a', 'à' => 'a', 'ả' => 'a', 'ã' => 'a', 'ạ' => 'a',
-            'ă' => 'a', 'ắ' => 'a', 'ằ' => 'a', 'ẳ' => 'a', 'ẵ' => 'a', 'ặ' => 'a',
-            'â' => 'a', 'ấ' => 'a', 'ầ' => 'a', 'ẩ' => 'a', 'ẫ' => 'a', 'ậ' => 'a',
+            'á' => 'a',
+            'à' => 'a',
+            'ả' => 'a',
+            'ã' => 'a',
+            'ạ' => 'a',
+            'ă' => 'a',
+            'ắ' => 'a',
+            'ằ' => 'a',
+            'ẳ' => 'a',
+            'ẵ' => 'a',
+            'ặ' => 'a',
+            'â' => 'a',
+            'ấ' => 'a',
+            'ầ' => 'a',
+            'ẩ' => 'a',
+            'ẫ' => 'a',
+            'ậ' => 'a',
             'đ' => 'd',
-            'é' => 'e', 'è' => 'e', 'ẻ' => 'e', 'ẽ' => 'e', 'ẹ' => 'e',
-            'ê' => 'e', 'ế' => 'e', 'ề' => 'e', 'ể' => 'e', 'ễ' => 'e', 'ệ' => 'e',
-            'í' => 'i', 'ì' => 'i', 'ỉ' => 'i', 'ĩ' => 'i', 'ị' => 'i',
-            'ó' => 'o', 'ò' => 'o', 'ỏ' => 'o', 'õ' => 'o', 'ọ' => 'o',
-            'ô' => 'o', 'ố' => 'o', 'ồ' => 'o', 'ổ' => 'o', 'ỗ' => 'o', 'ộ' => 'o',
-            'ơ' => 'o', 'ớ' => 'o', 'ờ' => 'o', 'ở' => 'o', 'ỡ' => 'o', 'ợ' => 'o',
-            'ú' => 'u', 'ù' => 'u', 'ủ' => 'u', 'ũ' => 'u', 'ụ' => 'u',
-            'ư' => 'u', 'ứ' => 'u', 'ừ' => 'u', 'ử' => 'u', 'ữ' => 'u', 'ự' => 'u',
-            'ý' => 'y', 'ỳ' => 'y', 'ỷ' => 'y', 'ỹ' => 'y', 'ỵ' => 'y',
+            'é' => 'e',
+            'è' => 'e',
+            'ẻ' => 'e',
+            'ẽ' => 'e',
+            'ẹ' => 'e',
+            'ê' => 'e',
+            'ế' => 'e',
+            'ề' => 'e',
+            'ể' => 'e',
+            'ễ' => 'e',
+            'ệ' => 'e',
+            'í' => 'i',
+            'ì' => 'i',
+            'ỉ' => 'i',
+            'ĩ' => 'i',
+            'ị' => 'i',
+            'ó' => 'o',
+            'ò' => 'o',
+            'ỏ' => 'o',
+            'õ' => 'o',
+            'ọ' => 'o',
+            'ô' => 'o',
+            'ố' => 'o',
+            'ồ' => 'o',
+            'ổ' => 'o',
+            'ỗ' => 'o',
+            'ộ' => 'o',
+            'ơ' => 'o',
+            'ớ' => 'o',
+            'ờ' => 'o',
+            'ở' => 'o',
+            'ỡ' => 'o',
+            'ợ' => 'o',
+            'ú' => 'u',
+            'ù' => 'u',
+            'ủ' => 'u',
+            'ũ' => 'u',
+            'ụ' => 'u',
+            'ư' => 'u',
+            'ứ' => 'u',
+            'ừ' => 'u',
+            'ử' => 'u',
+            'ữ' => 'u',
+            'ự' => 'u',
+            'ý' => 'y',
+            'ỳ' => 'y',
+            'ỷ' => 'y',
+            'ỹ' => 'y',
+            'ỵ' => 'y',
         ];
 
         $string = strtr($string, $vietnameseMap);
@@ -99,12 +155,24 @@ class FAQCategoryModel extends BaseModel
     }
 
     // Update category
-    public function updateCategory(int $id, string $name, int $is_active)
+    public function updateCategory(int $id, string $name, ?string $slugInput, string $color, int $is_active)
     {
-        // Generate new slug from updated name
-        $slug = $this->generateSlug($name);
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+        $old = $this->getOne($sql, ['id' => $id]);
 
-        // Check if slug exists (exclude current record)
+        if (!$old) {
+            return false;
+        }
+
+        $slug = trim($slugInput ?? '');
+        if ($slug === '') {
+            $slug = $old['slug'];
+        }
+
+        if ($slug === '' || $slug === null) {
+            $slug = $this->generateSlug($name);
+        }
+
         $originalSlug = $slug;
         $counter = 1;
         while ($this->slugExists($slug, $id)) {
@@ -117,7 +185,9 @@ class FAQCategoryModel extends BaseModel
             [
                 "name" => $name,
                 "slug" => $slug,
-                "is_active" => $is_active
+                "color" => $color,
+                "is_active" => $is_active,
+                "updated_at" => date('Y-m-d H:i:s')
             ],
             "id = :id",
             ["id" => $id]

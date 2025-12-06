@@ -34,11 +34,15 @@
         <h3 class="card-title">Danh sách thể loại FAQ</h3>
       </div>
       <div class="table-responsive">
+
         <table class="table table-vcenter card-table">
           <thead>
             <tr>
               <th>ID</th>
               <th>Tên thể loại</th>
+              <th>Slug</th>
+              <th>Màu</th>
+              <th>Cập nhật lúc</th> <!-- ✅ thêm cột mới -->
               <th>Trạng thái</th>
               <th class="w-1"></th>
             </tr>
@@ -46,7 +50,7 @@
           <tbody>
             <?php if (empty($categories)): ?>
               <tr>
-                <td colspan="4" class="text-center py-5">
+                <td colspan="7" class="text-center py-5">
                   <div class="empty">
                     <div class="empty-icon">
                       <i class="ti ti-category"></i>
@@ -65,6 +69,26 @@
                 <tr>
                   <td><?php echo $cat['id']; ?></td>
                   <td><?php echo escape($cat['name']); ?></td>
+                  <td><?php echo escape($cat['slug']); ?></td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <div
+                        style="width: 20px; height: 20px; border-radius: 4px; background-color: <?php echo $cat['color']; ?>; border: 1px solid #ccc;">
+                      </div>
+                      <span><?php echo $cat['color']; ?></span>
+                    </div>
+                  </td>
+                  <td>
+                    <?php
+                    if (!empty($cat['updated_at'])) {
+                      // Định dạng thời gian: dd/mm/yyyy HH:MM
+                      $date = date('d/m/Y H:i', strtotime($cat['updated_at']));
+                      echo '<span class="text-muted small">' . $date . '</span>';
+                    } else {
+                      echo '<span class="text-muted small">—</span>';
+                    }
+                    ?>
+                  </td>
                   <td>
                     <?php if ($cat['is_active']): ?>
                       <span class="badge bg-success">Hiển thị</span>
@@ -93,6 +117,7 @@
             <?php endif; ?>
           </tbody>
         </table>
+
       </div>
     </div>
   </div>
