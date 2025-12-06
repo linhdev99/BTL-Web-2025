@@ -16,10 +16,12 @@ class ContactModel extends BaseModel
         $where = [];
 
         if ($readStatus !== null) {
-            if ($readStatus === 'read') {
-                $where[] = "is_read = 1";
+            if ($readStatus === 'replied') {
+                $where[] = "status = 'replied'";
+            } elseif ($readStatus === 'read') {
+                $where[] = "status = 'read'";
             } elseif ($readStatus === 'unread') {
-                $where[] = "is_read = 0";
+                $where[] = "status = 'unread'";
             }
         }
 
@@ -81,7 +83,7 @@ class ContactModel extends BaseModel
     {
         return $this->update(
             $this->table,
-            ['is_read' => 1],
+            ['is_read' => 1, 'status' => 'read'],
             'id = :id',
             ['id' => $id]
         );
@@ -95,5 +97,64 @@ class ContactModel extends BaseModel
         $sql = "SELECT COUNT(*) as count FROM {$this->table} WHERE is_read = 0";
         $result = $this->getOne($sql);
         return $result['count'] ?? 0;
+    }
+
+    /**
+     * Mark contact as unread
+     */
+    public function markAsUnread($id)
+    {
+        return $this->update(
+            $this->table,
+            ['is_read' => 0, 'status' => 'unread'],
+            'id = :id',
+            ['id' => $id]
+        );
+    }
+
+    /**
+     * Update contact status
+     */
+    public function updateStatus($id, $status)
+    {
+        $validStatuses = ['unread', 'read', 'replied'];
+        if (!in_array($status, $validStatuses)) {
+            return false;
+        }
+
+        $data = ['status' => $status];
+
+        // Auto set is_read based on status
+        if ($status === 'read' || $status === 'replied') {
+            $data['is_read'] = 1;
+        } else {
+            $data['is_read'] = 0;
+        }
+
+        return $this->update(
+            $this->table,
+            $data,
+            'id = :id',
+            ['id' => $id]
+        );
+    }
+
+    /**
+     * Add reply to contact
+     */
+    public function addReply($id, $reply, $adminId)
+    {
+        return $this->update(
+            $this->table,
+            [
+                'admin_reply' => $reply,
+                'status' => 'replied',
+                'is_read' => 1,
+                'replied_at' => date('Y-m-d H:i:s'),
+                'replied_by' => $adminId
+            ],
+            'id = :id',
+            ['id' => $id]
+        );
     }
 }

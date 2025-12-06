@@ -75,14 +75,6 @@ $router->get('/cms/orders/{id}', 'CMSOrderController@viewOrder');
 $router->post('/cms/orders/{id}/update-status', 'CMSOrderController@updateStatus');
 $router->post('/cms/orders/{id}/update-payment-status', 'CMSOrderController@updatePaymentStatus');
 
-// Users Management
-$router->get('/cms/users', 'CMSUserController@index');
-$router->get('/cms/users/add', 'CMSUserController@add');
-$router->post('/cms/users/add', 'CMSUserController@store');
-$router->get('/cms/users/edit/{id}', 'CMSUserController@edit');
-$router->post('/cms/users/edit/{id}', 'CMSUserController@update');
-$router->post('/cms/users/delete/{id}', 'CMSUserController@delete');
-
 // News Management
 $router->get('/cms/news', 'CMSNewsController@index');
 $router->get('/cms/news/add', 'CMSNewsController@add');
@@ -95,6 +87,9 @@ $router->post('/cms/news/delete/{id}', 'CMSNewsController@delete');
 $router->get('/cms/contacts', 'CMSContactController@index');
 $router->get('/cms/contacts/{id}', 'CMSContactController@viewContact');
 $router->post('/cms/contacts/{id}/delete', 'CMSContactController@delete');
+$router->post('/cms/contacts/{id}/toggle-read', 'CMSContactController@toggleRead');
+$router->post('/cms/contacts/{id}/update-status', 'CMSContactController@updateStatus');
+$router->post('/cms/contacts/{id}/add-reply', 'CMSContactController@addReply');
 
 // Settings
 $router->get('/cms/settings', 'CMSSettingController@index');

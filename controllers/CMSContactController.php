@@ -80,4 +80,85 @@ class CMSContactController extends BaseController
             $this->redirectWithMessage(BASE_URL . '/cms/contacts', 'Có lỗi xảy ra', 'error');
         }
     }
+
+    /**
+     * Toggle read/unread status
+     */
+    public function toggleRead($id)
+    {
+        Auth::requireAdminOrStaff();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts', 'Invalid request', 'error');
+            return;
+        }
+
+        $contact = $this->contactModel->getContactById($id);
+        if (!$contact) {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts', 'Liên hệ không tồn tại', 'error');
+            return;
+        }
+
+        // Toggle status
+        if ($contact['is_read']) {
+            $this->contactModel->markAsUnread($id);
+            $message = 'Đã đánh dấu chưa đọc';
+        } else {
+            $this->contactModel->markAsRead($id);
+            $message = 'Đã đánh dấu đã đọc';
+        }
+
+        $this->redirectWithMessage(BASE_URL . '/cms/contacts', $message, 'success');
+    }
+
+    /**
+     * Update contact status
+     */
+    public function updateStatus($id)
+    {
+        Auth::requireAdminOrStaff();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts', 'Invalid request', 'error');
+            return;
+        }
+
+        $status = $_POST['status'] ?? '';
+        $success = $this->contactModel->updateStatus($id, $status);
+
+        if ($success) {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts/' . $id, 'Đã cập nhật trạng thái', 'success');
+        } else {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts/' . $id, 'Có lỗi xảy ra', 'error');
+        }
+    }
+
+    /**
+     * Add reply to contact
+     */
+    public function addReply($id)
+    {
+        Auth::requireAdminOrStaff();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts/' . $id, 'Invalid request', 'error');
+            return;
+        }
+
+        $reply = $_POST['admin_reply'] ?? '';
+
+        if (empty($reply)) {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts/' . $id, 'Vui lòng nhập nội dung phản hồi', 'error');
+            return;
+        }
+
+        $user = Auth::optionalUser();
+        $success = $this->contactModel->addReply($id, $reply, $user['id']);
+
+        if ($success) {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts/' . $id, 'Đã thêm phản hồi', 'success');
+        } else {
+            $this->redirectWithMessage(BASE_URL . '/cms/contacts/' . $id, 'Có lỗi xảy ra', 'error');
+        }
+    }
 }

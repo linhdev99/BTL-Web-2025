@@ -111,15 +111,6 @@ $currentPath = $_SERVER['REQUEST_URI'];
                                 </a>
                             </li>
 
-                            <li class="nav-item <?php echo strpos($currentPath, '/cms/users') !== false ? 'active' : ''; ?>">
-                                <a class="nav-link" href="<?php echo BASE_URL; ?>/cms/users">
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <i class="ti ti-users"></i>
-                                    </span>
-                                    <span class="nav-link-title">Người dùng</span>
-                                </a>
-                            </li>
-
                             <li class="nav-item <?php echo strpos($currentPath, '/cms/faq') !== false ? 'active' : ''; ?>">
                                 <a class="nav-link" href="<?php echo BASE_URL; ?>/cms/faq">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">

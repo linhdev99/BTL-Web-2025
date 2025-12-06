@@ -51,12 +51,6 @@
         </li>
 
         <li>
-            <a href="/cms/user" class="nav-link text-white">
-                <i class="fa-solid fa-users"></i> Người dùng
-            </a>
-        </li>
-
-        <li>
             <a href="/cms/settings" class="nav-link text-white">
                 <i class="fa-solid fa-gear"></i> Cài đặt
             </a>
