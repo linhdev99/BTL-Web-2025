@@ -260,12 +260,19 @@ class CMSFAQController extends BaseController
         Auth::requireAdminOrStaff();
 
         $id = (int) $id;
-
         $questionModel = new FAQQuestionModel();
         $question = $questionModel->getById($id);
+
+        if (!$question) {
+            $_SESSION['error'] = 'Câu hỏi không tồn tại hoặc đã bị xóa.';
+            header('Location: ' . BASE_URL . '/cms/faq/user');
+            exit;
+        }
+
         $comments = $questionModel->getComments($id);
 
-        $this->view('admin/faq/user/detail', [
+        $view = new CMSFAQView();
+        $view->renderUserDetail([
             'pageTitle' => 'Chi tiết câu hỏi người dùng',
             'question' => $question,
             'comments' => $comments
