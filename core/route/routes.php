@@ -42,7 +42,10 @@ $router->post('/order/{id}/cancel', 'UserController@cancelOrder');
 
 // News
 $router->get('/news', 'NewsController@index');
-$router->get('/news/{slug}', 'NewsController@detail');
+$router->get('/news/{id}', 'NewsController@detail');
+$router->post('/news/{id}/comment/add', 'NewsController@comment');
+$router->post('/news/{id}/comment/delete', 'NewsController@deleteComment');
+$router->post('/news/{id}/rate', 'NewsController@rate');
 
 // About & Contact
 $router->get('/about', 'AboutController@index');
