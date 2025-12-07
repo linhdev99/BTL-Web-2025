@@ -29,12 +29,14 @@
     $groupTitles = [
         'general' => 'Cài đặt chung',
         'contact' => 'Thông tin liên hệ',
-        'about' => 'Trang giới thiệu',
         'social' => 'Mạng xã hội',
         'banner' => 'Quản lý Banner trang chủ'
     ];
 
     foreach ($settingsGrouped as $group => $settings):
+        // Skip 'about' group as it has its own dedicated page
+        if ($group === 'about') continue;
+
         $groupTitle = $groupTitles[$group] ?? ucfirst($group);
     ?>
         <div class="card mb-3">

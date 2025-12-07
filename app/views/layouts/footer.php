@@ -25,32 +25,35 @@
           <?php
           $socialFacebook = getSetting('social_facebook', '');
           $socialInstagram = getSetting('social_instagram', '');
-          $socialTwitter = getSetting('social_twitter', '');
+          $socialTiktok = getSetting('social_twitter', ''); // Key is social_twitter but used for TikTok
           $socialYoutube = getSetting('social_youtube', '');
+          $contactEmail = getSetting('contact_email', getContactEmail());
           ?>
           <?php if (!empty($socialFacebook)): ?>
-            <a href="<?php echo escape($socialFacebook); ?>" class="text-white me-3" target="_blank">
+            <a href="<?php echo escape($socialFacebook); ?>" class="text-white me-3" target="_blank" rel="noopener noreferrer">
               <i class="bi bi-facebook" style="font-size: 24px;"></i>
             </a>
           <?php endif; ?>
           <?php if (!empty($socialInstagram)): ?>
-            <a href="<?php echo escape($socialInstagram); ?>" class="text-white me-3" target="_blank">
+            <a href="<?php echo escape($socialInstagram); ?>" class="text-white me-3" target="_blank" rel="noopener noreferrer">
               <i class="bi bi-instagram" style="font-size: 24px;"></i>
             </a>
           <?php endif; ?>
-          <?php if (!empty($socialTwitter)): ?>
-            <a href="<?php echo escape($socialTwitter); ?>" class="text-white me-3" target="_blank">
-              <i class="bi bi-twitter" style="font-size: 24px;"></i>
+          <?php if (!empty($socialTiktok)): ?>
+            <a href="<?php echo escape($socialTiktok); ?>" class="text-white me-3" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-tiktok" style="font-size: 24px;"></i>
             </a>
           <?php endif; ?>
           <?php if (!empty($socialYoutube)): ?>
-            <a href="<?php echo escape($socialYoutube); ?>" class="text-white me-3" target="_blank">
+            <a href="<?php echo escape($socialYoutube); ?>" class="text-white me-3" target="_blank" rel="noopener noreferrer">
               <i class="bi bi-youtube" style="font-size: 24px;"></i>
             </a>
           <?php endif; ?>
-          <a href="mailto:<?php echo escape(getSetting('contact_email', getContactEmail())); ?>" class="text-white me-3" target="_blank">
-            <i class="bi bi-envelope" style="font-size: 24px;"></i>
-          </a>
+          <?php if (!empty($contactEmail)): ?>
+            <a href="mailto:<?php echo escape($contactEmail); ?>" class="text-white me-3">
+              <i class="bi bi-envelope" style="font-size: 24px;"></i>
+            </a>
+          <?php endif; ?>
         </div>
       </div>
 
