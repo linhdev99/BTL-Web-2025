@@ -140,4 +140,144 @@ class FAQController extends BaseController
 
         $this->redirectWithMessage(BASE_URL . '/questions/' . $id, 'Đã thêm phản hồi', 'success');
     }
+
+    public function userShowAsk()
+    {
+        Auth::requireLogin();
+
+        $categories = (new FAQCategoryModel())->getAllCategories();
+        $page_title = "Đặt câu hỏi mới";
+
+        (new FAQView())->render_user_ask([
+            'page_title' => $page_title,
+            'categories' => $categories
+        ]);
+    }
+
+    public function userAsk()
+    {
+        Auth::requireLogin();
+
+        $userId = $_SESSION['user']['id'] ?? null;
+        $question = trim($_POST['question'] ?? '');
+        $category_id = $_POST['category_id'] ?? null;
+
+        if (empty($question)) {
+            $_SESSION['error'] = "Vui lòng nhập nội dung câu hỏi.";
+            header("Location: " . BASE_URL . "/questions/add");
+            exit;
+        }
+
+        (new FAQQuestionModel())->insertQuestion([
+            'user_id' => $userId,
+            'category_id' => $category_id,
+            'question' => $question,
+            'status' => 'pending',
+            'views' => 0
+        ]);
+
+        $_SESSION['success'] = "Câu hỏi của bạn đã được gửi và đang chờ duyệt!";
+        header("Location: " . BASE_URL . "/questions");
+        exit;
+    }
+
+    public function deleteQuestion($id)
+    {
+        Auth::requireLogin();
+
+        $userId = $_SESSION['user']['id'] ?? null;
+        $faqModel = new FAQQuestionModel();
+
+        $question = $faqModel->getById($id);
+
+        if (!$question) {
+            $_SESSION['error'] = "Câu hỏi không tồn tại.";
+            header("Location: " . BASE_URL . "/questions");
+            exit;
+        }
+
+        if ($question['user_id'] != $userId) {
+            $_SESSION['error'] = "Bạn không có quyền xóa câu hỏi này.";
+            header("Location: " . BASE_URL . "/questions");
+            exit;
+        }
+
+        $faqModel->deleteQuestion($id);
+
+        $_SESSION['success'] = "Câu hỏi đã được xoá thành công.";
+        header("Location: " . BASE_URL . "/questions");
+        exit;
+    }
+    public function questionEdit($id)
+    {
+        Auth::requireLogin();
+
+        $faqModel = new FAQQuestionModel();
+        $categoryModel = new FAQCategoryModel();
+
+        $question = $faqModel->getById($id);
+        $categories = $categoryModel->getAllCategories();
+
+        if (!$question) {
+            $_SESSION['error'] = "Câu hỏi không tồn tại.";
+            header("Location: " . BASE_URL . "/questions");
+            exit;
+        }
+
+        // Chỉ cho phép người tạo câu hỏi được chỉnh sửa
+        $userId = $_SESSION['user']['id'] ?? null;
+        if ($question['user_id'] != $userId) {
+            $_SESSION['error'] = "Bạn không có quyền chỉnh sửa câu hỏi này.";
+            header("Location: " . BASE_URL . "/questions");
+            exit;
+        }
+
+        $page_title = "Chỉnh sửa câu hỏi";
+
+        (new FAQView())->render_user_edit_ask([
+            'page_title' => $page_title,
+            'categories' => $categories,
+            'question' => $question
+        ]);
+    }
+
+    public function questionUpdate($id)
+    {
+        Auth::requireLogin();
+
+        $faqModel = new FAQQuestionModel();
+        $question = $faqModel->getById($id);
+
+        if (!$question) {
+            $_SESSION['error'] = "Câu hỏi không tồn tại.";
+            header("Location: " . BASE_URL . "/questions");
+            exit;
+        }
+
+        $userId = $_SESSION['user']['id'] ?? null;
+        if ($question['user_id'] != $userId) {
+            $_SESSION['error'] = "Bạn không có quyền cập nhật câu hỏi này.";
+            header("Location: " . BASE_URL . "/questions");
+            exit;
+        }
+
+        $category_id = $_POST['category_id'] ?? '';
+        $new_question = trim($_POST['question'] ?? '');
+
+        if (empty($new_question)) {
+            $_SESSION['error'] = "Vui lòng nhập nội dung câu hỏi.";
+            header("Location: " . BASE_URL . "/questions/{$id}/edit");
+            exit;
+        }
+
+        $faqModel->updateQuestion($id, [
+            'category_id' => $category_id,
+            'question' => $new_question,
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        $_SESSION['success'] = "Câu hỏi đã được cập nhật thành công!";
+        header("Location: " . BASE_URL . "/questions");
+        exit;
+    }
 }

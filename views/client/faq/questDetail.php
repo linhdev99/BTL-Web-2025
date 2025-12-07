@@ -42,8 +42,23 @@
             </span>
           </div>
 
-          <h4 class="fw-bold text-dark"><?= htmlspecialchars($question['question']) ?></h4>
-          <p class="text-muted mb-3"><?= nl2br(htmlspecialchars($question['answer'] ?? 'Chưa có câu trả lời.')) ?></p>
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h4 class="fw-bold text-dark mb-2"><?= htmlspecialchars($question['question']) ?></h4>
+              <p class="text-muted mb-3">
+                <?= nl2br(htmlspecialchars($question['answer'] ?? 'Chưa có câu trả lời.')) ?>
+              </p>
+            </div>
+
+            <?php if (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $question['user_id']): ?>
+              <div class="ms-3">
+                <a href="<?= BASE_URL ?>/questions/<?= htmlspecialchars($question['id']) ?>/edit"
+                  class="btn btn-outline-warning btn-sm" title="Chỉnh sửa câu hỏi">
+                  <i class="fa-solid fa-pen-to-square"></i> Sửa
+                </a>
+              </div>
+            <?php endif; ?>
+          </div>
 
           <div class="question-stats text-muted small">
             <span class="me-3"><i class="fa-regular fa-eye"></i> <?= (int) ($question['views'] ?? 0) ?> lượt
@@ -166,5 +181,17 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  .btn-outline-warning {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+  }
+
+  .btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: #fff;
+    transform: translateY(-1px);
   }
 </style>

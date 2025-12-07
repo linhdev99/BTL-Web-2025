@@ -54,8 +54,13 @@ $router->get('/faq', 'FAQController@index');
 $router->get('/faq/{id}', 'FAQController@faqDetail');
 $router->get('/questions', 'FAQController@questions');
 $router->get('/questions/{id}', 'FAQController@questionDetail');
+$router->get('/questions/{id}/edit', 'FAQController@questionEdit');
+$router->post('/questions/{id}/edit', 'FAQController@questionUpdate');
+$router->post('/questions/{id}/delete', 'FAQController@deleteQuestion');
 $router->post('/questions/{id}/comment', 'FAQController@questCmt');
 $router->post('/questions/{id}/delete/comment', 'FAQController@questCmt');
+$router->get('/user/ask', 'FAQController@userShowAsk');
+$router->post('/user/ask', 'FAQController@userAsk');
 
 // ========================================
 // ADMIN ROUTES (CMS)
