@@ -39,7 +39,7 @@ class NewsController
 
         // --- Nếu có từ khóa tìm kiếm ---
         if ($keyword !== '') {
-            $where .= " AND (title LIKE :kw1 OR summary LIKE :kw2 OR content LIKE :kw3)";
+            $where .= "(title LIKE :kw1 OR summary LIKE :kw2 OR content LIKE :kw3)";
             $params = [
                 'kw1' => "%{$keyword}%",
                 'kw2' => "%{$keyword}%",

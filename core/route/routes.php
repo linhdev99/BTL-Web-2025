@@ -93,7 +93,7 @@ $router->get('/cms/news', 'CMSNewsController@index');
 $router->get('/cms/news/add', 'CMSNewsController@add');
 $router->post('/cms/news/add', 'CMSNewsController@store');
 $router->get('/cms/news/edit/{id}', 'CMSNewsController@edit');
-$router->post('/cms/news/edit/{id}', 'CMSNewsController@update');
+$router->post('/cms/news/update/{id}', 'CMSNewsController@update');
 $router->post('/cms/news/delete/{id}', 'CMSNewsController@delete');
 
 // Contacts Management

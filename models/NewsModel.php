@@ -15,17 +15,10 @@ class NewsModel extends BaseModel
     /**
      * Lấy danh sách tin đã xuất bản (có tác giả)
      */
-    public function getDataPaginate(
-        int $page = 1,
-        int $perPage = 9,
-        ?bool $onlyPublished = false,
-        ?string $where = null,
-        array $params = [],
-        string $orderBy = 'n.published_at DESC, n.created_at DESC'
-    ) {
-        $offset = ($page - 1) * $perPage;
+    public function getDataPaginate(int $page = 1, int $perPage = 9, ?bool $onlyPublished = false, ?string $where = null, array $params = [], string $orderBy = 'n.published_at DESC, n.created_at DESC')
+    {
 
-        // ✅ Lấy dữ liệu bài viết + tên tác giả + điểm trung bình sao
+        $offset = ($page - 1) * $perPage;
         $sql = "SELECT 
                 n.*, 
                 u.full_name AS full_name,
@@ -50,15 +43,12 @@ class NewsModel extends BaseModel
             $sql .= " WHERE " . implode(" AND ", $whereClauses);
         }
 
-        // ✅ Gom nhóm để tính AVG và COUNT đúng cho từng bài
         $sql .= " GROUP BY n.id";
 
-        // ✅ Thứ tự + phân trang
         $sql .= " ORDER BY {$orderBy} LIMIT {$perPage} OFFSET {$offset}";
 
         $data = $this->getAll($sql, $params);
 
-        // ✅ Truy vấn đếm tổng bản ghi (không cần JOIN)
         $countSql = "SELECT COUNT(*) AS total FROM {$this->table} n";
         if (!empty($whereClauses)) {
             $countSql .= " WHERE " . implode(" AND ", $whereClauses);
