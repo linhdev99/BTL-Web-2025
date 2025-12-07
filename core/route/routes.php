@@ -42,7 +42,10 @@ $router->post('/order/{id}/cancel', 'UserController@cancelOrder');
 
 // News
 $router->get('/news', 'NewsController@index');
-$router->get('/news/{slug}', 'NewsController@detail');
+$router->get('/news/{id}', 'NewsController@detail');
+$router->post('/news/{id}/comment/add', 'NewsController@comment');
+$router->post('/news/{id}/comment/delete', 'NewsController@deleteComment');
+$router->post('/news/{id}/rate', 'NewsController@rate');
 
 // About & Contact
 $router->get('/about', 'AboutController@index');
@@ -90,7 +93,7 @@ $router->get('/cms/news', 'CMSNewsController@index');
 $router->get('/cms/news/add', 'CMSNewsController@add');
 $router->post('/cms/news/add', 'CMSNewsController@store');
 $router->get('/cms/news/edit/{id}', 'CMSNewsController@edit');
-$router->post('/cms/news/edit/{id}', 'CMSNewsController@update');
+$router->post('/cms/news/update/{id}', 'CMSNewsController@update');
 $router->post('/cms/news/delete/{id}', 'CMSNewsController@delete');
 
 // Contacts Management

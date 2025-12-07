@@ -30,6 +30,7 @@ class FAQQuestionModel extends BaseModel
                     SELECT 
                         q.*,
                         u.full_name AS full_name,
+                        u.avatar AS avatar,
                         u.email AS user_email,
                         c.name AS category_name,
                         c.color AS category_color,
@@ -166,6 +167,7 @@ class FAQQuestionModel extends BaseModel
         SELECT 
             q.*, 
             u.full_name, 
+            u.avatar AS avatar, 
             c.name AS category_name,
             c.color AS category_color
         FROM faq_questions q
@@ -197,7 +199,8 @@ class FAQQuestionModel extends BaseModel
         return $this->getAll("
         SELECT 
             c.*, 
-            u.full_name
+            u.full_name,
+            u.avatar
         FROM faq_comments c
         LEFT JOIN users u ON u.id = c.user_id
         WHERE c.question_id = :qid

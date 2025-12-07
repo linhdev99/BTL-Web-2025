@@ -65,10 +65,16 @@
           <div class="question-card card shadow-sm mb-4">
             <div class="card-body">
               <div class="d-flex align-items-center mb-3">
-                <img src="<?= !empty($q['avatar'])
-                  ? BASE_URL . '/' . htmlspecialchars($q['avatar'])
-                  : 'https://i.pravatar.cc/100?u=' . urlencode($userName) ?>" alt="avatar"
-                  class="rounded-circle me-2 question-avatar">
+                <?php
+                $userName = $q['username'] ?? $q['full_name'] ?? 'guest';
+                $avatarUrl = '';
+                if (!empty($q['avatar'])) {
+                  $avatarUrl = $q['avatar'];
+                } else {
+                  $avatarUrl = 'https://i.pravatar.cc/100?u=' . urlencode($userName);
+                }
+                ?>
+                <img src="<?= $avatarUrl ?>" alt="Avatar" class="rounded-circle me-2 question-avatar">
                 <div>
                   <div class="fw-bold"><?= $userName ?></div>
                   <small class="text-muted">

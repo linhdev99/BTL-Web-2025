@@ -25,11 +25,11 @@ class UserController extends BaseController
         Auth::requireLogin();
 
         $userId = getCurrentUserId();
-        $user = $this->userModel->getById($userId);
+        $data = $this->userModel->getById($userId);
 
         $this->view('client/user/profile', [
             'pageTitle' => 'Thông tin tài khoản',
-            'user' => $user
+            'data' => $data
         ]);
     }
 
@@ -38,34 +38,68 @@ class UserController extends BaseController
      */
     public function updateProfile()
     {
+        // Yêu cầu đăng nhập
         Auth::requireLogin();
 
         $userId = getCurrentUserId();
+
+        // Lấy dữ liệu từ POST, làm sạch input
         $fullName = trim($_POST['full_name'] ?? '');
+        $username = trim($_POST['username'] ?? '');
+        $avatar = trim($_POST['avatar'] ?? '');
         $phone = trim($_POST['phone'] ?? '');
         $address = trim($_POST['address'] ?? '');
 
+        $errors = [];
+
+        // ====== VALIDATE ======
         if (empty($fullName)) {
-            $_SESSION['error'] = 'Vui lòng nhập họ tên';
+            $errors[] = 'Vui lòng nhập họ và tên';
+        }
+
+        if (!empty($avatar) && !filter_var($avatar, FILTER_VALIDATE_URL)) {
+            $errors[] = 'URL ảnh đại diện không hợp lệ';
+        }
+
+        if (!empty($phone) && !preg_match('/^(0|\+84)[0-9]{8,10}$/', $phone)) {
+            $errors[] = 'Số điện thoại không hợp lệ';
+        }
+
+        // Nếu có lỗi → lưu session và quay lại
+        if (!empty($errors)) {
+            $_SESSION['error'] = implode('<br>', $errors);
             $this->redirect(BASE_URL . '/profile');
             return;
         }
 
+        // ====== CHUẨN BỊ DỮ LIỆU CẬP NHẬT ======
         $data = [
+            'username' => $username,
             'full_name' => $fullName,
+            'avatar' => $avatar,
             'phone' => $phone,
             'address' => $address
         ];
 
-        if ($this->userModel->updateUser($userId, $data)) {
-            $_SESSION['user']['full_name'] = $fullName;
-            $_SESSION['user']['phone'] = $phone;
-            $_SESSION['user']['address'] = $address;
-            $_SESSION['success'] = 'Cập nhật thông tin thành công';
+        // ====== CẬP NHẬT DB ======
+        $result = $this->userModel->updateUser($userId, $data);
+
+        if ($result) {
+            // Cập nhật lại session user hiện tại (nếu có)
+            if (isset($_SESSION['user'])) {
+                $_SESSION['user']['username'] = $username;
+                $_SESSION['user']['full_name'] = $fullName;
+                $_SESSION['user']['avatar'] = $avatar;
+                $_SESSION['user']['phone'] = $phone;
+                $_SESSION['user']['address'] = $address;
+            }
+
+            $_SESSION['success'] = 'Cập nhật thông tin thành công ✅';
         } else {
-            $_SESSION['error'] = 'Có lỗi xảy ra khi cập nhật';
+            $_SESSION['error'] = 'Có lỗi xảy ra khi cập nhật thông tin ❌';
         }
 
+        // ====== QUAY LẠI TRANG PROFILE ======
         $this->redirect(BASE_URL . '/profile');
     }
 
@@ -77,7 +111,7 @@ class UserController extends BaseController
         Auth::requireLogin();
 
         $userId = getCurrentUserId();
-        $page = max(1, (int)($_GET['page'] ?? 1));
+        $page = max(1, (int) ($_GET['page'] ?? 1));
 
         $result = $this->orderModel->getOrdersByUserId($userId, $page, 10);
 
