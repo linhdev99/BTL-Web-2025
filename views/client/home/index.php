@@ -3,35 +3,83 @@
 <section class="hero-section position-relative overflow-hidden">
   <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://picsum.photos/1920/700?random=1" class="d-block w-100" alt="Hero 1">
-        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-4">
-          <h1 class="fw-bold text-white">Chào mừng đến với Toy Model Shop</h1>
-          <p class="lead text-light">Khám phá thế giới mô hình đồ chơi độc đáo và tinh xảo</p>
-          <a href="<?php echo BASE_URL; ?>/products" class="btn btn-primary btn-lg mt-2">Khám phá ngay</a>
+      <?php
+      $activeBanners = array_filter($banners, function ($banner) {
+        return !empty($banner['image']) || !empty($banner['title']);
+      });
+
+      if (empty($activeBanners)) {
+        // Fallback to default banners if no banners configured
+        $activeBanners = [
+          1 => [
+            'image' => 'https://picsum.photos/1920/700?random=1',
+            'title' => 'Chào mừng đến với Toy Model Shop',
+            'description' => 'Khám phá thế giới mô hình đồ chơi độc đáo và tinh xảo',
+            'button_text' => 'Khám phá ngay',
+            'button_link' => '/products'
+          ],
+          2 => [
+            'image' => 'https://picsum.photos/1920/700?random=2',
+            'title' => 'Mô hình đa dạng chủ đề',
+            'description' => 'Từ anime, xe hơi, đến nhân vật điện ảnh',
+            'button_text' => '',
+            'button_link' => ''
+          ],
+          3 => [
+            'image' => 'https://picsum.photos/1920/700?random=3',
+            'title' => 'Ưu đãi cực hot mỗi tuần',
+            'description' => 'Giảm giá lên đến 40% cho các sản phẩm nổi bật',
+            'button_text' => '',
+            'button_link' => ''
+          ]
+        ];
+      }
+
+      $first = true;
+      foreach ($activeBanners as $banner):
+        // Skip banners without image or title
+        if (empty($banner['image']) && empty($banner['title'])) continue;
+
+        // Get image URL
+        $imageUrl = !empty($banner['image']) ? escape($banner['image']) : 'https://picsum.photos/1920/700?random=' . rand(1, 10);
+
+        // Handle button link
+        $buttonLink = !empty($banner['button_link']) ? $banner['button_link'] : '#';
+        if ($buttonLink !== '#' && !preg_match('/^https?:\/\//', $buttonLink)) {
+          $buttonLink = BASE_URL . $buttonLink;
+        }
+      ?>
+        <div class="carousel-item <?php echo $first ? 'active' : ''; ?>">
+          <img src="<?php echo $imageUrl; ?>" class="d-block w-100" alt="<?php echo escape($banner['title']); ?>">
+          <?php if (!empty($banner['title']) || !empty($banner['description'])): ?>
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-4">
+              <?php if (!empty($banner['title'])): ?>
+                <h1 class="fw-bold text-white"><?php echo escape($banner['title']); ?></h1>
+              <?php endif; ?>
+              <?php if (!empty($banner['description'])): ?>
+                <p class="lead text-light"><?php echo escape($banner['description']); ?></p>
+              <?php endif; ?>
+              <?php if (!empty($banner['button_text']) && !empty($banner['button_link'])): ?>
+                <a href="<?php echo $buttonLink; ?>" class="btn btn-primary btn-lg mt-2">
+                  <?php echo escape($banner['button_text']); ?>
+                </a>
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
         </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/1920/700?random=2" class="d-block w-100" alt="Hero 2">
-        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-4">
-          <h1 class="fw-bold text-white">Mô hình đa dạng chủ đề</h1>
-          <p class="lead text-light">Từ anime, xe hơi, đến nhân vật điện ảnh</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/1920/700?random=3" class="d-block w-100" alt="Hero 3">
-        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-4">
-          <h1 class="fw-bold text-white">Ưu đãi cực hot mỗi tuần</h1>
-          <p class="lead text-light">Giảm giá lên đến 40% cho các sản phẩm nổi bật</p>
-        </div>
-      </div>
+      <?php
+        $first = false;
+      endforeach;
+      ?>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </button>
+    <?php if (count($activeBanners) > 1): ?>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+    <?php endif; ?>
   </div>
 </section>
 
@@ -47,12 +95,8 @@
       <div class="row g-4 justify-content-center">
         <?php foreach ($featuredProducts as $product): ?>
           <?php
-          $imgSrc = $product['image'];
-          if (empty($imgSrc)) {
-            $imgSrc = "https://picsum.photos/400/400?random=" . rand(10, 99);
-          } elseif (!preg_match('/^https?:\/\//', $imgSrc)) {
-            $imgSrc = BASE_URL . "/public/uploads/products/" . $imgSrc;
-          }
+          // Use getImageUrl helper for proper image handling
+          $imgSrc = getImageUrl($product['image'], 'product-placeholder.jpg');
 
           $isNew = !empty($product['is_new']) && $product['is_new'] == 1;
           $isFeatured = !empty($product['is_featured']) && $product['is_featured'] == 1;
@@ -68,7 +112,7 @@
               <a href="<?php echo BASE_URL; ?>/product/<?php echo escape($product['slug']); ?>">
                 <img src="<?php echo $imgSrc; ?>" class="card-img-top rounded-top"
                   alt="<?php echo escape($product['name']); ?>"
-                  onerror="this.src='https://picsum.photos/400/400?random=<?php echo rand(100, 999); ?>'">
+                  onerror="this.src='<?php echo BASE_URL; ?>/public/images/product-placeholder.jpg'">
               </a>
 
               <div class="card-body">

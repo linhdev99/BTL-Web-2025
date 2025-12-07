@@ -9,7 +9,7 @@
   <meta name="keywords"
     content="<?php echo isset($metaKeywords) ? escape($metaKeywords) : 'mô hình, figure, đồ chơi, gundam, xe mô hình'; ?>">
   <meta name="author" content="<?= getSiteName() ?>">
-  <title><?php echo isset($pageTitle) ? escape($pageTitle) . ' - ' : ''; ?>BK Figure Lab</title>
+  <title><?php echo isset($pageTitle) ? escape($pageTitle) . ' - ' : ''; ?><?php echo escape(getSetting('site_name', 'BK Figure Lab')); ?></title>
 
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -58,8 +58,18 @@
         <div class="container-fluid">
 
           <!-- Logo -->
-          <a class="navbar-brand fw-bold text-primary" href="<?php echo BASE_URL; ?>">
-            <i class="bi bi-cube me-2"></i> BK Figure Lab
+          <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="<?php echo BASE_URL; ?>">
+            <?php
+            $siteLogo = getSetting('site_logo', '');
+            $siteName = getSetting('site_name', 'BK Figure Lab');
+            if (!empty($siteLogo)):
+            ?>
+              <img src="<?php echo escape($siteLogo); ?>" alt="<?php echo escape($siteName); ?>"
+                   style="max-height: 40px; margin-right: 10px;" class="me-2">
+            <?php else: ?>
+              <i class="bi bi-cube me-2"></i>
+            <?php endif; ?>
+            <?php echo escape($siteName); ?>
           </a>
 
           <!-- Toggler -->

@@ -65,6 +65,15 @@ class SettingsModel extends BaseModel
     }
 
     /**
+     * Get a single setting record (full row) by key
+     */
+    public function get($key)
+    {
+        $sql = "SELECT * FROM site_settings WHERE setting_key = :key LIMIT 1";
+        return $this->getOne($sql, ['key' => $key]);
+    }
+
+    /**
      * Update a setting value
      */
     public function updateSetting($key, $value)
