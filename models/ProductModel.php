@@ -101,9 +101,13 @@ class ProductModel extends BaseModel
             $params['category_id'] = $categoryId;
         }
 
-        if ($search) {
-            $where[] = "(p.name LIKE :search OR p.description LIKE :search)";
-            $params['search'] = '%' . $search . '%';
+        if ($search && trim($search) !== '') {
+            $searchTerm = '%' . trim($search) . '%';
+            $where[] = "(p.name LIKE :search1 OR p.description LIKE :search2 OR p.sku LIKE :search3 OR p.content LIKE :search4)";
+            $params['search1'] = $searchTerm;
+            $params['search2'] = $searchTerm;
+            $params['search3'] = $searchTerm;
+            $params['search4'] = $searchTerm;
         }
 
         $whereClause = implode(' AND ', $where);
@@ -145,12 +149,20 @@ class ProductModel extends BaseModel
         $params = [];
         $where = [];
 
-        if ($search) {
-            $where[] = "(p.name LIKE :search OR p.sku LIKE :search OR p.description LIKE :search)";
-            $params['search'] = '%' . $search . '%';
+        if ($search && trim($search) !== '') {
+            $searchTerm = '%' . trim($search) . '%';
+            $where[] = "(p.name LIKE :search1 OR p.sku LIKE :search2 OR p.description LIKE :search3 OR p.content LIKE :search4)";
+            $params['search1'] = $searchTerm;
+            $params['search2'] = $searchTerm;
+            $params['search3'] = $searchTerm;
+            $params['search4'] = $searchTerm;
         }
 
         $whereClause = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
+
+        // Cast to int for safety
+        $perPage = (int)$perPage;
+        $offset = (int)$offset;
 
         $sql = "SELECT p.*, c.name as category_name
                 FROM {$this->table} p

@@ -24,7 +24,7 @@ class ProductController extends BaseController
         // Get filter parameters
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $categoryParam = isset($_GET['category']) ? $_GET['category'] : null;
-        $search = isset($_GET['search']) ? trim($_GET['search']) : null;
+        $search = isset($_GET['search']) && trim($_GET['search']) !== '' ? trim($_GET['search']) : null;
 
         // Get current category info if filtered (support both ID and slug)
         $currentCategory = null;
