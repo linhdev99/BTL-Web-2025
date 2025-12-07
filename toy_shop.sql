@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 07, 2025 lúc 05:16 AM
+-- Thời gian đã tạo: Th12 07, 2025 lúc 09:41 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -40,23 +40,23 @@ CREATE TABLE `about` (
 --
 
 INSERT INTO `about` (`id`, `title`, `content`, `created_at`, `updated_at`) VALUES
-(1, 'name1', 'Nguyễn Văn A', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(2, 'mssv1', '22120001', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(3, 'mission1', 'Trưởng nhóm - Thiết kế giao diện & Lập trình Frontend', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(4, 'name2', 'Huỳnh Phạm Phước Linh', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(5, 'mssv2', '1710165', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(6, 'mission2', 'Phát triển Backend - Quản lý CSDL', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(7, 'name3', 'Lê Văn C', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(8, 'mssv3', '22120003', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(9, 'mission3', 'Tester - Viết tài liệu & Báo cáo', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(10, 'about', '<div class=\"about-content bg-white shadow-sm rounded-4 p-5 mb-5 border border-light-subtle\">\r\n    <div class=\"text-center mb-4\">\r\n      <div class=\"mb-3\">\r\n        <i class=\"bi bi-gem text-primary display-5\"></i>\r\n      </div>\r\n      <h2 class=\"fw-bold text-primary\">BK Figure Lab - Nơi hội tụ đam mê</h2>\r\n      <p class=\"text-muted mt-2 fs-5\">\r\n        Cùng nhau kiến tạo thế giới figure chính hãng đầy cảm hứng và sáng tạo!\r\n      </p>\r\n    </div>\r\n\r\n    <div class=\"row align-items-center\">\r\n      <div class=\"col-lg-6 mb-4 mb-lg-0\">\r\n        <p class=\"lead\">\r\n          <strong>BK Figure Lab</strong> là cửa hàng chuyên cung cấp các sản phẩm figure và mô hình sưu tầm chính hãng,\r\n          dành cho cộng đồng người yêu thích văn hóa Nhật Bản, anime, game và nghệ thuật mô hình.\r\n        </p>\r\n        <p>\r\n          Chúng tôi mang đến cho bạn những sản phẩm đến từ các thương hiệu hàng đầu như\r\n          <strong>Bandai</strong>, <strong>Good Smile Company</strong>, <strong>Kotobukiya</strong> và nhiều thương hiệu danh tiếng khác.\r\n        </p>\r\n        <p>\r\n          Không chỉ là nơi mua sắm, BK Figure Lab còn là <strong>cộng đồng của đam mê</strong>,\r\n          nơi bạn có thể chia sẻ sở thích, học hỏi và giao lưu cùng những người cùng chí hướng.\r\n        </p>\r\n      </div>\r\n\r\n      <div class=\"col-lg-6 text-center\">\r\n        <img src=\"https://picsum.photos/800/400?random=20\" alt=\"BK Figure Lab About\" class=\"img-fluid rounded-4 shadow-sm\">\r\n      </div>\r\n    </div>\r\n\r\n    <hr class=\"my-5\">\r\n\r\n    <div class=\"row gy-4\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"p-4 bg-light rounded-4 h-100 shadow-sm\">\r\n          <h3 class=\"text-primary fw-bold mb-3\">\r\n            <i class=\"bi bi-bullseye me-2\"></i>Tầm nhìn\r\n          </h3>\r\n          <p>\r\n            Trở thành cửa hàng figure uy tín hàng đầu Việt Nam, nơi các fan hâm mộ\r\n            có thể tìm thấy những sản phẩm yêu thích và kết nối với cộng đồng cùng đam mê.\r\n          </p>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-md-6\">\r\n        <div class=\"p-4 bg-light rounded-4 h-100 shadow-sm\">\r\n          <h3 class=\"text-primary fw-bold mb-3\">\r\n            <i class=\"bi bi-lightning-charge-fill me-2\"></i>Sứ mệnh\r\n          </h3>\r\n          <p>\r\n            Cung cấp sản phẩm chính hãng, chất lượng cao với giá cả hợp lý — đồng thời lan tỏa\r\n            tinh thần sáng tạo, đam mê và gắn kết trong cộng đồng người yêu figure tại Việt Nam.\r\n          </p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"text-center mt-5\">\r\n      <img src=\"https://picsum.photos/1000/400?random=4\" alt=\"About BK Figure Lab\" class=\"img-fluid rounded-4 shadow\">\r\n      <p class=\"mt-3 text-muted small fst-italic\">\r\n        “Đam mê không chỉ để ngắm nhìn — mà để sẻ chia.”\r\n      </p>\r\n    </div>\r\n  </div>', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
-(11, 'title1', 'Nhóm phát triển BK Figure Lab', '2025-12-07 03:09:43', '2025-12-07 04:15:54'),
-(12, 'subtitle1', 'Chúng tôi là những sinh viên đam mê công nghệ và yêu thích thế giới mô hình.', '2025-12-07 03:09:43', '2025-12-07 04:15:54'),
-(13, 'subtitle2', 'BK Figure Lab - Nơi hội tụ đam mê', '2025-12-07 03:09:43', '2025-12-07 04:15:54'),
-(14, 'files', '', '2025-12-07 03:59:41', '2025-12-07 04:15:54'),
-(15, 'avatar1', 'https://i.ibb.co/RkD9VHSL/Capybara.jpg', '2025-12-07 04:05:37', '2025-12-07 04:15:54'),
-(16, 'avatar2', 'https://i.ibb.co/zWPgx4SP/461442910-843306404623312-6429687454985045364-n.jpg', '2025-12-07 04:05:37', '2025-12-07 04:15:54'),
-(17, 'avatar3', 'https://i.ibb.co/RkD9VHSL/Capybara.jpg', '2025-12-07 04:05:37', '2025-12-07 04:15:54');
+(1, 'name1', 'Nguyễn Văn A', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(2, 'mssv1', '22120001', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(3, 'mission1', 'Trưởng nhóm - Thiết kế giao diện & Lập trình Frontend', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(4, 'name2', 'Huỳnh Phạm Phước Linh', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(5, 'mssv2', '1710165', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(6, 'mission2', 'Phát triển Backend - Quản lý CSDL', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(7, 'name3', 'Lê Văn C', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(8, 'mssv3', '22120003', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(9, 'mission3', 'Tester - Viết tài liệu & Báo cáo', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(10, 'about', '<div class=\"about-content bg-white shadow-sm rounded-4 p-5 mb-5 border border-light-subtle\">\r\n    <div class=\"text-center mb-4\">\r\n      <div class=\"mb-3\">\r\n        <i class=\"bi bi-gem text-primary display-5\"></i>\r\n      </div>\r\n      <h2 class=\"fw-bold text-primary\">BK Figure Lab - Nơi hội tụ đam mê</h2>\r\n      <p class=\"text-muted mt-2 fs-5\">\r\n        Cùng nhau kiến tạo thế giới figure chính hãng đầy cảm hứng và sáng tạo!\r\n      </p>\r\n    </div>\r\n\r\n    <div class=\"row align-items-center\">\r\n      <div class=\"col-lg-6 mb-4 mb-lg-0\">\r\n        <p class=\"lead\">\r\n          <strong>BK Figure Lab</strong> là cửa hàng chuyên cung cấp các sản phẩm figure và mô hình sưu tầm chính hãng,\r\n          dành cho cộng đồng người yêu thích văn hóa Nhật Bản, anime, game và nghệ thuật mô hình.\r\n        </p>\r\n        <p>\r\n          Chúng tôi mang đến cho bạn những sản phẩm đến từ các thương hiệu hàng đầu như\r\n          <strong>Bandai</strong>, <strong>Good Smile Company</strong>, <strong>Kotobukiya</strong> và nhiều thương hiệu danh tiếng khác.\r\n        </p>\r\n        <p>\r\n          Không chỉ là nơi mua sắm, BK Figure Lab còn là <strong>cộng đồng của đam mê</strong>,\r\n          nơi bạn có thể chia sẻ sở thích, học hỏi và giao lưu cùng những người cùng chí hướng.\r\n        </p>\r\n      </div>\r\n\r\n      <div class=\"col-lg-6 text-center\">\r\n        <img src=\"https://picsum.photos/800/400?random=20\" alt=\"BK Figure Lab About\" class=\"img-fluid rounded-4 shadow-sm\">\r\n      </div>\r\n    </div>\r\n\r\n    <hr class=\"my-5\">\r\n\r\n    <div class=\"row gy-4\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"p-4 bg-light rounded-4 h-100 shadow-sm\">\r\n          <h3 class=\"text-primary fw-bold mb-3\">\r\n            <i class=\"bi bi-bullseye me-2\"></i>Tầm nhìn\r\n          </h3>\r\n          <p>\r\n            Trở thành cửa hàng figure uy tín hàng đầu Việt Nam, nơi các fan hâm mộ\r\n            có thể tìm thấy những sản phẩm yêu thích và kết nối với cộng đồng cùng đam mê.\r\n          </p>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-md-6\">\r\n        <div class=\"p-4 bg-light rounded-4 h-100 shadow-sm\">\r\n          <h3 class=\"text-primary fw-bold mb-3\">\r\n            <i class=\"bi bi-lightning-charge-fill me-2\"></i>Sứ mệnh\r\n          </h3>\r\n          <p>\r\n            Cung cấp sản phẩm chính hãng, chất lượng cao với giá cả hợp lý — đồng thời lan tỏa\r\n            tinh thần sáng tạo, đam mê và gắn kết trong cộng đồng người yêu figure tại Việt Nam.\r\n          </p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"text-center mt-5\">\r\n      <img src=\"https://picsum.photos/1000/400?random=4\" alt=\"About BK Figure Lab\" class=\"img-fluid rounded-4 shadow\">\r\n      <p class=\"mt-3 text-muted small fst-italic\">\r\n        “Đam mê không chỉ để ngắm nhìn — mà để sẻ chia.”\r\n      </p>\r\n    </div>\r\n  </div>', '2025-12-07 02:52:52', '2025-12-07 08:07:40'),
+(11, 'title1', 'Nhóm phát triển BK Figure Lab', '2025-12-07 03:09:43', '2025-12-07 08:07:40'),
+(12, 'subtitle1', 'Chúng tôi là những sinh viên đam mê công nghệ và yêu thích thế giới mô hình.', '2025-12-07 03:09:43', '2025-12-07 08:07:40'),
+(13, 'subtitle2', 'BK Figure Lab - Nơi hội tụ đam mê', '2025-12-07 03:09:43', '2025-12-07 08:07:40'),
+(14, 'files', '', '2025-12-07 03:59:41', '2025-12-07 08:07:40'),
+(15, 'avatar1', 'https://i.ibb.co/RkD9VHSL/Capybara.jpg', '2025-12-07 04:05:37', '2025-12-07 08:07:40'),
+(16, 'avatar2', 'https://i.ibb.co/zWPgx4SP/461442910-843306404623312-6429687454985045364-n.jpg', '2025-12-07 04:05:37', '2025-12-07 08:07:40'),
+(17, 'avatar3', 'https://i.ibb.co/RkD9VHSL/Capybara.jpg', '2025-12-07 04:05:37', '2025-12-07 08:07:40');
 
 -- --------------------------------------------------------
 
@@ -233,7 +233,10 @@ INSERT INTO `faq_comments` (`id`, `question_id`, `user_id`, `content`, `is_admin
 (16, 10, 5, 'thêm comment ', 0, '2025-12-06 19:44:10'),
 (17, 10, 5, '123123xczxc', 0, '2025-12-06 19:44:22'),
 (18, 1, 5, '❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️', 0, '2025-12-06 19:45:22'),
-(19, 10, 5, '❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️', 0, '2025-12-06 19:45:37');
+(19, 10, 5, '❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️', 0, '2025-12-06 19:45:37'),
+(20, 12, 5, 'có nè', 0, '2025-12-07 04:50:15'),
+(21, 13, 5, 'hihi haha', 0, '2025-12-07 05:00:13'),
+(22, 13, 5, 'abc', 0, '2025-12-07 08:05:18');
 
 -- --------------------------------------------------------
 
@@ -257,7 +260,7 @@ CREATE TABLE `faq_questions` (
 --
 
 INSERT INTO `faq_questions` (`id`, `user_id`, `category_id`, `question`, `status`, `views`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 'Shop có hỗ trợ ship COD toàn quốc không ạ?', 'answered', 47, '2025-11-22 03:00:00', '2025-12-06 19:45:22'),
+(1, 1, 2, 'Shop có hỗ trợ ship COD toàn quốc không ạ?', 'answered', 48, '2025-11-22 03:00:00', '2025-12-07 08:38:03'),
 (2, 3, 2, 'Nếu mình ở Hà Nội thì bao lâu nhận được hàng?', 'answered', 33, '2025-11-22 03:01:00', '2025-12-06 08:45:19'),
 (3, 5, 2, 'Có thể chọn đơn vị vận chuyển không vậy shop?', 'pending', 0, '2025-11-22 03:02:00', '2025-12-06 08:45:19'),
 (4, 2, 2, 'Phí ship được tính như thế nào ạ?', 'answered', 27, '2025-11-22 03:03:00', '2025-12-06 08:45:19'),
@@ -266,7 +269,9 @@ INSERT INTO `faq_questions` (`id`, `user_id`, `category_id`, `question`, `status
 (7, 4, 3, 'Có thể thanh toán khi nhận hàng (COD) không?', 'answered', 42, '2025-11-22 04:01:00', '2025-12-06 08:45:19'),
 (8, 3, 3, 'Shop có hỗ trợ chuyển khoản ngân hàng không ạ?', 'answered', 35, '2025-11-22 04:02:00', '2025-12-06 08:45:19'),
 (9, 5, 3, 'Có thể dùng ví MOMO để thanh toán không?', 'closed', 38, '2025-11-22 04:03:00', '2025-12-06 12:28:15'),
-(10, 2, 3, 'Khi thanh toán online mà lỗi thì xử lý thế nào?', 'pending', 21, '2025-11-22 04:04:00', '2025-12-07 03:48:12');
+(10, 2, 3, 'Khi thanh toán online mà lỗi thì xử lý thế nào?', 'pending', 23, '2025-11-22 04:04:00', '2025-12-07 08:37:57'),
+(12, 5, 6, 'Hông có hỏi gì hết!', 'pending', 11, '2025-12-07 04:40:11', '2025-12-07 04:58:15'),
+(13, 5, 4, 'Shop bảo hành okela!', 'pending', 13, '2025-12-07 04:59:55', '2025-12-07 08:37:48');
 
 -- --------------------------------------------------------
 
@@ -293,7 +298,78 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `user_id`, `title`, `slug`, `summary`, `content`, `thumbnail`, `published_at`, `is_published`, `created_at`, `updated_at`) VALUES
-(2, 1, 'Hướng dẫn lắp ráp Gundam', 'huong-dan-lap-rap-gundam', 'Hướng dẫn chi tiết lắp ráp Gundam', '<p>Bước 1: Chuẩn bị dụng cụ</p><p>Bước 2: Lắp ráp</p>', NULL, '2025-11-25 20:17:44', 1, '2025-11-25 13:17:44', '2025-11-25 13:17:44');
+(2, 1, 'Hướng dẫn lắp ráp Gundam', 'huong-dan-lap-rap-gundam', 'Hướng dẫn chi tiết lắp ráp Gundam', '<p>Bước 1: Chuẩn bị dụng cụ</p><p>Bước 2: Lắp ráp</p>', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-11-25 20:17:44', 1, '2025-11-25 13:17:44', '2025-12-07 05:39:34'),
+(3, 1, 'Hướng dẫn lắp ráp mô hình Gundam RX-78-2 cho người mới bắt đầu', 'huong-dan-lap-rap-gundam-rx-78-2', 'Cùng tìm hiểu cách lắp ráp bộ Gundam RX-78-2 cơ bản dành cho người mới chơi mô hình.', 'Bài viết hướng dẫn chi tiết từng bước lắp ráp Gundam RX-78-2, từ việc cắt part, vệ sinh chi tiết, đến lắp khớp cơ bản. Bao gồm cả mẹo dùng nhíp, dao rọc mô hình và cách tô panel line để mô hình trông sống động hơn.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(4, 1, '5 mẹo giúp lắp ráp mô hình figure nhanh và đẹp hơn', '5-meo-lap-rap-figure-nhanh-va-dep', 'Tổng hợp những mẹo hữu ích khi bạn lắp mô hình figure resin hoặc PVC.', 'Từ việc chuẩn bị keo chuyên dụng, kiểm tra chi tiết trước khi dán, đến việc sơn phủ mờ để bảo vệ mô hình. Bài viết giúp bạn tiết kiệm thời gian mà vẫn có kết quả chuyên nghiệp.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(5, 1, 'Cách sơn mô hình Gunpla bằng tay với cọ lông mềm', 'cach-son-gunpla-bang-tay-voi-co-long-mem', 'Không cần airbrush, bạn vẫn có thể sơn mô hình đẹp chỉ với cọ và sơn acrylic.', 'Hướng dẫn chọn cọ, chọn sơn và pha loãng đúng tỉ lệ. Cách tô nhiều lớp, tránh lem màu, và xử lý vết chồng sơn để tạo hiệu ứng nhẵn mịn cho mô hình Gunpla.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(6, 1, 'Review bộ mô hình Luffy Gear 5 chính hãng Bandai', 'review-mo-hinh-luffy-gear-5', 'Cảm nhận chi tiết về bộ figure Luffy Gear 5 – sản phẩm hot nhất năm của Bandai.', 'Bài review chi tiết về độ hoàn thiện, chất liệu, màu sắc và khớp chuyển động của Luffy Gear 5. Kèm theo so sánh với phiên bản third-party và hình ảnh thực tế khi trưng bày.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(7, 1, 'Cách làm sạch và bảo quản figure lâu dài', 'cach-lam-sach-va-bao-quan-figure', 'Figure có thể xuống màu hoặc bụi bẩn nếu không chăm sóc đúng cách.', 'Chia sẻ bí quyết làm sạch figure mà không gây trầy xước. Cách dùng chổi mini, cồn isopropyl, và hộp trưng bày chống UV để bảo quản mô hình của bạn luôn như mới.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(8, 1, 'Phân biệt mô hình chính hãng và hàng giả', 'phan-biet-mo-hinh-chinh-hang-va-hang-gia', 'Nhận biết nhanh figure chính hãng Bandai, Banpresto, Kotobukiya…', 'Bài viết nêu ra các đặc điểm nhận biết như tem chống giả, chi tiết đúc, độ trong của nhựa, và bao bì. Kèm hình minh họa thực tế giữa hàng thật và hàng nhái.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(9, 1, 'Hướng dẫn chụp ảnh mô hình đẹp bằng điện thoại', 'huong-dan-chup-anh-mo-hinh-dep', 'Chỉ với điện thoại, bạn vẫn có thể chụp ảnh figure cực kỳ nghệ thuật.', 'Hướng dẫn chọn ánh sáng, bố cục, background và filter phù hợp để chụp figure sống động như thật. Không cần máy ảnh chuyên nghiệp!', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(10, 1, 'Top 10 bộ Gunpla đáng sưu tầm nhất năm 2025', 'top-10-gunpla-2025', 'Danh sách 10 bộ mô hình Gunpla đẹp nhất và được yêu thích nhất 2025.', 'Tổng hợp từ nhiều cộng đồng Gunpla toàn cầu, kèm ảnh thực tế và đánh giá độ khó khi lắp. Bao gồm MGEX Strike Freedom, RG Nu Gundam, MG Barbatos, v.v.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(11, 1, 'Sửa lỗi khớp lỏng trong mô hình Gunpla', 'sua-loi-khop-long-trong-gunpla', 'Một số khớp mô hình lỏng hoặc rơi ra, đừng lo – có cách xử lý dễ dàng!', 'Hướng dẫn dùng keo PVA, sơn móng tay trong hoặc giấy dán để làm chặt khớp. Có thể áp dụng cho nhiều dòng như HG, RG, MG.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(12, 1, 'Cách làm base trưng bày mô hình đơn giản', 'cach-lam-base-trung-bay-mo-hinh', 'Tự tay làm đế trưng bày mô hình với vật liệu rẻ tiền mà đẹp mắt.', 'Chỉ cần vài miếng xốp, cát mô phỏng, sơn acrylic và keo. Tạo hiệu ứng đất, đá hoặc nền công nghiệp cho mô hình trở nên sống động.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(13, 1, 'Cách xử lý vết nứt nhỏ khi lắp mô hình nhựa', 'cach-xu-ly-vet-nut-mo-hinh-nhua', 'Vết nứt nhỏ không đáng sợ nếu bạn biết xử lý đúng cách.', 'Dùng cement chuyên dụng, ép nhẹ phần nứt và chờ khô. Sau đó mài và sơn lại, mô hình sẽ như mới. Có thể áp dụng cho nhựa ABS và PS.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(14, 1, 'Cách tạo hiệu ứng thời tiết cho mô hình (weathering)', 'cach-tao-hieu-ung-weathering-mo-hinh', 'Kỹ thuật weathering giúp mô hình trông chân thật, bụi bặm hơn.', 'Giới thiệu các phương pháp dry brush, wash, rust, và chipping. Có thể áp dụng cho Gunpla, xe tăng, máy bay mô hình.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(15, 1, 'Tổng hợp dụng cụ cần thiết khi chơi Gunpla', 'dung-cu-can-thiet-khi-choi-gunpla', 'Danh sách đầy đủ các dụng cụ cắt, mài, sơn mà ai chơi Gunpla cũng nên có.', 'Bao gồm kềm Godhand, dao trổ, nhíp, giũa, giấy nhám, panel line, marker và keo Mr.Cement. Mô tả rõ công dụng từng món.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(16, 1, 'Cách tạo dáng figure đẹp khi trưng bày', 'cach-tao-dang-figure-dep', 'Một tư thế tốt giúp figure nổi bật hơn nhiều khi trưng bày.', 'Hướng dẫn chọn góc nghiêng, phối ánh sáng và dùng stand hỗ trợ để pose figure đúng tỉ lệ, không bị đổ ngã.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(17, 1, 'Giới thiệu dòng mô hình Metal Build cao cấp', 'gioi-thieu-metal-build-cao-cap', 'Khám phá dòng Metal Build – tinh hoa kỹ thuật và chi tiết vượt trội.', 'Bài viết giới thiệu cơ chế khớp kim loại, tỉ lệ chính xác và mức độ hoàn thiện cực cao của dòng Metal Build. Thích hợp cho nhà sưu tầm cao cấp.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(18, 1, 'Cách chụp video review figure tại nhà', 'cach-chup-video-review-figure', 'Hướng dẫn setup ánh sáng, góc quay và cách nói mạch lạc khi review figure.', 'Bạn chỉ cần điện thoại, tripod và đèn bàn. Bài viết hướng dẫn chi tiết cách ghi hình, chỉnh âm và dựng clip đơn giản bằng CapCut.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(19, 1, 'Tự làm tủ trưng bày mô hình tiết kiệm', 'tu-lam-tu-trung-bay-mo-hinh', 'Gợi ý cách làm tủ mica hoặc gỗ để trưng bày mô hình tại nhà.', 'Dùng khung nhôm hoặc gỗ MDF, lắp kính mica, gắn LED. Tổng chi phí chỉ bằng 1/3 tủ thương mại nhưng vẫn đẹp và bền.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(20, 1, 'Các dòng figure One Piece đáng sưu tầm nhất', 'cac-dong-figure-one-piece-dang-suu-tam', 'Top figure One Piece từ P.O.P, Ichibansho, Grandline, King of Artist...', 'Giới thiệu những mẫu figure được yêu thích nhất trong cộng đồng, kèm ảnh thật và link tham khảo. Luffy, Zoro, Nami, Sanji đều có mặt.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(21, 1, 'So sánh giữa mô hình tĩnh và mô hình động', 'so-sanh-mo-hinh-tinh-va-mo-hinh-dong', 'Hai loại mô hình phổ biến nhất: static và action figure – khác nhau thế nào?', 'Phân tích ưu nhược điểm của từng loại, cách bảo quản và lựa chọn tùy theo sở thích sưu tầm hoặc trưng bày.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 0, '2025-12-07 05:22:36', '2025-12-07 07:23:24'),
+(22, 1, 'Cách chụp ảnh mô hình với nền hiệu ứng khói', 'chup-anh-mo-hinh-hieu-ung-khoi', 'Tạo hiệu ứng khói thật bằng bông, đèn và filter để ảnh figure lung linh hơn.', 'Hướng dẫn setup bố cục, chọn ánh sáng, tạo hiệu ứng động và xử lý hậu kỳ bằng Snapseed hoặc Lightroom mobile.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 07:23:26');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `news_cmt`
+--
+
+CREATE TABLE `news_cmt` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `news_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `content` text NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `news_cmt`
+--
+
+INSERT INTO `news_cmt` (`id`, `news_id`, `user_id`, `content`, `created_at`) VALUES
+(1, 3, 5, 'hihi', '2025-12-07 13:00:34'),
+(2, 3, 6, 'okela', '2025-12-07 13:06:42'),
+(6, 3, 5, 'quạc quạc', '2025-12-07 13:15:11'),
+(7, 2, 5, 'hihi', '2025-12-07 14:36:02'),
+(8, 2, 6, 'cũng được đó', '2025-12-07 14:59:41'),
+(9, 4, 5, 'oke nhe', '2025-12-07 15:01:18'),
+(10, 3, 5, 'gì đấy', '2025-12-07 15:04:52');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `news_rating`
+--
+
+CREATE TABLE `news_rating` (
+  `id` int(11) NOT NULL,
+  `news_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `star` tinyint(2) UNSIGNED NOT NULL DEFAULT 0,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `news_rating`
+--
+
+INSERT INTO `news_rating` (`id`, `news_id`, `user_id`, `star`, `created_at`, `updated_at`) VALUES
+(1, 2, 5, 8, '2025-12-07 14:45:45', '2025-12-07 14:59:59'),
+(6, 2, 6, 9, '2025-12-07 14:59:31', '2025-12-07 14:59:31'),
+(8, 3, 5, 9, '2025-12-07 15:00:21', '2025-12-07 15:04:46');
 
 -- --------------------------------------------------------
 
@@ -492,11 +568,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `avatar`, `password`, `full_name`, `phone`, `address`, `role_id`, `role`, `is_active`, `rememberToken`, `username`, `created_at`, `updated_at`) VALUES
-(1, 'admin@toyshop.com', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
+(1, 'admin@toyshop.com', 'https://i.ibb.co/zWPgx4SP/461442910-843306404623312-6429687454985045364-n.jpg', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-12-07 08:19:00'),
 (2, 'staff@toyshop.com', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Staff User', NULL, NULL, 2, 'staff', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
 (3, 'customer@toyshop.com', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Customer User', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
 (4, '123@gmail.com', NULL, '$2y$12$TI1yMA.fC6h02jLhBxBSe.5EXX/cO6zqQF1rm8OE0l7XHw4d/V9cK', 'Quách Nguyễn Hoàng', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-26 09:55:48', '2025-11-26 09:55:48'),
-(5, 'admin@gmail.com', NULL, '$2y$10$ZxTOmh11/UA1vqtW6GGm4uu7h5pRAd0NhNeJ6P.S1sdgAsa3w9RG.', 'Huynh Pham Phuoc Linh', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-12-06 08:03:58', '2025-12-06 08:04:25'),
+(5, 'admin@gmail.com', 'https://i.ibb.co/zWPgx4SP/461442910-843306404623312-6429687454985045364-n.jpg', '$2y$10$ZxTOmh11/UA1vqtW6GGm4uu7h5pRAd0NhNeJ6P.S1sdgAsa3w9RG.', 'Admin Linh', '0987987999', 'ABC', 1, 'admin', 1, NULL, 'admin_linh', '2025-12-06 08:03:58', '2025-12-07 08:40:45'),
 (6, 'linh@gmail.com', NULL, '$2y$10$JLUobHzlbCmqwTsINcF1FeDG1HZjngfpNXnaz3ISGl5.zhHOHgrDu', 'Linh Huynh', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-12-06 18:47:11', '2025-12-06 18:47:11');
 
 --
@@ -585,6 +661,20 @@ ALTER TABLE `news`
   ADD KEY `idx_is_published` (`is_published`),
   ADD KEY `idx_published_at` (`published_at`);
 ALTER TABLE `news` ADD FULLTEXT KEY `ft_search` (`title`,`content`);
+
+--
+-- Chỉ mục cho bảng `news_cmt`
+--
+ALTER TABLE `news_cmt`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `news_rating`
+--
+ALTER TABLE `news_rating`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_user_news` (`news_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `orders`
@@ -689,19 +779,31 @@ ALTER TABLE `faq_categories`
 -- AUTO_INCREMENT cho bảng `faq_comments`
 --
 ALTER TABLE `faq_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `faq_questions`
 --
 ALTER TABLE `faq_questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT cho bảng `news_cmt`
+--
+ALTER TABLE `news_cmt`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `news_rating`
+--
+ALTER TABLE `news_rating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
@@ -767,6 +869,13 @@ ALTER TABLE `contacts`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `fk_news_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Các ràng buộc cho bảng `news_rating`
+--
+ALTER TABLE `news_rating`
+  ADD CONSTRAINT `news_rating_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `news_rating_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `orders`
