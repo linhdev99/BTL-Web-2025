@@ -155,6 +155,15 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 </a>
               </li>
 
+              <li class="nav-item <?php echo strpos($currentPath, '/cms/about/edit') !== false ? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/cms/about/edit">
+                  <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <i class="ti ti-settings"></i>
+                  </span>
+                  <span class="nav-link-title">Giới thiệu</span>
+                </a>
+              </li>
+
               <li class="nav-item <?php echo strpos($currentPath, '/cms/settings') !== false ? 'active' : ''; ?>">
                 <a class="nav-link" href="<?php echo BASE_URL; ?>/cms/settings">
                   <span class="nav-link-icon d-md-none d-lg-inline-block">

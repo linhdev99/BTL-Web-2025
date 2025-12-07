@@ -64,4 +64,34 @@ class FAQView
         include PATH_ROOT . "/app/views/layouts/footer.php";
 
     }
+
+    public function render_user_ask(array $data = [])
+    {
+        extract($data);
+
+        $file = PATH_ROOT . "/views/client/faq/userAsk.php";
+        if (!file_exists($file)) {
+            (new ErrorView)->render();
+            return;
+        }
+
+        include PATH_ROOT . "/app/views/layouts/header.php";
+        include $file;
+        include PATH_ROOT . "/app/views/layouts/footer.php";
+    }
+
+    public function render_user_edit_ask(array $data = [])
+    {
+        extract($data);
+
+        $file = PATH_ROOT . "/views/client/faq/userEditAsk.php";
+        if (!file_exists($file)) {
+            (new ErrorView)->render();
+            return;
+        }
+
+        include PATH_ROOT . "/app/views/layouts/header.php";
+        include $file;
+        include PATH_ROOT . "/app/views/layouts/footer.php";
+    }
 }

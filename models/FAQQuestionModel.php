@@ -231,6 +231,25 @@ class FAQQuestionModel extends BaseModel
         return $this->delete($this->table, "id = :id", ['id' => $id]);
     }
 
+    public function insertQuestion($data)
+    {
+        $sql = "INSERT INTO faq_questions 
+                (user_id, category_id, question, status, views, created_at, updated_at)
+            VALUES 
+                (:user_id, :category_id, :question, :status, :views, NOW(), NOW())";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':user_id' => $data['user_id'] ?? null,
+            ':category_id' => $data['category_id'] ?? null,
+            ':question' => $data['question'],
+            ':status' => $data['status'] ?? 'pending',
+            ':views' => $data['views'] ?? 0
+        ]);
+
+        return $this->db->lastInsertId();
+    }
+
     public function filterUserQuestions(string $keyword = '', $category_id = '', string $sort = 'newest')
     {
         $sql = "
@@ -338,5 +357,22 @@ class FAQQuestionModel extends BaseModel
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
         return $stmt->execute();
+    }
+
+    public function updateQuestion($id, $data)
+    {
+        $sql = "UPDATE faq_questions 
+            SET category_id = :category_id,
+                question = :question,
+                updated_at = :updated_at
+            WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':category_id' => $data['category_id'],
+            ':question' => $data['question'],
+            ':updated_at' => $data['updated_at'],
+            ':id' => $id
+        ]);
     }
 }

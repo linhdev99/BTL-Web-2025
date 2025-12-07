@@ -15,7 +15,6 @@
       💬 Câu hỏi từ cộng đồng
     </h2>
 
-    <!-- Bộ lọc -->
     <form method="get" class="question-filter mb-4 d-flex flex-wrap align-items-center justify-content-center gap-2">
       <input type="text" name="keyword" placeholder="🔍 Tìm kiếm câu hỏi..." class="form-control w-auto"
         value="<?= htmlspecialchars($keyword ?? '') ?>">
@@ -42,6 +41,12 @@
         <i class="bi bi-arrow-clockwise"></i> Làm mới
       </a>
     </form>
+
+    <div class="text-center mb-5">
+      <a href="<?= BASE_URL ?>/user/ask" class="btn btn-success btn-lg shadow-sm px-4">
+        <i class="bi bi-plus-circle"></i> Đặt câu hỏi mới
+      </a>
+    </div>
 
     <?php if (!empty($faqQuestions)): ?>
       <div class="question-feed">
@@ -99,9 +104,22 @@
                 <span class="badge category-badge" style="background-color: <?= $categoryColor ?>;">
                   <?= $categoryName ?>
                 </span>
-                <a href="/questions/<?= htmlspecialchars($q['id']) ?>" class="btn btn-outline-primary btn-sm">
-                  <i class="bi bi-arrow-right-circle"></i> Xem chi tiết
-                </a>
+
+                <div class="d-flex align-items-center gap-2">
+                  <a href="/questions/<?= htmlspecialchars($q['id']) ?>" class="btn btn-outline-primary btn-sm">
+                    <i class="bi bi-arrow-right-circle"></i> Xem chi tiết
+                  </a>
+
+                  <?php if (isset($_SESSION['user']['id']) && $_SESSION['user']['id'] == $q['user_id']): ?>
+                    <form action="<?= BASE_URL ?>/questions/<?= htmlspecialchars($q['id']) ?>/delete" method="post"
+                      onsubmit="return confirm('Bạn có chắc muốn xoá câu hỏi này không?');">
+                      <button type="submit" class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-trash"></i> Xóa
+                      </button>
+                    </form>
+                  <?php endif; ?>
+
+                </div>
               </div>
             </div>
           </div>

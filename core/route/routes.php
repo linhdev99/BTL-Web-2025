@@ -45,7 +45,7 @@ $router->get('/news', 'NewsController@index');
 $router->get('/news/{slug}', 'NewsController@detail');
 
 // About & Contact
-$router->get('/about', 'PageController@about');
+$router->get('/about', 'AboutController@index');
 $router->get('/contact', 'PageController@contact');
 $router->post('/contact', 'PageController@submitContact');
 
@@ -54,8 +54,13 @@ $router->get('/faq', 'FAQController@index');
 $router->get('/faq/{id}', 'FAQController@faqDetail');
 $router->get('/questions', 'FAQController@questions');
 $router->get('/questions/{id}', 'FAQController@questionDetail');
+$router->get('/questions/{id}/edit', 'FAQController@questionEdit');
+$router->post('/questions/{id}/edit', 'FAQController@questionUpdate');
+$router->post('/questions/{id}/delete', 'FAQController@deleteQuestion');
 $router->post('/questions/{id}/comment', 'FAQController@questCmt');
 $router->post('/questions/{id}/delete/comment', 'FAQController@questCmt');
+$router->get('/user/ask', 'FAQController@userShowAsk');
+$router->post('/user/ask', 'FAQController@userAsk');
 
 // ========================================
 // ADMIN ROUTES (CMS)
@@ -63,6 +68,8 @@ $router->post('/questions/{id}/delete/comment', 'FAQController@questCmt');
 
 // Dashboard - Updated to use DashboardController from BTL-Web-2025
 $router->get('/cms', 'DashboardController@index');
+$router->get('/cms/about/edit', 'AboutController@edit');
+$router->post('/cms/about/edit/update', 'AboutController@update');
 
 // Products Management
 $router->get('/cms/products', 'CMSProductController@index');
