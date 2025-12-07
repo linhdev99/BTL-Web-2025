@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 06, 2025 lúc 09:55 AM
+-- Thời gian đã tạo: Th12 07, 2025 lúc 05:16 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -20,6 +20,43 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `toy_shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `about`
+--
+
+CREATE TABLE `about` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `about`
+--
+
+INSERT INTO `about` (`id`, `title`, `content`, `created_at`, `updated_at`) VALUES
+(1, 'name1', 'Nguyễn Văn A', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(2, 'mssv1', '22120001', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(3, 'mission1', 'Trưởng nhóm - Thiết kế giao diện & Lập trình Frontend', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(4, 'name2', 'Huỳnh Phạm Phước Linh', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(5, 'mssv2', '1710165', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(6, 'mission2', 'Phát triển Backend - Quản lý CSDL', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(7, 'name3', 'Lê Văn C', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(8, 'mssv3', '22120003', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(9, 'mission3', 'Tester - Viết tài liệu & Báo cáo', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(10, 'about', '<div class=\"about-content bg-white shadow-sm rounded-4 p-5 mb-5 border border-light-subtle\">\r\n    <div class=\"text-center mb-4\">\r\n      <div class=\"mb-3\">\r\n        <i class=\"bi bi-gem text-primary display-5\"></i>\r\n      </div>\r\n      <h2 class=\"fw-bold text-primary\">BK Figure Lab - Nơi hội tụ đam mê</h2>\r\n      <p class=\"text-muted mt-2 fs-5\">\r\n        Cùng nhau kiến tạo thế giới figure chính hãng đầy cảm hứng và sáng tạo!\r\n      </p>\r\n    </div>\r\n\r\n    <div class=\"row align-items-center\">\r\n      <div class=\"col-lg-6 mb-4 mb-lg-0\">\r\n        <p class=\"lead\">\r\n          <strong>BK Figure Lab</strong> là cửa hàng chuyên cung cấp các sản phẩm figure và mô hình sưu tầm chính hãng,\r\n          dành cho cộng đồng người yêu thích văn hóa Nhật Bản, anime, game và nghệ thuật mô hình.\r\n        </p>\r\n        <p>\r\n          Chúng tôi mang đến cho bạn những sản phẩm đến từ các thương hiệu hàng đầu như\r\n          <strong>Bandai</strong>, <strong>Good Smile Company</strong>, <strong>Kotobukiya</strong> và nhiều thương hiệu danh tiếng khác.\r\n        </p>\r\n        <p>\r\n          Không chỉ là nơi mua sắm, BK Figure Lab còn là <strong>cộng đồng của đam mê</strong>,\r\n          nơi bạn có thể chia sẻ sở thích, học hỏi và giao lưu cùng những người cùng chí hướng.\r\n        </p>\r\n      </div>\r\n\r\n      <div class=\"col-lg-6 text-center\">\r\n        <img src=\"https://picsum.photos/800/400?random=20\" alt=\"BK Figure Lab About\" class=\"img-fluid rounded-4 shadow-sm\">\r\n      </div>\r\n    </div>\r\n\r\n    <hr class=\"my-5\">\r\n\r\n    <div class=\"row gy-4\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"p-4 bg-light rounded-4 h-100 shadow-sm\">\r\n          <h3 class=\"text-primary fw-bold mb-3\">\r\n            <i class=\"bi bi-bullseye me-2\"></i>Tầm nhìn\r\n          </h3>\r\n          <p>\r\n            Trở thành cửa hàng figure uy tín hàng đầu Việt Nam, nơi các fan hâm mộ\r\n            có thể tìm thấy những sản phẩm yêu thích và kết nối với cộng đồng cùng đam mê.\r\n          </p>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-md-6\">\r\n        <div class=\"p-4 bg-light rounded-4 h-100 shadow-sm\">\r\n          <h3 class=\"text-primary fw-bold mb-3\">\r\n            <i class=\"bi bi-lightning-charge-fill me-2\"></i>Sứ mệnh\r\n          </h3>\r\n          <p>\r\n            Cung cấp sản phẩm chính hãng, chất lượng cao với giá cả hợp lý — đồng thời lan tỏa\r\n            tinh thần sáng tạo, đam mê và gắn kết trong cộng đồng người yêu figure tại Việt Nam.\r\n          </p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"text-center mt-5\">\r\n      <img src=\"https://picsum.photos/1000/400?random=4\" alt=\"About BK Figure Lab\" class=\"img-fluid rounded-4 shadow\">\r\n      <p class=\"mt-3 text-muted small fst-italic\">\r\n        “Đam mê không chỉ để ngắm nhìn — mà để sẻ chia.”\r\n      </p>\r\n    </div>\r\n  </div>', '2025-12-07 02:52:52', '2025-12-07 04:15:54'),
+(11, 'title1', 'Nhóm phát triển BK Figure Lab', '2025-12-07 03:09:43', '2025-12-07 04:15:54'),
+(12, 'subtitle1', 'Chúng tôi là những sinh viên đam mê công nghệ và yêu thích thế giới mô hình.', '2025-12-07 03:09:43', '2025-12-07 04:15:54'),
+(13, 'subtitle2', 'BK Figure Lab - Nơi hội tụ đam mê', '2025-12-07 03:09:43', '2025-12-07 04:15:54'),
+(14, 'files', '', '2025-12-07 03:59:41', '2025-12-07 04:15:54'),
+(15, 'avatar1', 'https://i.ibb.co/RkD9VHSL/Capybara.jpg', '2025-12-07 04:05:37', '2025-12-07 04:15:54'),
+(16, 'avatar2', 'https://i.ibb.co/zWPgx4SP/461442910-843306404623312-6429687454985045364-n.jpg', '2025-12-07 04:05:37', '2025-12-07 04:15:54'),
+(17, 'avatar3', 'https://i.ibb.co/RkD9VHSL/Capybara.jpg', '2025-12-07 04:05:37', '2025-12-07 04:15:54');
 
 -- --------------------------------------------------------
 
@@ -157,7 +194,8 @@ INSERT INTO `faq_categories` (`id`, `name`, `slug`, `color`, `is_active`, `creat
 (3, 'Thanh toán', 'thanh-toan', '#e67e22', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
 (4, 'Đổi trả - Bảo hành', 'doi-tra-bao-hanh', '#2ecc71', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
 (5, 'Thông tin cửa hàng', 'thong-tin-cua-hang', '#f1c40f', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
-(6, 'Về sản phẩm', 've-san-pham', '#e74c3c', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34');
+(6, 'Về sản phẩm', 've-san-pham', '#e74c3c', 1, '2025-12-06 08:45:01', '2025-12-06 08:53:34'),
+(9, 'Testing!', 'testing', '#52b9c7', 1, '2025-12-06 09:35:54', '2025-12-06 09:50:02');
 
 -- --------------------------------------------------------
 
@@ -188,7 +226,14 @@ INSERT INTO `faq_comments` (`id`, `question_id`, `user_id`, `content`, `is_admin
 (7, 3, 1, 'Tất cả đều chính hãng 100%, có tem kiểm định rõ ràng ạ ✅', 0, '2025-11-22 05:00:50'),
 (8, 4, 8, 'Nếu sản phẩm lỗi thì đổi như thế nào ạ?', 0, '2025-11-22 06:00:00'),
 (9, 5, 1, 'Dạ có ạ, bạn được mở hộp kiểm tra trước khi thanh toán nha ✨', 0, '2025-11-22 07:00:40'),
-(10, 6, 1, 'Dạ shop giữ giá ổn định, không tăng dù khan hàng nha 🔒', 0, '2025-11-22 08:00:40');
+(10, 6, 1, 'Dạ shop giữ giá ổn định, không tăng dù khan hàng nha 🔒', 0, '2025-11-22 08:00:40'),
+(11, 9, 5, 'có nhe', 0, '2025-12-06 12:27:53'),
+(12, 9, 5, 'quạc quạc', 0, '2025-12-06 12:27:59'),
+(15, 10, 5, 'abc', 0, '2025-12-06 17:37:16'),
+(16, 10, 5, 'thêm comment ', 0, '2025-12-06 19:44:10'),
+(17, 10, 5, '123123xczxc', 0, '2025-12-06 19:44:22'),
+(18, 1, 5, '❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️', 0, '2025-12-06 19:45:22'),
+(19, 10, 5, '❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️', 0, '2025-12-06 19:45:37');
 
 -- --------------------------------------------------------
 
@@ -212,7 +257,7 @@ CREATE TABLE `faq_questions` (
 --
 
 INSERT INTO `faq_questions` (`id`, `user_id`, `category_id`, `question`, `status`, `views`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 'Shop có hỗ trợ ship COD toàn quốc không ạ?', 'answered', 45, '2025-11-22 03:00:00', '2025-12-06 08:45:19'),
+(1, 1, 2, 'Shop có hỗ trợ ship COD toàn quốc không ạ?', 'answered', 47, '2025-11-22 03:00:00', '2025-12-06 19:45:22'),
 (2, 3, 2, 'Nếu mình ở Hà Nội thì bao lâu nhận được hàng?', 'answered', 33, '2025-11-22 03:01:00', '2025-12-06 08:45:19'),
 (3, 5, 2, 'Có thể chọn đơn vị vận chuyển không vậy shop?', 'pending', 0, '2025-11-22 03:02:00', '2025-12-06 08:45:19'),
 (4, 2, 2, 'Phí ship được tính như thế nào ạ?', 'answered', 27, '2025-11-22 03:03:00', '2025-12-06 08:45:19'),
@@ -220,8 +265,8 @@ INSERT INTO `faq_questions` (`id`, `user_id`, `category_id`, `question`, `status
 (6, 7, 3, 'Shop chấp nhận thanh toán qua những hình thức nào?', 'answered', 54, '2025-11-22 04:00:00', '2025-12-06 08:45:19'),
 (7, 4, 3, 'Có thể thanh toán khi nhận hàng (COD) không?', 'answered', 42, '2025-11-22 04:01:00', '2025-12-06 08:45:19'),
 (8, 3, 3, 'Shop có hỗ trợ chuyển khoản ngân hàng không ạ?', 'answered', 35, '2025-11-22 04:02:00', '2025-12-06 08:45:19'),
-(9, 5, 3, 'Có thể dùng ví MOMO để thanh toán không?', 'answered', 38, '2025-11-22 04:03:00', '2025-12-06 08:45:19'),
-(10, 2, 3, 'Khi thanh toán online mà lỗi thì xử lý thế nào?', 'pending', 3, '2025-11-22 04:04:00', '2025-12-06 08:45:19');
+(9, 5, 3, 'Có thể dùng ví MOMO để thanh toán không?', 'closed', 38, '2025-11-22 04:03:00', '2025-12-06 12:28:15'),
+(10, 2, 3, 'Khi thanh toán online mà lỗi thì xử lý thế nào?', 'pending', 21, '2025-11-22 04:04:00', '2025-12-07 03:48:12');
 
 -- --------------------------------------------------------
 
@@ -428,6 +473,7 @@ INSERT INTO `site_settings` (`id`, `setting_key`, `setting_value`, `setting_type
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -445,16 +491,24 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `full_name`, `phone`, `address`, `role_id`, `role`, `is_active`, `rememberToken`, `username`, `created_at`, `updated_at`) VALUES
-(1, 'admin@toyshop.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(2, 'staff@toyshop.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Staff User', NULL, NULL, 2, 'staff', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(3, 'customer@toyshop.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Customer User', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
-(4, '123@gmail.com', '$2y$12$TI1yMA.fC6h02jLhBxBSe.5EXX/cO6zqQF1rm8OE0l7XHw4d/V9cK', 'Quách Nguyễn Hoàng', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-26 09:55:48', '2025-11-26 09:55:48'),
-(5, 'admin@gmail.com', '$2y$10$ZxTOmh11/UA1vqtW6GGm4uu7h5pRAd0NhNeJ6P.S1sdgAsa3w9RG.', 'Huynh Pham Phuoc Linh', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-12-06 08:03:58', '2025-12-06 08:04:25');
+INSERT INTO `users` (`id`, `email`, `avatar`, `password`, `full_name`, `phone`, `address`, `role_id`, `role`, `is_active`, `rememberToken`, `username`, `created_at`, `updated_at`) VALUES
+(1, 'admin@toyshop.com', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
+(2, 'staff@toyshop.com', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Staff User', NULL, NULL, 2, 'staff', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
+(3, 'customer@toyshop.com', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Customer User', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-25 13:17:44', '2025-11-25 13:17:44'),
+(4, '123@gmail.com', NULL, '$2y$12$TI1yMA.fC6h02jLhBxBSe.5EXX/cO6zqQF1rm8OE0l7XHw4d/V9cK', 'Quách Nguyễn Hoàng', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-11-26 09:55:48', '2025-11-26 09:55:48'),
+(5, 'admin@gmail.com', NULL, '$2y$10$ZxTOmh11/UA1vqtW6GGm4uu7h5pRAd0NhNeJ6P.S1sdgAsa3w9RG.', 'Huynh Pham Phuoc Linh', NULL, NULL, 1, 'admin', 1, NULL, NULL, '2025-12-06 08:03:58', '2025-12-06 08:04:25'),
+(6, 'linh@gmail.com', NULL, '$2y$10$JLUobHzlbCmqwTsINcF1FeDG1HZjngfpNXnaz3ISGl5.zhHOHgrDu', 'Linh Huynh', NULL, NULL, 3, 'customer', 1, NULL, NULL, '2025-12-06 18:47:11', '2025-12-06 18:47:11');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `about`
+--
+ALTER TABLE `about`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `title` (`title`);
 
 --
 -- Chỉ mục cho bảng `carts`
@@ -596,6 +650,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `about`
+--
+ALTER TABLE `about`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
@@ -617,19 +677,19 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT cho bảng `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `faq_categories`
 --
 ALTER TABLE `faq_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `faq_comments`
 --
 ALTER TABLE `faq_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `faq_questions`
@@ -677,7 +737,7 @@ ALTER TABLE `site_settings`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

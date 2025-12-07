@@ -45,7 +45,7 @@ $router->get('/news', 'NewsController@index');
 $router->get('/news/{slug}', 'NewsController@detail');
 
 // About & Contact
-$router->get('/about', 'PageController@about');
+$router->get('/about', 'AboutController@index');
 $router->get('/contact', 'PageController@contact');
 $router->post('/contact', 'PageController@submitContact');
 
@@ -63,6 +63,8 @@ $router->post('/questions/{id}/delete/comment', 'FAQController@questCmt');
 
 // Dashboard - Updated to use DashboardController from BTL-Web-2025
 $router->get('/cms', 'DashboardController@index');
+$router->get('/cms/about/edit', 'AboutController@edit');
+$router->post('/cms/about/edit/update', 'AboutController@update');
 
 // Products Management
 $router->get('/cms/products', 'CMSProductController@index');
