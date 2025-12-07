@@ -10,8 +10,8 @@
 .env.*.local
 
 # Uploads directory (user uploaded files)
-public/uploads/*
-!public/uploads/.gitkeep
+# public/uploads/*
+# !public/uploads/.gitkeep
 
 # Logs
 *.log
