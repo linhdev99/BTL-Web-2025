@@ -30,10 +30,10 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="card product-card h-100">
                             <a href="<?php echo BASE_URL; ?>/product/<?php echo escape($product['slug']); ?>">
-                                <img src="<?php echo BASE_URL; ?>/public/uploads/products/<?php echo escape($product['image']); ?>"
+                                <img src="<?php echo getImageUrl($product['image'], 'product-placeholder.jpg'); ?>"
                                      class="card-img-top"
                                      alt="<?php echo escape($product['name']); ?>"
-                                     onerror="this.src='<?php echo BASE_URL; ?>/public/images/no-image.jpg'">
+                                     onerror="this.src='<?php echo BASE_URL; ?>/public/images/product-placeholder.jpg'">
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">

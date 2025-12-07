@@ -15,8 +15,8 @@ class HomeController extends BaseController
 
     public function index()
     {
-        // Get featured products for homepage
-        $featuredProducts = $this->productModel->getFeaturedProducts(8);
+        // Get featured products for homepage (show only 4)
+        $featuredProducts = $this->productModel->getFeaturedProducts(4);
 
         // Render homepage view
         $this->view('client/home/index', [
