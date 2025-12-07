@@ -15,47 +15,17 @@ class FAQController extends BaseController
     {
         $view = new FAQView();
         $faqModel = new FAQModel();
-        $catModel = new FAQCategoryModel();
+        $user = Auth::optionalUser();
 
-        $categories = $catModel->getAllCategories();
-        $faqs = $faqModel->getAllFAQ();
+        if (Auth::isAdmin() || Auth::isStaff()) {
+            $faqs = $faqModel->getAllFAQ();
+        } else {
+            $faqs = $faqModel->getAllActiveFAQ();
+        }
 
         return $view->render_faq([
-            'categories' => $categories,
             'faqs' => $faqs,
-        ]);
-    }
-    public function questions()
-    {
-        $view = new FAQView();
-        $catModel = new FAQCategoryModel();
-        $faqQuestionModel = new FAQQuestionModel();
-
-        $search = $_GET['search'] ?? '';
-        $sort = $_GET['sort'] ?? 'created_at';
-        $filterCategory = isset($_GET['category_id']) && $_GET['category_id'] !== '' ? (int) $_GET['category_id'] : null;
-        $page = max(1, (int) ($_GET['page'] ?? 1));
-        $limit = 9;
-
-        $categories = $catModel->getAllCategories();
-
-        [$faqQuestions, $totalPages] = $faqQuestionModel->getFilteredQuestions(
-            $search,
-            $sort,
-            $filterCategory,
-            $page,
-            $limit
-        );
-
-        // ==== Gửi dữ liệu sang View ====
-        return $view->render_questions([
-            'categories' => $categories,
-            'faqQuestions' => $faqQuestions,
-            'page' => $page,
-            'totalPages' => $totalPages,
-            'search' => $search,
-            'sort' => $sort,
-            'filterCategory' => $filterCategory,
+            'user' => $user,
         ]);
     }
 
@@ -63,8 +33,6 @@ class FAQController extends BaseController
     {
         $view = new FAQView();
         $faqModel = new FAQModel();
-        $catModel = new FAQCategoryModel();
-
         $user = Auth::optionalUser();
 
         $faq = $faqModel->getById($id);
@@ -72,10 +40,13 @@ class FAQController extends BaseController
             die("Không tìm thấy câu hỏi FAQ với ID #{$id}");
         }
 
-        $category = null;
-        if (!empty($faq['category_id'])) {
-            $category = $catModel->getById((int)$faq['category_id']);
-        }
+        $category = [
+            'id' => $faq['category_id'] ?? null,
+            'name' => $faq['category_name'] ?? 'Khác',
+            'slug' => $faq['category_slug'] ?? null,
+            'color' => $faq['category_color'] ?? '#6c757d',
+            'active' => $faq['category_active'] ?? 0,
+        ];
 
         return $view->render_faq_detail([
             'faq' => $faq,
@@ -84,4 +55,89 @@ class FAQController extends BaseController
         ]);
     }
 
+    public function questions()
+    {
+        Auth::requireLogin();
+
+        $view = new FAQView();
+        $catModel = new FAQCategoryModel();
+        $faqQuestionModel = new FAQQuestionModel();
+
+        $keyword = trim($_GET['keyword'] ?? '');
+        $category_id = $_GET['category_id'] ?? '';
+        $sort = $_GET['sort'] ?? 'newest';
+
+        $statuses = ['pending', 'answered'];
+        if (Auth::isAdminOrStaff()) {
+            $statuses = [];
+        }
+
+        $page = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
+        $limit = 5;
+        $offset = ($page - 1) * $limit;
+
+        $categories = $catModel->getAllCategories();
+
+        $questions = $faqQuestionModel->getAllQuestions(
+            $keyword,
+            $category_id,
+            $statuses,
+            $sort,
+            $limit,
+            $offset
+        );
+
+        $total = $faqQuestionModel->countAll($keyword, $category_id, $statuses);
+        $totalPages = ceil($total / $limit);
+
+        return $view->render_questions([
+            'pageTitle' => 'Câu hỏi từ cộng đồng',
+            'categories' => $categories,
+            'faqQuestions' => $questions,
+            'keyword' => htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'),
+            'category_id' => $category_id,
+            'status' => $statuses,
+            'sort' => $sort,
+            'page' => $page,
+            'totalPages' => $totalPages
+        ]);
+    }
+
+    public function questionDetail($id)
+    {
+        Auth::requireLogin();
+
+        $id = (int) $id;
+        $questionModel = new FAQQuestionModel();
+        $question = $questionModel->getById($id);
+
+        if (!$question) {
+            $_SESSION['error'] = 'Câu hỏi không tồn tại hoặc đã bị xóa.';
+            header('Location: ' . BASE_URL . '/cms/faq/user');
+            exit;
+        }
+
+        $comments = $questionModel->getComments($id);
+        $questionModel->incrementViews($id);
+
+        $view = new FAQView();
+        $view->render_question_detail([
+            'pageTitle' => 'Chi tiết câu hỏi người dùng',
+            'question' => $question,
+            'comments' => $comments
+        ]);
+    }
+
+    public function questCmt($id)
+    {
+        Auth::requireLogin();
+
+        $id = (int) $id;
+        $userId = $_SESSION['user']['id'] ?? null;
+        $content = $_POST['content'] ?? '';
+
+        (new FAQQuestionModel())->addComment($id, $userId, $content);
+
+        $this->redirectWithMessage(BASE_URL . '/questions/' . $id, 'Đã thêm phản hồi', 'success');
+    }
 }

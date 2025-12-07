@@ -117,6 +117,7 @@
           <th>Câu hỏi</th>
           <th>Thể loại</th>
           <th>Lượt xem</th>
+          <th>Bình luận</th>
           <th>Trạng thái</th>
           <th>Ngày tạo</th>
           <th class="w-1"></th>
@@ -170,6 +171,17 @@
               <td>
                 <span class="badge badge-outline text-muted">
                   <i class="ti ti-eye"></i> <?= $q['views']; ?>
+                </span>
+              </td>
+
+              <!-- Tổng bình luận -->
+              <td>
+                <?php
+                $totalComments = (int) ($q['total_comments'] ?? 0);
+                $badgeClass = $totalComments > 0 ? 'bg-blue' : 'bg-yellow';
+                ?>
+                <span class="badge <?= $badgeClass ?>">
+                  <i class="ti ti-message"></i> <?= $totalComments ?>
                 </span>
               </td>
 
