@@ -97,7 +97,7 @@
           <form method="POST" action="/news/<?= (int) $news['id'] ?>/comment/add"
             class="d-flex align-items-start gap-3 mb-4">
             <img src="<?= !empty($user['avatar'])
-              ? BASE_URL . '/' . htmlspecialchars($user['avatar'])
+              ? $user['avatar']
               : 'https://i.pravatar.cc/80?u=' . urlencode($user['full_name'] ?? 'guest') ?>" alt="Avatar"
               class="rounded-circle comment-avatar">
             <div class="flex-grow-1">
@@ -120,7 +120,7 @@
           <?php foreach ($comments as $c): ?>
             <div class="d-flex align-items-start border-bottom pb-3 mb-3 fade-in">
               <img src="<?= !empty($c['avatar'])
-                ? BASE_URL . '/' . htmlspecialchars($c['avatar'])
+                ? $c['avatar']
                 : 'https://i.pravatar.cc/80?u=' . urlencode($c['full_name'] ?? 'guest') ?>" alt="Avatar"
                 class="rounded-circle me-3 comment-avatar">
 

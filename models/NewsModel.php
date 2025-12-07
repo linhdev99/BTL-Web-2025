@@ -185,6 +185,7 @@ class NewsModel extends BaseModel
         $sql = "SELECT 
                 n.*, 
                 u.full_name AS full_name,
+                u.avatar AS avatar,
                 ROUND(AVG(r.star), 1) AS avg_rating,
                 COUNT(r.id) AS rating_count
             FROM {$this->table} n
@@ -243,7 +244,9 @@ class NewsModel extends BaseModel
      */
     public function getByNewsId(int $newsId)
     {
-        $sql = "SELECT c.*, u.full_name AS full_name
+        $sql = "SELECT c.*,
+                       u.full_name AS full_name,
+                       u.avatar AS avatar
                 FROM {$this->table_cmt} c
                 LEFT JOIN users u ON c.user_id = u.id
                 WHERE c.news_id = :news_id

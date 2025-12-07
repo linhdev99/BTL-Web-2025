@@ -21,7 +21,7 @@
     <div class="card shadow-sm mb-4 p-4 question-card">
       <div class="d-flex align-items-start mb-3">
         <img src="<?= !empty($question['avatar'])
-          ? BASE_URL . '/' . htmlspecialchars($question['avatar'])
+          ? $question['avatar']
           : 'https://i.pravatar.cc/100?u=' . urlencode($question['full_name'] ?? 'user') ?>" alt="Avatar"
           class="rounded-circle me-3 question-avatar">
 
@@ -79,7 +79,7 @@
           <?php foreach ($comments as $c): ?>
             <div class="d-flex align-items-start border-bottom pb-3 mb-3 fade-in">
               <img src="<?= !empty($c['avatar'])
-                ? BASE_URL . '/' . htmlspecialchars($c['avatar'])
+                ? $c['avatar']
                 : 'https://i.pravatar.cc/80?u=' . urlencode($c['full_name'] ?? 'guest') ?>" alt="Avatar"
                 class="rounded-circle me-3 comment-avatar">
               <div>
@@ -107,7 +107,7 @@
         <form method="POST" action="/questions/<?= (int) $question['id'] ?>/comment"
           class="d-flex align-items-start gap-3">
           <img src="<?= !empty($_SESSION['user']['avatar'])
-            ? BASE_URL . '/' . htmlspecialchars($_SESSION['user']['avatar'])
+            ? $_SESSION['user']['avatar']
             : 'https://i.pravatar.cc/80?u=' . urlencode($_SESSION['user']['full_name'] ?? 'guest') ?>" alt="Avatar"
             class="rounded-circle comment-avatar">
           <div class="flex-grow-1">
