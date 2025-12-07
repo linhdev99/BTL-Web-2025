@@ -108,6 +108,10 @@ class ProductModel extends BaseModel
 
         $whereClause = implode(' AND ', $where);
 
+        // Cast to int for safety
+        $perPage = (int)$perPage;
+        $offset = (int)$offset;
+
         $sql = "SELECT p.*, c.name as category_name
                 FROM {$this->table} p
                 LEFT JOIN categories c ON p.category_id = c.id
