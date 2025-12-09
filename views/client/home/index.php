@@ -12,21 +12,21 @@
         // Fallback to default banners if no banners configured
         $activeBanners = [
           1 => [
-            'image' => 'https://picsum.photos/1920/700?random=1',
+            'image' => '/assets/img/bg_1.png',
             'title' => 'Chào mừng đến với Toy Model Shop',
             'description' => 'Khám phá thế giới mô hình đồ chơi độc đáo và tinh xảo',
             'button_text' => 'Khám phá ngay',
             'button_link' => '/products'
           ],
           2 => [
-            'image' => 'https://picsum.photos/1920/700?random=2',
+            'image' => '/assets/img/bg_2.png',
             'title' => 'Mô hình đa dạng chủ đề',
             'description' => 'Từ anime, xe hơi, đến nhân vật điện ảnh',
             'button_text' => '',
             'button_link' => ''
           ],
           3 => [
-            'image' => 'https://picsum.photos/1920/700?random=3',
+            'image' => '/assets/img/bg_3.jpg',
             'title' => 'Ưu đãi cực hot mỗi tuần',
             'description' => 'Giảm giá lên đến 40% cho các sản phẩm nổi bật',
             'button_text' => '',
@@ -38,7 +38,8 @@
       $first = true;
       foreach ($activeBanners as $banner):
         // Skip banners without image or title
-        if (empty($banner['image']) && empty($banner['title'])) continue;
+        if (empty($banner['image']) && empty($banner['title']))
+          continue;
 
         // Get image URL
         $imageUrl = !empty($banner['image']) ? escape($banner['image']) : 'https://picsum.photos/1920/700?random=' . rand(1, 10);
@@ -48,7 +49,7 @@
         if ($buttonLink !== '#' && !preg_match('/^https?:\/\//', $buttonLink)) {
           $buttonLink = BASE_URL . $buttonLink;
         }
-      ?>
+        ?>
         <div class="carousel-item <?php echo $first ? 'active' : ''; ?>">
           <img src="<?php echo $imageUrl; ?>" class="d-block w-100" alt="<?php echo escape($banner['title']); ?>">
           <?php if (!empty($banner['title']) || !empty($banner['description'])): ?>
@@ -67,7 +68,7 @@
             </div>
           <?php endif; ?>
         </div>
-      <?php
+        <?php
         $first = false;
       endforeach;
       ?>
