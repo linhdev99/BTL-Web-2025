@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 07, 2025 at 04:45 PM
+-- Generation Time: Dec 09, 2025 at 05:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -297,16 +297,16 @@ CREATE TABLE `news` (
 
 INSERT INTO `news` (`id`, `user_id`, `title`, `slug`, `summary`, `content`, `thumbnail`, `published_at`, `is_published`, `created_at`, `updated_at`) VALUES
 (2, 1, 'Hướng dẫn lắp ráp Gundam', 'huong-dan-lap-rap-gundam', 'Hướng dẫn chi tiết lắp ráp Gundam', '<p>Bước 1: Chuẩn bị dụng cụ</p><p>Bước 2: Lắp ráp</p>', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-11-25 20:17:44', 1, '2025-11-25 13:17:44', '2025-12-07 05:39:34'),
-(3, 1, 'Hướng dẫn lắp ráp mô hình Gundam RX-78-2 cho người mới bắt đầu', 'huong-dan-lap-rap-gundam-rx-78-2', 'Cùng tìm hiểu cách lắp ráp bộ Gundam RX-78-2 cơ bản dành cho người mới chơi mô hình.', 'Bài viết hướng dẫn chi tiết từng bước lắp ráp Gundam RX-78-2, từ việc cắt part, vệ sinh chi tiết, đến lắp khớp cơ bản. Bao gồm cả mẹo dùng nhíp, dao rọc mô hình và cách tô panel line để mô hình trông sống động hơn.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
-(4, 1, '5 mẹo giúp lắp ráp mô hình figure nhanh và đẹp hơn', '5-meo-lap-rap-figure-nhanh-va-dep', 'Tổng hợp những mẹo hữu ích khi bạn lắp mô hình figure resin hoặc PVC.', 'Từ việc chuẩn bị keo chuyên dụng, kiểm tra chi tiết trước khi dán, đến việc sơn phủ mờ để bảo vệ mô hình. Bài viết giúp bạn tiết kiệm thời gian mà vẫn có kết quả chuyên nghiệp.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
-(5, 1, 'Cách sơn mô hình Gunpla bằng tay với cọ lông mềm', 'cach-son-gunpla-bang-tay-voi-co-long-mem', 'Không cần airbrush, bạn vẫn có thể sơn mô hình đẹp chỉ với cọ và sơn acrylic.', 'Hướng dẫn chọn cọ, chọn sơn và pha loãng đúng tỉ lệ. Cách tô nhiều lớp, tránh lem màu, và xử lý vết chồng sơn để tạo hiệu ứng nhẵn mịn cho mô hình Gunpla.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
-(6, 1, 'Review bộ mô hình Luffy Gear 5 chính hãng Bandai', 'review-mo-hinh-luffy-gear-5', 'Cảm nhận chi tiết về bộ figure Luffy Gear 5 – sản phẩm hot nhất năm của Bandai.', 'Bài review chi tiết về độ hoàn thiện, chất liệu, màu sắc và khớp chuyển động của Luffy Gear 5. Kèm theo so sánh với phiên bản third-party và hình ảnh thực tế khi trưng bày.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
-(7, 1, 'Cách làm sạch và bảo quản figure lâu dài', 'cach-lam-sach-va-bao-quan-figure', 'Figure có thể xuống màu hoặc bụi bẩn nếu không chăm sóc đúng cách.', 'Chia sẻ bí quyết làm sạch figure mà không gây trầy xước. Cách dùng chổi mini, cồn isopropyl, và hộp trưng bày chống UV để bảo quản mô hình của bạn luôn như mới.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
-(8, 1, 'Phân biệt mô hình chính hãng và hàng giả', 'phan-biet-mo-hinh-chinh-hang-va-hang-gia', 'Nhận biết nhanh figure chính hãng Bandai, Banpresto, Kotobukiya…', 'Bài viết nêu ra các đặc điểm nhận biết như tem chống giả, chi tiết đúc, độ trong của nhựa, và bao bì. Kèm hình minh họa thực tế giữa hàng thật và hàng nhái.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(3, 1, 'Hướng dẫn lắp ráp mô hình Gundam RX-78-2 cho người mới bắt đầu', 'huong-dan-lap-rap-mo-hinh-gundam-rx-78-2-cho-nguoi-moi-bat-dau', 'Cùng tìm hiểu cách lắp ráp bộ Gundam RX-78-2 cơ bản dành cho người mới chơi mô hình.', 'Bài viết hướng dẫn chi tiết từng bước lắp ráp Gundam RX-78-2, từ việc cắt part, vệ sinh chi tiết, đến lắp khớp cơ bản. Bao gồm cả mẹo dùng nhíp, dao rọc mô hình và cách tô panel line để mô hình trông sống động hơn.', 'https://bizweb.dktcdn.net/thumb/1024x1024/100/309/941/products/6267fcd1-21c9-4bb6-91ad-4510dff4b444.jpg?v=1742202900063', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 08:57:07'),
+(4, 1, '5 mẹo giúp lắp ráp mô hình figure nhanh và đẹp hơn', '5-meo-giup-lap-rap-mo-hinh-figure-nhanh-va-dep-hon', 'Tổng hợp những mẹo hữu ích khi bạn lắp mô hình figure resin hoặc PVC.', 'Từ việc chuẩn bị keo chuyên dụng, kiểm tra chi tiết trước khi dán, đến việc sơn phủ mờ để bảo vệ mô hình. Bài viết giúp bạn tiết kiệm thời gian mà vẫn có kết quả chuyên nghiệp.', 'https://blog.janbox.com/wp-content/uploads/2022/07/cach-lam-figure-2.jpg', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 08:57:26'),
+(5, 1, 'Cách sơn mô hình Gunpla bằng tay với cọ lông mềm', 'cach-son-mo-hinh-gunpla-bang-tay-voi-co-long-mem', 'Không cần airbrush, bạn vẫn có thể sơn mô hình đẹp chỉ với cọ và sơn acrylic.', 'Hướng dẫn chọn cọ, chọn sơn và pha loãng đúng tỉ lệ. Cách tô nhiều lớp, tránh lem màu, và xử lý vết chồng sơn để tạo hiệu ứng nhẵn mịn cho mô hình Gunpla.', 'https://file.hstatic.net/1000231532/file/cach_lay_son_pha_mau_mo_hinh_9a2bc31c4c2d4d0383835aa4f760e89b.jpg', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 08:59:00'),
+(6, 1, 'Review bộ mô hình Luffy Gear 5 chính hãng Bandai', 'review-bo-mo-hinh-luffy-gear-5-chinh-hang-bandai', 'Cảm nhận chi tiết về bộ figure Luffy Gear 5 – sản phẩm hot nhất năm của Bandai.', 'Bài review chi tiết về độ hoàn thiện, chất liệu, màu sắc và khớp chuyển động của Luffy Gear 5. Kèm theo so sánh với phiên bản third-party và hình ảnh thực tế khi trưng bày.', 'https://i.ytimg.com/vi/cffcNaONZRo/hqdefault.jpg', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 09:00:23'),
+(7, 1, 'Cách làm sạch và bảo quản figure lâu dài', 'cach-lam-sach-va-bao-quan-figure-lau-dai', 'Figure có thể xuống màu hoặc bụi bẩn nếu không chăm sóc đúng cách.', 'Chia sẻ bí quyết làm sạch figure mà không gây trầy xước. Cách dùng chổi mini, cồn isopropyl, và hộp trưng bày chống UV để bảo quản mô hình của bạn luôn như mới.', 'https://file.hstatic.net/1000231532/file/221024-bao-quan-mo-hinh-mang-choi-dai-ngay_nshop6_a15dc2ae9e2f4b5da69166e384bf3447.jpg', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 09:01:08'),
+(8, 1, 'Phân biệt mô hình chính hãng và hàng giả', 'phan-biet-mo-hinh-chinh-hang-va-hang-gia', 'Nhận biết nhanh figure chính hãng Bandai, Banpresto, Kotobukiya…', 'Bài viết nêu ra các đặc điểm nhận biết như tem chống giả, chi tiết đúc, độ trong của nhựa, và bao bì. Kèm hình minh họa thực tế giữa hàng thật và hàng nhái.', 'https://khomohinh.com/wp-content/uploads/2023/01/cach-phan-biet-mo-hinh-real-fake-thumb.jpg.webp', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 09:01:27'),
 (9, 1, 'Hướng dẫn chụp ảnh mô hình đẹp bằng điện thoại', 'huong-dan-chup-anh-mo-hinh-dep', 'Chỉ với điện thoại, bạn vẫn có thể chụp ảnh figure cực kỳ nghệ thuật.', 'Hướng dẫn chọn ánh sáng, bố cục, background và filter phù hợp để chụp figure sống động như thật. Không cần máy ảnh chuyên nghiệp!', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
-(10, 1, 'Top 10 bộ Gunpla đáng sưu tầm nhất năm 2025', 'top-10-gunpla-2025', 'Danh sách 10 bộ mô hình Gunpla đẹp nhất và được yêu thích nhất 2025.', 'Tổng hợp từ nhiều cộng đồng Gunpla toàn cầu, kèm ảnh thực tế và đánh giá độ khó khi lắp. Bao gồm MGEX Strike Freedom, RG Nu Gundam, MG Barbatos, v.v.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
-(11, 1, 'Sửa lỗi khớp lỏng trong mô hình Gunpla', 'sua-loi-khop-long-trong-gunpla', 'Một số khớp mô hình lỏng hoặc rơi ra, đừng lo – có cách xử lý dễ dàng!', 'Hướng dẫn dùng keo PVA, sơn móng tay trong hoặc giấy dán để làm chặt khớp. Có thể áp dụng cho nhiều dòng như HG, RG, MG.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
-(12, 1, 'Cách làm base trưng bày mô hình đơn giản', 'cach-lam-base-trung-bay-mo-hinh', 'Tự tay làm đế trưng bày mô hình với vật liệu rẻ tiền mà đẹp mắt.', 'Chỉ cần vài miếng xốp, cát mô phỏng, sơn acrylic và keo. Tạo hiệu ứng đất, đá hoặc nền công nghiệp cho mô hình trở nên sống động.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
+(10, 1, 'Top 10 bộ Gunpla đáng sưu tầm nhất năm 2025', 'top-10-bo-gunpla-dang-suu-tam-nhat-nam-2025', 'Danh sách 10 bộ mô hình Gunpla đẹp nhất và được yêu thích nhất 2025.', 'Tổng hợp từ nhiều cộng đồng Gunpla toàn cầu, kèm ảnh thực tế và đánh giá độ khó khi lắp. Bao gồm MGEX Strike Freedom, RG Nu Gundam, MG Barbatos, v.v.', 'https://file.hstatic.net/1000231532/file/top_gundam_dep_nhat_rx-78-2_8939f415f8e446f7bdfeb051bc525afe_grande.jpg', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 09:02:54'),
+(11, 1, 'Sửa lỗi khớp lỏng trong mô hình Gunpla', 'sua-loi-khop-long-trong-mo-hinh-gunpla', 'Một số khớp mô hình lỏng hoặc rơi ra, đừng lo – có cách xử lý dễ dàng!', 'Hướng dẫn dùng keo PVA, sơn móng tay trong hoặc giấy dán để làm chặt khớp. Có thể áp dụng cho nhiều dòng như HG, RG, MG.', 'https://funface.vn/wp-content/uploads/2023/08/cach-sua-mo-hinh-gundam-4.jpg', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 09:03:10'),
+(12, 1, 'Cách làm base trưng bày mô hình đơn giản', 'cach-lam-base-trung-bay-mo-hinh-don-gian', 'Tự tay làm đế trưng bày mô hình với vật liệu rẻ tiền mà đẹp mắt.', 'Chỉ cần vài miếng xốp, cát mô phỏng, sơn acrylic và keo. Tạo hiệu ứng đất, đá hoặc nền công nghiệp cho mô hình trở nên sống động.', 'https://file.hstatic.net/1000231532/file/230114_trung_bay_mo_hinh_nshop12_36db95c27abe4fd1bdc011587543fc4f.jpg', '2025-12-07 12:22:00', 1, '2025-12-07 05:22:36', '2025-12-08 09:03:59'),
 (13, 1, 'Cách xử lý vết nứt nhỏ khi lắp mô hình nhựa', 'cach-xu-ly-vet-nut-mo-hinh-nhua', 'Vết nứt nhỏ không đáng sợ nếu bạn biết xử lý đúng cách.', 'Dùng cement chuyên dụng, ép nhẹ phần nứt và chờ khô. Sau đó mài và sơn lại, mô hình sẽ như mới. Có thể áp dụng cho nhựa ABS và PS.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
 (14, 1, 'Cách tạo hiệu ứng thời tiết cho mô hình (weathering)', 'cach-tao-hieu-ung-weathering-mo-hinh', 'Kỹ thuật weathering giúp mô hình trông chân thật, bụi bặm hơn.', 'Giới thiệu các phương pháp dry brush, wash, rust, và chipping. Có thể áp dụng cho Gunpla, xe tăng, máy bay mô hình.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
 (15, 1, 'Tổng hợp dụng cụ cần thiết khi chơi Gunpla', 'dung-cu-can-thiet-khi-choi-gunpla', 'Danh sách đầy đủ các dụng cụ cắt, mài, sơn mà ai chơi Gunpla cũng nên có.', 'Bao gồm kềm Godhand, dao trổ, nhíp, giũa, giấy nhám, panel line, marker và keo Mr.Cement. Mô tả rõ công dụng từng món.', 'https://i.ibb.co/hqTqN5J/genshin.jpg', '2025-12-07 12:22:36', 1, '2025-12-07 05:22:36', '2025-12-07 05:35:44'),
@@ -326,8 +326,8 @@ INSERT INTO `news` (`id`, `user_id`, `title`, `slug`, `summary`, `content`, `thu
 
 CREATE TABLE `news_cmt` (
   `id` int(10) UNSIGNED NOT NULL,
-  `news_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
+  `news_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `content` text NOT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -404,7 +404,8 @@ INSERT INTO `orders` (`id`, `user_id`, `order_code`, `customer_name`, `customer_
 (1, 1, 'ORD-20251126-2E3DBF', '123', '234234234@gmail.com', '0987654321', '123', 6260000.00, 'cod', 'pending', 'cancelled', '', '2025-11-26 08:50:24', '2025-11-26 08:51:12'),
 (2, 4, 'ORD-20251126-D474B3', '123', '123@gmail.com', '123', '123', 100000001050000.00, 'cod', 'paid', 'completed', '', '2025-11-26 09:56:18', '2025-12-07 11:07:36'),
 (3, 8, 'ORD-20251207-2DBDB1', 'Duy Phạm', 'abc@gmail.com', '123456789', 'abc', 4294000.00, 'cod', 'pending', 'pending', 'asdcsa', '2025-12-07 14:31:07', '2025-12-07 14:31:07'),
-(4, 8, 'ORD-20251207-212A49', 'Duy Phạm', 'abc@gmail.com', '0123456789', 'abc', 5269000.00, 'cod', 'pending', 'pending', 'abc', '2025-12-07 15:08:50', '2025-12-07 15:08:50');
+(4, 8, 'ORD-20251207-212A49', 'Duy Phạm', 'abc@gmail.com', '0123456789', 'abc', 5269000.00, 'cod', 'pending', 'pending', 'abc', '2025-12-07 15:08:50', '2025-12-07 15:08:50'),
+(5, 8, 'ORD-20251208-AE0870', 'Duy Phạm', 'abc@gmail.com', '0123456789', 'asdfasd', 1490000.00, 'cod', 'pending', 'pending', 'fasdfasd', '2025-12-08 09:31:22', '2025-12-08 09:31:22');
 
 -- --------------------------------------------------------
 
@@ -439,7 +440,8 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `prod
 (7, 3, 20, 'Mô hình xe Land Rover Defender 2022 1:24 Bburago', NULL, NULL, 386000.00, 4, 1544000.00, '2025-12-07 14:31:07'),
 (8, 3, 11, 'Jujutsu Kaisen - Sukuna - Maximatic (Bandai Spirits)', NULL, NULL, 630000.00, 2, 1260000.00, '2025-12-07 14:31:07'),
 (9, 4, 22, 'Nendoroid Character Vocal Series 01 Hatsune Miku: Rabbit Hole', NULL, NULL, 1490000.00, 3, 4470000.00, '2025-12-07 15:08:50'),
-(10, 4, 24, 'Mô hình máy bay ném bom B-52 1:200 Nsmodel', NULL, NULL, 799000.00, 1, 799000.00, '2025-12-07 15:08:50');
+(10, 4, 24, 'Mô hình máy bay ném bom B-52 1:200 Nsmodel', NULL, NULL, 799000.00, 1, 799000.00, '2025-12-07 15:08:50'),
+(11, 5, 22, 'Nendoroid Character Vocal Series 01 Hatsune Miku: Rabbit Hole', NULL, NULL, 1490000.00, 1, 1490000.00, '2025-12-08 09:31:22');
 
 -- --------------------------------------------------------
 
@@ -496,7 +498,7 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `slug`, `sku`, `description
 (19, 1, 'MG Full Armor Unicorn Ver.Ka', 'mg-full-armor-unicorn-ver-ka', 'MGUNIFULLARMOR', 'Tỉ lệ: 1/100\r\nPhân loại: Mô hình lắp ráp\r\nSeries: MG Gundam UC\r\nHàng chính hãng Bandai (Nhật Bản)', 'Tỉ lệ: 1/100\r\nPhân loại: Mô hình lắp ráp\r\nSeries: MG Gundam UC\r\nHàng chính hãng Bandai (Nhật Bản)', 2350000.00, NULL, 500, 'products/69356963c08d3_1765108067.jpg', 1, 0, 1, 'active', 0, NULL, NULL, NULL, '2025-12-07 11:47:47', '2025-12-07 11:47:47'),
 (20, 2, 'Mô hình xe Land Rover Defender 2022 1:24 Bburago', 'mo-hinh-xe-land-rover-defender-2022-1-24-bburago-18-21101', '4893151821121', 'Mô hình xe Land Rover Defender 110 2020 tỉ lệ 1:24 của Bburago là một tác phẩm tinh xảo, phản ánh chân thực từng chi tiết của chiếc SUV biểu tượng này. Bề mặt xe được sơn tỉ mỉ, tạo nên độ bóng và màu sắc chính xác như phiên bản thực tế. Các chi tiết như lưới tản nhiệt, đèn pha, và cả các đường nét khí động học của xe đều được tái hiện một cách chân thực. Bên trong xe, nội thất cũng được chăm chút với các chi tiết nhỏ như bảng điều khiển, ghế ngồi, và vô lăng, giúp người sưu tầm cảm nhận được sự tinh tế và kỳ công trong từng sản phẩm.', 'Mô hình xe Land Rover Defender 110 2020 tỉ lệ 1:24 của Bburago là một tác phẩm tinh xảo, phản ánh chân thực từng chi tiết của chiếc SUV biểu tượng này. Bề mặt xe được sơn tỉ mỉ, tạo nên độ bóng và màu sắc chính xác như phiên bản thực tế. Các chi tiết như lưới tản nhiệt, đèn pha, và cả các đường nét khí động học của xe đều được tái hiện một cách chân thực. Bên trong xe, nội thất cũng được chăm chút với các chi tiết nhỏ như bảng điều khiển, ghế ngồi, và vô lăng, giúp người sưu tầm cảm nhận được sự tinh tế và kỳ công trong từng sản phẩm.', 429000.00, 386000.00, 9996, 'products/69356d042c8f2_1765108996.jpg', 1, 0, 1, 'active', 0, NULL, NULL, NULL, '2025-12-07 12:03:16', '2025-12-07 14:31:07'),
 (21, 2, 'Mô hình xe Mercedes Benz SL500 1:24 Welly', 'mo-hinh-xe-mercedes-benz-sl500-1-24-welly', '6902247512544', 'Chiếc xe có thiết kế như thật với những đường nét mô phỏng chi tiết, được sơn tĩnh điện tinh tế rất phù hợp để trưng bày ở phòng khách, phòng làm việc, showroom...Mô hình xe với kích cỡ thu nhỏ sẽ trở thành một món sưu tập thú vị trong phòng của bạn.', 'Chiếc xe có thiết kế như thật với những đường nét mô phỏng chi tiết, được sơn tĩnh điện tinh tế rất phù hợp để trưng bày ở phòng khách, phòng làm việc, showroom...Mô hình xe với kích cỡ thu nhỏ sẽ trở thành một món sưu tập thú vị trong phòng của bạn.', 429000.00, 343000.00, 2000, 'products/69356d63d06ca_1765109091.png', 1, 0, 1, 'active', 0, NULL, NULL, NULL, '2025-12-07 12:04:51', '2025-12-07 12:04:51'),
-(22, 9, 'Nendoroid Character Vocal Series 01 Hatsune Miku: Rabbit Hole', 'nendoroid-character-vocal-series-01-hatsune-miku-rabbit-hole-ver', '0051', '', '', 2000000.00, 1490000.00, 4996, 'products/69356df02cbbc_1765109232.png', 0, 0, 1, 'active', 0, NULL, NULL, NULL, '2025-12-07 12:07:12', '2025-12-07 15:08:50'),
+(22, 9, 'Nendoroid Character Vocal Series 01 Hatsune Miku: Rabbit Hole', 'nendoroid-character-vocal-series-01-hatsune-miku-rabbit-hole-ver', '0051', '', '', 2000000.00, 1490000.00, 4995, 'products/69356df02cbbc_1765109232.png', 0, 0, 1, 'active', 0, NULL, NULL, NULL, '2025-12-07 12:07:12', '2025-12-08 09:31:22'),
 (23, 4, 'Mô hình máy bay trực thăng UH-60R Seahawk HUAYI', 'mo-hinh-may-bay-truc-thang-uh-60r-seahawk-huayi', '4891241600922', 'Mô hình máy bay trực thăng UH-60R Seahawk từ HUAYI là phiên bản thu nhỏ của dòng trực thăng đa nhiệm UH-60R Seahawk do Sikorsky sản xuất, chuyên phục vụ trong Hải quân Hoa Kỳ. Đây là một mẫu trực thăng hiện đại, được thiết kế để thực hiện nhiều nhiệm vụ như chống ngầm, trinh sát, tìm kiếm cứu nạn và vận tải chiến thuật.', 'Mô hình máy bay trực thăng UH-60R Seahawk từ HUAYI là phiên bản thu nhỏ của dòng trực thăng đa nhiệm UH-60R Seahawk do Sikorsky sản xuất, chuyên phục vụ trong Hải quân Hoa Kỳ. Đây là một mẫu trực thăng hiện đại, được thiết kế để thực hiện nhiều nhiệm vụ như chống ngầm, trinh sát, tìm kiếm cứu nạn và vận tải chiến thuật.', 359000.00, NULL, 5000, 'products/69359120be89c_1765118240.jpg', 0, 0, 1, 'active', 0, NULL, NULL, NULL, '2025-12-07 14:37:20', '2025-12-07 14:37:20'),
 (24, 4, 'Mô hình máy bay ném bom B-52 1:200 Nsmodel', 'mo-hinh-may-bay-aircraft-b-52-1-200-nsmodel', '4891761200105', 'Mô hình B-52 1:200 Nsmodel được phông phỏng dựa trên mẫu máy bay thật với các chi tiết tinh xảo. Mô hình đã được sơn tĩnh điện và kèm theo đế. Thích hợp để trưng bày và sưu tầm, còn gì thú vị hơn khi có một bộ sưu tầm tất cả các chiến đấu cơ mà mình yêu thích hoặc làm quà tặng người thân.', 'Mô hình B-52 1:200 Nsmodel được phông phỏng dựa trên mẫu máy bay thật với các chi tiết tinh xảo. Mô hình đã được sơn tĩnh điện và kèm theo đế. Thích hợp để trưng bày và sưu tầm, còn gì thú vị hơn khi có một bộ sưu tầm tất cả các chiến đấu cơ mà mình yêu thích hoặc làm quà tặng người thân.', 799000.00, NULL, 598, 'products/693591fbd218f_1765118459.jpg', 0, 0, 1, 'active', 0, NULL, NULL, NULL, '2025-12-07 14:40:59', '2025-12-07 15:08:50');
 
@@ -550,21 +552,21 @@ CREATE TABLE `site_settings` (
 --
 
 INSERT INTO `site_settings` (`id`, `setting_key`, `setting_value`, `setting_type`, `setting_group`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'site_name', 'Toy shop', 'text', 'general', 'Tên cửa hàng', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(2, 'site_tagline', 'For True Figure Lovers', 'text', 'general', 'Slogan cửa hàng', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(3, 'site_logo', '/assets/img/logo.png', 'image', 'general', 'Logo cửa hàng', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(4, 'contact_address', '268 Lý Thường Kiệt, Phường 14, Quận 10, TP.HCM', 'text', 'contact', 'Địa chỉ cửa hàng', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(5, 'contact_phone', '0123 456 789', 'phone', 'contact', 'Số điện thoại', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(6, 'contact_email', 'contact@bkfigurelab.vn', 'email', 'contact', 'Email liên hệ', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(7, 'contact_hotline', '1900 xxxx', 'phone', 'contact', 'Hotline hỗ trợ', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(8, 'contact_working_hours', 'Thứ 2 - Thứ 7: 9:00 - 21:00\r\nChủ nhật: 10:00 - 20:00', 'textarea', 'contact', 'Giờ làm việc', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
+(1, 'site_name', 'Toy shop', 'text', 'general', 'Tên cửa hàng', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(2, 'site_tagline', 'For True Figure Lovers', 'text', 'general', 'Slogan cửa hàng', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(3, 'site_logo', '/public/images/site_logo_1765165277.png', 'image', 'general', 'Logo cửa hàng', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(4, 'contact_address', '268 Lý Thường Kiệt, Phường 14, Quận 10, TP.HCM', 'text', 'contact', 'Địa chỉ cửa hàng', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(5, 'contact_phone', '0123 456 789', 'phone', 'contact', 'Số điện thoại', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(6, 'contact_email', 'contact@bkfigurelab.vn', 'email', 'contact', 'Email liên hệ', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(7, 'contact_hotline', '1900 xxxx', 'phone', 'contact', 'Hotline hỗ trợ', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(8, 'contact_working_hours', 'Thứ 2 - Thứ 7: 9:00 - 21:00\r\nChủ nhật: 10:00 - 20:00', 'textarea', 'contact', 'Giờ làm việc', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
 (9, 'about_title', 'Về chúng tôi', 'text', 'about', 'Tiêu đề trang giới thiệu', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
 (10, 'about_content', '<h3>BK Figure Lab - Nơi hội tụ đam mê</h3>\r\n<p>Chào mừng bạn đến với BK Figure Lab - cửa hàng chuyên cung cấp các sản phẩm figure, mô hình chính hãng chất lượng cao!</p>\r\n<p>Với niềm đam mê và tình yêu với các sản phẩm figure, chúng tôi cam kết mang đến cho khách hàng những sản phẩm tốt nhất từ các thương hiệu nổi tiếng như Bandai, Good Smile Company, Kotobukiya...</p>\r\n<h4>Tầm nhìn</h4>\r\n<p>Trở thành cửa hàng figure uy tín hàng đầu Việt Nam, nơi các fan hâm mộ có thể tìm thấy những sản phẩm yêu thích của mình.</p>\r\n<h4>Sứ mệnh</h4>\r\n<p>Cung cấp sản phẩm chính hãng, chất lượng cao với giá cả hợp lý. Tạo dựng cộng đồng người yêu thích figure tại Việt Nam.</p>', 'textarea', 'about', 'Nội dung trang giới thiệu (HTML)', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(11, 'social_facebook', 'https://facebook.com/bkfigurelab', 'url', 'social', 'Link Facebook', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(12, 'social_instagram', 'https://instagram.com/bkfigurelab', 'url', 'social', 'Link Instagram', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(13, 'social_youtube', '', 'url', 'social', 'Link Youtube', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(14, 'social_tiktok', '', 'url', 'social', 'Link TikTok', '2025-11-26 15:56:57', '2025-11-26 16:21:28'),
-(15, 'footer_copyright', '© {year} BK Figure Lab. All rights reserved.', 'text', 'general', 'Bản quyền footer ({year} sẽ được thay bằng năm hiện tại)', '2025-11-26 15:56:57', '2025-11-26 16:21:28');
+(11, 'social_facebook', 'https://facebook.com/bkfigurelab', 'url', 'social', 'Link Facebook', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(12, 'social_instagram', 'https://instagram.com/bkfigurelab', 'url', 'social', 'Link Instagram', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(13, 'social_youtube', '', 'url', 'social', 'Link Youtube', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(14, 'social_tiktok', '', 'url', 'social', 'Link TikTok', '2025-11-26 15:56:57', '2025-12-08 03:41:17'),
+(15, 'footer_copyright', '© {year} BK Figure Lab. All rights reserved.', 'text', 'general', 'Bản quyền footer ({year} sẽ được thay bằng năm hiện tại)', '2025-11-26 15:56:57', '2025-12-08 03:41:17');
 
 -- --------------------------------------------------------
 
@@ -836,13 +838,13 @@ ALTER TABLE `news_rating`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -890,6 +892,25 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `contacts`
   ADD CONSTRAINT `fk_contacts_replied_by` FOREIGN KEY (`replied_by`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `faq`
+--
+ALTER TABLE `faq`
+  ADD CONSTRAINT `fk_faq_category` FOREIGN KEY (`category_id`) REFERENCES `faq_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `faq_comments`
+--
+ALTER TABLE `faq_comments`
+  ADD CONSTRAINT `fk_faq_comments_question` FOREIGN KEY (`question_id`) REFERENCES `faq_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_faq_comments_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `faq_questions`
+--
+ALTER TABLE `faq_questions`
+  ADD CONSTRAINT `fk_faq_questions_category` FOREIGN KEY (`category_id`) REFERENCES `faq_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `news`
